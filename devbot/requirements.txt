@@ -1,5 +1,4 @@
-[devbot]
-version = 1.0.0
+# DevBot Requirements
 
 # Core
 PyYAML>=6.0
