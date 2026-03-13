@@ -7,7 +7,11 @@ Wrapper for Claude Code CLI operations.
 import subprocess
 import json
 import logging
-from typing import Any, Dict, Optional
+import os
+import tempfile
+import re
+from typing import Any, Dict, Optional, List
+from pathlib import Path
 from tools.tool import Tool, ToolResult
 
 logger = logging.getLogger(__name__)
@@ -30,38 +34,143 @@ class ClaudeCLITool(Tool):
         self.model = self.config.get('model', 'sonnet')
         self.max_tokens = self.config.get('max_tokens', 4096)
         self.temperature = self.config.get('temperature', 0.7)
+        self.project_context = self.config.get('project_context', '.')
 
     def execute(self, prompt: str, **kwargs) -> ToolResult:
         """
-        Execute a Claude CLI command.
+        Execute a Claude CLI command using /expand mode.
 
         Args:
-            prompt: The prompt to send to Claude
+            prompt: The prompt/requirement to send to Claude
+            **kwargs: Additional parameters (task_type, model, etc.)
+
+        Returns:
+            ToolResult with Claude's response
+        """
+        task_type = kwargs.get('task_type', 'general')
+        model = kwargs.get('model', self.model)
+
+        try:
+            # Write the prompt to a temp file for claude to read
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+                f.write(prompt)
+                prompt_file = f.name
+
+            # Build Claude CLI command - use claude with --print flag for non-interactive
+            cmd = [
+                self.cli_path,
+                'expand',
+                '--yes',  # Auto-confirm
+                '--model', model,
+                '--prompt-file', prompt_file
+            ]
+
+            logger.info(f"Executing Claude CLI: {' '.join(cmd[:3])}... with prompt: {prompt[:80]}...")
+
+            # Execute command
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=120,
+                cwd=self.project_context
+            )
+
+            # Cleanup temp file
+            try:
+                os.unlink(prompt_file)
+            except:
+                pass
+
+            if result.returncode == 0:
+                output = {
+                    'status': 'success',
+                    'response': result.stdout,
+                    'model': model,
+                    'task_type': task_type
+                }
+                return ToolResult(
+                    success=True,
+                    output=output,
+                    metadata={'cli_path': self.cli_path, 'return_code': result.returncode}
+                )
+            else:
+                error_msg = result.stderr or "Unknown error"
+                logger.error(f"Claude CLI error: {error_msg}")
+                return ToolResult(
+                    success=False,
+                    output=None,
+                    error=error_msg
+                )
+
+        except subprocess.TimeoutExpired:
+            logger.error("Claude CLI timeout")
+            return ToolResult(
+                success=False,
+                output=None,
+                error="Claude CLI command timed out"
+            )
+        except FileNotFoundError:
+            logger.error("Claude CLI not found - make sure it's installed")
+            return ToolResult(
+                success=False,
+                output=None,
+                error="Claude CLI not found. Please install: npm install -g @anthropic-ai/claude-code"
+            )
+        except Exception as e:
+            logger.error(f"Claude CLI execution failed: {e}")
+            return ToolResult(
+                success=False,
+                output=None,
+                error=str(e)
+            )
+
+    def execute_with_session(self, session_id: str, message: str, **kwargs) -> ToolResult:
+        """
+        Send a message to an existing Claude session.
+
+        Args:
+            session_id: Session ID to continue
+            message: Message to send
             **kwargs: Additional parameters
 
         Returns:
             ToolResult with Claude's response
         """
         try:
-            # Placeholder: Build actual Claude CLI command
-            # cmd = [self.cli_path, 'generate', '--prompt', prompt, '--model', self.model]
-            logger.info(f"Executing Claude CLI with prompt: {prompt[:100]}...")
+            cmd = [
+                self.cli_path,
+                'session',
+                'send',
+                session_id,
+                message
+            ]
 
-            # Placeholder response
-            output = {
-                'status': 'success',
-                'response': f"Claude CLI response for: {prompt[:50]}...",
-                'model': self.model
-            }
+            logger.info(f"Sending to Claude session {session_id}: {message[:50]}...")
 
-            return ToolResult(
-                success=True,
-                output=output,
-                metadata={'cli_path': self.cli_path}
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=120,
+                cwd=self.project_context
             )
 
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'response': result.stdout},
+                    metadata={'session_id': session_id}
+                )
+            else:
+                return ToolResult(
+                    success=False,
+                    output=None,
+                    error=result.stderr
+                )
+
         except Exception as e:
-            logger.error(f"Claude CLI execution failed: {e}")
+            logger.error(f"Claude session send failed: {e}")
             return ToolResult(
                 success=False,
                 output=None,
@@ -89,7 +198,12 @@ class ClaudeCLITool(Tool):
                 'properties': {
                     'prompt': {
                         'type': 'string',
-                        'description': 'The prompt to send to Claude'
+                        'description': 'The prompt/requirement to send to Claude'
+                    },
+                    'task_type': {
+                        'type': 'string',
+                        'description': 'Type of task (spec, code, test, debug)',
+                        'enum': ['spec', 'code', 'test', 'debug', 'general']
                     },
                     'model': {
                         'type': 'string',
@@ -100,3 +214,8 @@ class ClaudeCLITool(Tool):
                 'required': ['prompt']
             }
         }
+
+
+def create_claude_tool(config: Optional[Dict[str, Any]] = None) -> ClaudeCLITool:
+    """Factory function to create Claude CLI tool."""
+    return ClaudeCLITool(config)

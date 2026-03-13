@@ -6,8 +6,9 @@ Coordinates agent execution and manages multi-agent workflows.
 
 import logging
 import asyncio
+import uuid
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Callable
 from datetime import datetime
 from enum import Enum
 
@@ -50,6 +51,18 @@ class Workflow:
     completed_at: Optional[datetime] = None
     context: Dict[str, Any] = field(default_factory=dict)
 
+    @property
+    def is_complete(self) -> bool:
+        return self.status in (TaskStatus.COMPLETED, TaskStatus.FAILED, TaskStatus.CANCELLED)
+
+    @property
+    def total_steps(self) -> int:
+        return len(self.steps)
+
+    @property
+    def completed_steps(self) -> int:
+        return sum(1 for s in self.steps if s.status == TaskStatus.COMPLETED)
+
 
 class Orchestrator:
     """
@@ -73,6 +86,12 @@ class Orchestrator:
 
         self._agents: Dict[str, BaseAgent] = {}
         self._workflows: Dict[str, Workflow] = {}
+        self._callbacks: Dict[str, List[Callable]] = {
+            'on_workflow_start': [],
+            'on_workflow_complete': [],
+            'on_step_complete': [],
+            'on_error': []
+        }
         self._logger = logging.getLogger(__name__)
 
     def register_agent(self, agent: BaseAgent):
@@ -84,30 +103,50 @@ class Orchestrator:
         """Get an agent by name."""
         return self._agents.get(name)
 
+    def list_agents(self) -> List[BaseAgent]:
+        """List all registered agents."""
+        return list(self._agents.values())
+
+    def register_callback(self, event: str, callback: Callable):
+        """Register a callback for workflow events."""
+        if event in self._callbacks:
+            self._callbacks[event].append(callback)
+
+    def _trigger_callbacks(self, event: str, *args, **kwargs):
+        """Trigger registered callbacks."""
+        for callback in self._callbacks.get(event, []):
+            try:
+                callback(*args, **kwargs)
+            except Exception as e:
+                logger.error(f"Callback error for {event}: {e}")
+
     def create_workflow(
         self,
-        workflow_id: str,
-        command_type: CommandType,
+        workflow_id: str = None,
+        command_type: CommandType = None,
         context: Optional[Dict[str, Any]] = None
     ) -> Workflow:
         """
         Create a new workflow.
 
         Args:
-            workflow_id: Unique workflow identifier
+            workflow_id: Unique workflow identifier (auto-generated if None)
             command_type: Type of command to execute
             context: Workflow context
 
         Returns:
             Created workflow
         """
+        if workflow_id is None:
+            workflow_id = str(uuid.uuid4())[:8]
+
         workflow = Workflow(
             workflow_id=workflow_id,
             command_type=command_type,
             context=context or {}
         )
         self._workflows[workflow_id] = workflow
-        logger.info(f"Created workflow: {workflow_id} for command: {command_type.value}")
+        logger.info(f"Created workflow: {workflow_id} for command: {command_type.value if command_type else 'unknown'}")
         return workflow
 
     def add_step(self, workflow: Workflow, agent_name: str, task: Task) -> WorkflowStep:
@@ -142,8 +181,12 @@ class Orchestrator:
         """
         logger.info(f"Executing workflow: {workflow.workflow_id}")
         workflow.status = TaskStatus.RUNNING
+        self._trigger_callbacks('on_workflow_start', workflow)
 
         for step in workflow.steps:
+            if workflow.status == TaskStatus.CANCELLED:
+                break
+
             try:
                 step.status = TaskStatus.RUNNING
                 step.started_at = datetime.now()
@@ -162,15 +205,19 @@ class Orchestrator:
                 step.status = TaskStatus.COMPLETED if result.success else TaskStatus.FAILED
                 step.completed_at = datetime.now()
 
+                self._trigger_callbacks('on_step_complete', workflow, step)
+
                 if not result.success:
                     logger.error(f"Step {step.step_id} failed: {result.error}")
                     workflow.status = TaskStatus.FAILED
+                    self._trigger_callbacks('on_error', workflow, step, result.error)
                     break
 
             except asyncio.TimeoutError:
                 step.status = TaskStatus.FAILED
                 step.error = f"Task timeout after {self.task_timeout}s"
                 workflow.status = TaskStatus.FAILED
+                self._trigger_callbacks('on_error', workflow, step, step.error)
                 break
 
             except Exception as e:
@@ -178,6 +225,7 @@ class Orchestrator:
                 step.error = str(e)
                 workflow.status = TaskStatus.FAILED
                 logger.error(f"Step {step.step_id} error: {e}")
+                self._trigger_callbacks('on_error', workflow, step, str(e))
                 break
 
         if workflow.status == TaskStatus.RUNNING:
@@ -185,13 +233,56 @@ class Orchestrator:
 
         workflow.completed_at = datetime.now()
         logger.info(f"Workflow {workflow.workflow_id} completed with status: {workflow.status.value}")
+        self._trigger_callbacks('on_workflow_complete', workflow)
 
         return workflow
+
+    async def execute_workflow_with_retry(self, workflow: Workflow) -> Workflow:
+        """Execute workflow with retry on failure."""
+        last_error = None
+
+        for attempt in range(self.retry_attempts):
+            if attempt > 0:
+                logger.info(f"Retry attempt {attempt + 1} for workflow {workflow.workflow_id}")
+                await asyncio.sleep(self.retry_delay * attempt)
+
+            workflow = await self.execute_workflow(workflow)
+
+            if workflow.status == TaskStatus.COMPLETED:
+                return workflow
+
+            last_error = workflow.steps[-1].error if workflow.steps else "Unknown error"
+
+        # All retries failed
+        logger.error(f"Workflow {workflow.workflow_id} failed after {self.retry_attempts} attempts")
+        return workflow
+
+    def cancel_workflow(self, workflow_id: str) -> bool:
+        """Cancel a running workflow."""
+        workflow = self._workflows.get(workflow_id)
+        if workflow and workflow.status == TaskStatus.RUNNING:
+            workflow.status = TaskStatus.CANCELLED
+            return True
+        return False
 
     def get_workflow(self, workflow_id: str) -> Optional[Workflow]:
         """Get a workflow by ID."""
         return self._workflows.get(workflow_id)
 
-    def list_workflows(self) -> List[Workflow]:
-        """List all workflows."""
-        return list(self._workflows.values())
+    def list_workflows(self, status: TaskStatus = None) -> List[Workflow]:
+        """List all workflows, optionally filtered by status."""
+        workflows = list(self._workflows.values())
+        if status:
+            workflows = [w for w in workflows if w.status == status]
+        return workflows
+
+    def get_workflow_summary(self) -> Dict[str, Any]:
+        """Get summary of all workflows."""
+        all_workflows = list(self._workflows.values())
+        return {
+            'total': len(all_workflows),
+            'pending': len([w for w in all_workflows if w.status == TaskStatus.PENDING]),
+            'running': len([w for w in all_workflows if w.status == TaskStatus.RUNNING]),
+            'completed': len([w for w in all_workflows if w.status == TaskStatus.COMPLETED]),
+            'failed': len([w for w in all_workflows if w.status == TaskStatus.FAILED]),
+        }
