@@ -1,0 +1,5742 @@
+{
+  "nodes": {
+    "file:telegram_claude_bot.py": {
+      "type": "file",
+      "path": "telegram_claude_bot.py",
+      "name": "telegram_claude_bot.py",
+      "language": "python",
+      "line_count": 39
+    },
+    "file:devbot/__init__.py": {
+      "type": "file",
+      "path": "devbot/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 13
+    },
+    "file:devbot/setup.py": {
+      "type": "file",
+      "path": "devbot/setup.py",
+      "name": "setup.py",
+      "language": "python",
+      "line_count": 59
+    },
+    "file:devbot/tools/git_tools.py": {
+      "type": "file",
+      "path": "devbot/tools/git_tools.py",
+      "name": "git_tools.py",
+      "language": "python",
+      "line_count": 257
+    },
+    "class:devbot/tools/git_tools.py:GitTool": {
+      "type": "class",
+      "name": "GitTool",
+      "file": "devbot/tools/git_tools.py",
+      "line": 16,
+      "methods": [
+        "__init__",
+        "_run_git",
+        "execute",
+        "status",
+        "add",
+        "commit",
+        "push",
+        "pull",
+        "branch",
+        "create_branch",
+        "checkout",
+        "log",
+        "diff",
+        "validate"
+      ]
+    },
+    "func:devbot/tools/git_tools.py:create_git_tool": {
+      "type": "function",
+      "name": "create_git_tool",
+      "file": "devbot/tools/git_tools.py",
+      "line": 255,
+      "args": [
+        "config"
+      ]
+    },
+    "file:devbot/tools/claude_cli.py": {
+      "type": "file",
+      "path": "devbot/tools/claude_cli.py",
+      "name": "claude_cli.py",
+      "language": "python",
+      "line_count": 213
+    },
+    "class:devbot/tools/claude_cli.py:ClaudeCLITool": {
+      "type": "class",
+      "name": "ClaudeCLITool",
+      "file": "devbot/tools/claude_cli.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "execute",
+        "execute_with_session",
+        "validate",
+        "get_schema"
+      ]
+    },
+    "func:devbot/tools/claude_cli.py:create_claude_tool": {
+      "type": "function",
+      "name": "create_claude_tool",
+      "file": "devbot/tools/claude_cli.py",
+      "line": 211,
+      "args": [
+        "config"
+      ]
+    },
+    "file:devbot/tools/tool_registry.py": {
+      "type": "file",
+      "path": "devbot/tools/tool_registry.py",
+      "name": "tool_registry.py",
+      "language": "python",
+      "line_count": 143
+    },
+    "class:devbot/tools/tool_registry.py:ToolRegistry": {
+      "type": "class",
+      "name": "ToolRegistry",
+      "file": "devbot/tools/tool_registry.py",
+      "line": 15,
+      "methods": [
+        "__init__",
+        "register",
+        "unregister",
+        "get",
+        "list_tools",
+        "get_all",
+        "execute",
+        "validate",
+        "get_schemas"
+      ]
+    },
+    "func:devbot/tools/tool_registry.py:get_registry": {
+      "type": "function",
+      "name": "get_registry",
+      "file": "devbot/tools/tool_registry.py",
+      "line": 128,
+      "args": []
+    },
+    "func:devbot/tools/tool_registry.py:register_tool": {
+      "type": "function",
+      "name": "register_tool",
+      "file": "devbot/tools/tool_registry.py",
+      "line": 136,
+      "args": [
+        "tool"
+      ]
+    },
+    "func:devbot/tools/tool_registry.py:get_tool": {
+      "type": "function",
+      "name": "get_tool",
+      "file": "devbot/tools/tool_registry.py",
+      "line": 141,
+      "args": [
+        "name"
+      ]
+    },
+    "file:devbot/tools/__init__.py": {
+      "type": "file",
+      "path": "devbot/tools/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 11
+    },
+    "file:devbot/tools/tool.py": {
+      "type": "file",
+      "path": "devbot/tools/tool.py",
+      "name": "tool.py",
+      "language": "python",
+      "line_count": 91
+    },
+    "class:devbot/tools/tool.py:ToolResult": {
+      "type": "class",
+      "name": "ToolResult",
+      "file": "devbot/tools/tool.py",
+      "line": 13,
+      "methods": [
+        "__post_init__"
+      ]
+    },
+    "class:devbot/tools/tool.py:Tool": {
+      "type": "class",
+      "name": "Tool",
+      "file": "devbot/tools/tool.py",
+      "line": 25,
+      "methods": [
+        "__init__",
+        "execute",
+        "validate",
+        "get_schema",
+        "__repr__"
+      ]
+    },
+    "file:devbot/core/devbot_core.py": {
+      "type": "file",
+      "path": "devbot/core/devbot_core.py",
+      "name": "devbot_core.py",
+      "language": "python",
+      "line_count": 338
+    },
+    "class:devbot/core/devbot_core.py:DevBot": {
+      "type": "class",
+      "name": "DevBot",
+      "file": "devbot/core/devbot_core.py",
+      "line": 29,
+      "methods": [
+        "__init__",
+        "_init_components",
+        "attach",
+        "scan",
+        "build_graph",
+        "create_feature",
+        "plan_feature",
+        "_get_timestamp",
+        "get_status"
+      ]
+    },
+    "func:devbot/core/devbot_core.py:create_devbot": {
+      "type": "function",
+      "name": "create_devbot",
+      "file": "devbot/core/devbot_core.py",
+      "line": 327,
+      "args": [
+        "project_path",
+        "config"
+      ]
+    },
+    "file:devbot/core/__init__.py": {
+      "type": "file",
+      "path": "devbot/core/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 9
+    },
+    "file:devbot/memory/memory.py": {
+      "type": "file",
+      "path": "devbot/memory/memory.py",
+      "name": "memory.py",
+      "language": "python",
+      "line_count": 104
+    },
+    "class:devbot/memory/memory.py:Memory": {
+      "type": "class",
+      "name": "Memory",
+      "file": "devbot/memory/memory.py",
+      "line": 13,
+      "methods": [
+        "__init__",
+        "set",
+        "get",
+        "remember",
+        "forget",
+        "clear_short_term",
+        "clear_all"
+      ]
+    },
+    "func:devbot/memory/memory.py:get_memory": {
+      "type": "function",
+      "name": "get_memory",
+      "file": "devbot/memory/memory.py",
+      "line": 99,
+      "args": []
+    },
+    "file:devbot/memory/short_term_memory.py": {
+      "type": "file",
+      "path": "devbot/memory/short_term_memory.py",
+      "name": "short_term_memory.py",
+      "language": "python",
+      "line_count": 121
+    },
+    "class:devbot/memory/short_term_memory.py:ShortTermMemory": {
+      "type": "class",
+      "name": "ShortTermMemory",
+      "file": "devbot/memory/short_term_memory.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "set",
+        "get",
+        "delete",
+        "clear",
+        "cleanup_expired",
+        "keys",
+        "__len__"
+      ]
+    },
+    "file:devbot/memory/__init__.py": {
+      "type": "file",
+      "path": "devbot/memory/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 11
+    },
+    "file:devbot/memory/long_term_memory.py": {
+      "type": "file",
+      "path": "devbot/memory/long_term_memory.py",
+      "name": "long_term_memory.py",
+      "language": "python",
+      "line_count": 169
+    },
+    "class:devbot/memory/long_term_memory.py:LongTermMemory": {
+      "type": "class",
+      "name": "LongTermMemory",
+      "file": "devbot/memory/long_term_memory.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "_load_index",
+        "_save_index",
+        "store",
+        "retrieve",
+        "search",
+        "delete",
+        "list_keys",
+        "clear"
+      ]
+    },
+    "file:devbot/graph/symbol_parser.py": {
+      "type": "file",
+      "path": "devbot/graph/symbol_parser.py",
+      "name": "symbol_parser.py",
+      "language": "python",
+      "line_count": 224
+    },
+    "class:devbot/graph/symbol_parser.py:SymbolParser": {
+      "type": "class",
+      "name": "SymbolParser",
+      "file": "devbot/graph/symbol_parser.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "parse_file",
+        "_parse_python",
+        "_parse_javascript",
+        "_get_name",
+        "get_all_symbols"
+      ]
+    },
+    "file:devbot/graph/__init__.py": {
+      "type": "file",
+      "path": "devbot/graph/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 9
+    },
+    "file:devbot/graph/code_graph_builder.py": {
+      "type": "file",
+      "path": "devbot/graph/code_graph_builder.py",
+      "name": "code_graph_builder.py",
+      "language": "python",
+      "line_count": 270
+    },
+    "class:devbot/graph/code_graph_builder.py:CodeGraphBuilder": {
+      "type": "class",
+      "name": "CodeGraphBuilder",
+      "file": "devbot/graph/code_graph_builder.py",
+      "line": 19,
+      "methods": [
+        "__init__",
+        "build",
+        "_find_source_files",
+        "_analyze_file",
+        "_analyze_python_file",
+        "_analyze_js_file",
+        "_add_node",
+        "_add_edge",
+        "_get_language",
+        "_count_lines",
+        "save_graph",
+        "get_summary"
+      ]
+    },
+    "file:devbot/spec/__init__.py": {
+      "type": "file",
+      "path": "devbot/spec/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:devbot/spec/spec_generator.py": {
+      "type": "file",
+      "path": "devbot/spec/spec_generator.py",
+      "name": "spec_generator.py",
+      "language": "python",
+      "line_count": 194
+    },
+    "class:devbot/spec/spec_generator.py:SpecGenerator": {
+      "type": "class",
+      "name": "SpecGenerator",
+      "file": "devbot/spec/spec_generator.py",
+      "line": 15,
+      "methods": [
+        "__init__",
+        "generate",
+        "_generate_with_ai",
+        "_generate_basic",
+        "generate_markdown"
+      ]
+    },
+    "func:devbot/spec/spec_generator.py:create_spec_generator": {
+      "type": "function",
+      "name": "create_spec_generator",
+      "file": "devbot/spec/spec_generator.py",
+      "line": 180,
+      "args": [
+        "claude_config"
+      ]
+    },
+    "file:devbot/spec/openspec_sync.py": {
+      "type": "file",
+      "path": "devbot/spec/openspec_sync.py",
+      "name": "openspec_sync.py",
+      "language": "python",
+      "line_count": 268
+    },
+    "class:devbot/spec/openspec_sync.py:OpenSpecSync": {
+      "type": "class",
+      "name": "OpenSpecSync",
+      "file": "devbot/spec/openspec_sync.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "list_features",
+        "load_feature",
+        "_parse_spec",
+        "create_feature",
+        "update_task_status",
+        "get_pending_tasks",
+        "get_task_graph",
+        "get_context",
+        "validate_spec",
+        "save_plan"
+      ]
+    },
+    "func:devbot/spec/openspec_sync.py:get_openspec": {
+      "type": "function",
+      "name": "get_openspec",
+      "file": "devbot/spec/openspec_sync.py",
+      "line": 266,
+      "args": [
+        "base_path"
+      ]
+    },
+    "file:devbot/agents/test_agent.py": {
+      "type": "file",
+      "path": "devbot/agents/test_agent.py",
+      "name": "test_agent.py",
+      "language": "python",
+      "line_count": 142
+    },
+    "class:devbot/agents/test_agent.py:TestAgent": {
+      "type": "class",
+      "name": "TestAgent",
+      "file": "devbot/agents/test_agent.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "execute",
+        "_run_pytest",
+        "_build_test_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:devbot/agents/base_agent.py": {
+      "type": "file",
+      "path": "devbot/agents/base_agent.py",
+      "name": "base_agent.py",
+      "language": "python",
+      "line_count": 151
+    },
+    "class:devbot/agents/base_agent.py:Task": {
+      "type": "class",
+      "name": "Task",
+      "file": "devbot/agents/base_agent.py",
+      "line": 17,
+      "methods": []
+    },
+    "class:devbot/agents/base_agent.py:AgentResult": {
+      "type": "class",
+      "name": "AgentResult",
+      "file": "devbot/agents/base_agent.py",
+      "line": 28,
+      "methods": []
+    },
+    "class:devbot/agents/base_agent.py:BaseAgent": {
+      "type": "class",
+      "name": "BaseAgent",
+      "file": "devbot/agents/base_agent.py",
+      "line": 38,
+      "methods": [
+        "__init__",
+        "execute",
+        "validate_input",
+        "get_capabilities",
+        "get_config",
+        "log",
+        "set_memory",
+        "remember",
+        "recall",
+        "__repr__"
+      ]
+    },
+    "file:devbot/agents/deploy_agent.py": {
+      "type": "file",
+      "path": "devbot/agents/deploy_agent.py",
+      "name": "deploy_agent.py",
+      "language": "python",
+      "line_count": 175
+    },
+    "class:devbot/agents/deploy_agent.py:DeployAgent": {
+      "type": "class",
+      "name": "DeployAgent",
+      "file": "devbot/agents/deploy_agent.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "execute",
+        "_detect_and_execute_deployment",
+        "_deploy_vercel",
+        "_deploy_docker",
+        "_deploy_heroku",
+        "_build_deploy_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:devbot/agents/planner_agent.py": {
+      "type": "file",
+      "path": "devbot/agents/planner_agent.py",
+      "name": "planner_agent.py",
+      "language": "python",
+      "line_count": 258
+    },
+    "class:devbot/agents/planner_agent.py:TaskPriority": {
+      "type": "class",
+      "name": "TaskPriority",
+      "file": "devbot/agents/planner_agent.py",
+      "line": 18,
+      "methods": []
+    },
+    "class:devbot/agents/planner_agent.py:TaskStatus": {
+      "type": "class",
+      "name": "TaskStatus",
+      "file": "devbot/agents/planner_agent.py",
+      "line": 26,
+      "methods": []
+    },
+    "class:devbot/agents/planner_agent.py:TaskNode": {
+      "type": "class",
+      "name": "TaskNode",
+      "file": "devbot/agents/planner_agent.py",
+      "line": 35,
+      "methods": [
+        "__init__",
+        "_infer_agent_type"
+      ]
+    },
+    "class:devbot/agents/planner_agent.py:TaskGraph": {
+      "type": "class",
+      "name": "TaskGraph",
+      "file": "devbot/agents/planner_agent.py",
+      "line": 63,
+      "methods": [
+        "__init__",
+        "add_task",
+        "get_ready_tasks",
+        "topological_sort"
+      ]
+    },
+    "class:devbot/agents/planner_agent.py:PlannerAgent": {
+      "type": "class",
+      "name": "PlannerAgent",
+      "file": "devbot/agents/planner_agent.py",
+      "line": 115,
+      "methods": [
+        "__init__",
+        "execute",
+        "_generate_task_graph",
+        "_format_plan_output",
+        "get_plan",
+        "get_capabilities"
+      ]
+    },
+    "file:devbot/agents/__init__.py": {
+      "type": "file",
+      "path": "devbot/agents/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 23
+    },
+    "file:devbot/agents/code_agent.py": {
+      "type": "file",
+      "path": "devbot/agents/code_agent.py",
+      "name": "code_agent.py",
+      "language": "python",
+      "line_count": 138
+    },
+    "class:devbot/agents/code_agent.py:CodeAgent": {
+      "type": "class",
+      "name": "CodeAgent",
+      "file": "devbot/agents/code_agent.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "execute",
+        "_extract_feature_name",
+        "_format_spec_context",
+        "_build_code_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:devbot/cli/__init__.py": {
+      "type": "file",
+      "path": "devbot/cli/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 9
+    },
+    "file:devbot/cli/devbot_cli.py": {
+      "type": "file",
+      "path": "devbot/cli/devbot_cli.py",
+      "name": "devbot_cli.py",
+      "language": "python",
+      "line_count": 286
+    },
+    "func:devbot/cli/devbot_cli.py:cli": {
+      "type": "function",
+      "name": "cli",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 26,
+      "args": []
+    },
+    "func:devbot/cli/devbot_cli.py:attach": {
+      "type": "function",
+      "name": "attach",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 38,
+      "args": [
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:scan": {
+      "type": "function",
+      "name": "scan",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 63,
+      "args": [
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:graph": {
+      "type": "function",
+      "name": "graph",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 103,
+      "args": [
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:feature": {
+      "type": "function",
+      "name": "feature",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 140,
+      "args": [
+        "feature_name",
+        "description",
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:plan": {
+      "type": "function",
+      "name": "plan",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 166,
+      "args": [
+        "feature_name",
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:implement": {
+      "type": "function",
+      "name": "implement",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 196,
+      "args": [
+        "feature_name",
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:status": {
+      "type": "function",
+      "name": "status",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 229,
+      "args": [
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:list_features": {
+      "type": "function",
+      "name": "list_features",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 255,
+      "args": [
+        "feature_name",
+        "path"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:main": {
+      "type": "function",
+      "name": "main",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 280,
+      "args": []
+    },
+    "file:devbot/observability/tracing.py": {
+      "type": "file",
+      "path": "devbot/observability/tracing.py",
+      "name": "tracing.py",
+      "language": "python",
+      "line_count": 116
+    },
+    "class:devbot/observability/tracing.py:Tracer": {
+      "type": "class",
+      "name": "Tracer",
+      "file": "devbot/observability/tracing.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "span",
+        "trace",
+        "get_spans",
+        "clear_spans"
+      ]
+    },
+    "func:devbot/observability/tracing.py:get_tracer": {
+      "type": "function",
+      "name": "get_tracer",
+      "file": "devbot/observability/tracing.py",
+      "line": 93,
+      "args": [
+        "name"
+      ]
+    },
+    "func:devbot/observability/tracing.py:setup_tracing": {
+      "type": "function",
+      "name": "setup_tracing",
+      "file": "devbot/observability/tracing.py",
+      "line": 101,
+      "args": [
+        "enabled"
+      ]
+    },
+    "file:devbot/observability/__init__.py": {
+      "type": "file",
+      "path": "devbot/observability/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:devbot/observability/logger.py": {
+      "type": "file",
+      "path": "devbot/observability/logger.py",
+      "name": "logger.py",
+      "language": "python",
+      "line_count": 131
+    },
+    "func:devbot/observability/logger.py:get_logger": {
+      "type": "function",
+      "name": "get_logger",
+      "file": "devbot/observability/logger.py",
+      "line": 16,
+      "args": [
+        "name",
+        "level",
+        "format_str",
+        "colorize"
+      ]
+    },
+    "func:devbot/observability/logger.py:configure_logging": {
+      "type": "function",
+      "name": "configure_logging",
+      "file": "devbot/observability/logger.py",
+      "line": 79,
+      "args": [
+        "level",
+        "log_file",
+        "format_str"
+      ]
+    },
+    "class:devbot/observability/logger.py:LogContext": {
+      "type": "class",
+      "name": "LogContext",
+      "file": "devbot/observability/logger.py",
+      "line": 118,
+      "methods": [
+        "__init__",
+        "__enter__",
+        "__exit__"
+      ]
+    },
+    "file:devbot/integrations/telegram_bot.py": {
+      "type": "file",
+      "path": "devbot/integrations/telegram_bot.py",
+      "name": "telegram_bot.py",
+      "language": "python",
+      "line_count": 236
+    },
+    "class:devbot/integrations/telegram_bot.py:DevBotTelegramBot": {
+      "type": "class",
+      "name": "DevBotTelegramBot",
+      "file": "devbot/integrations/telegram_bot.py",
+      "line": 35,
+      "methods": [
+        "__init__",
+        "run"
+      ]
+    },
+    "func:devbot/integrations/telegram_bot.py:create_bot": {
+      "type": "function",
+      "name": "create_bot",
+      "file": "devbot/integrations/telegram_bot.py",
+      "line": 206,
+      "args": [
+        "config"
+      ]
+    },
+    "func:devbot/integrations/telegram_bot.py:main": {
+      "type": "function",
+      "name": "main",
+      "file": "devbot/integrations/telegram_bot.py",
+      "line": 219,
+      "args": []
+    },
+    "file:devbot/integrations/__init__.py": {
+      "type": "file",
+      "path": "devbot/integrations/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 9
+    },
+    "file:devbot/scanner/project_scanner.py": {
+      "type": "file",
+      "path": "devbot/scanner/project_scanner.py",
+      "name": "project_scanner.py",
+      "language": "python",
+      "line_count": 250
+    },
+    "class:devbot/scanner/project_scanner.py:ProjectScanner": {
+      "type": "class",
+      "name": "ProjectScanner",
+      "file": "devbot/scanner/project_scanner.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "scan",
+        "_scan_structure",
+        "_detect_languages",
+        "_scan_dependencies",
+        "_find_config_files",
+        "_find_test_files",
+        "_find_source_files",
+        "_match_pattern",
+        "save_profile"
+      ]
+    },
+    "file:devbot/scanner/__init__.py": {
+      "type": "file",
+      "path": "devbot/scanner/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:devbot/scanner/stack_detector.py": {
+      "type": "file",
+      "path": "devbot/scanner/stack_detector.py",
+      "name": "stack_detector.py",
+      "language": "python",
+      "line_count": 297
+    },
+    "class:devbot/scanner/stack_detector.py:StackDetector": {
+      "type": "class",
+      "name": "StackDetector",
+      "file": "devbot/scanner/stack_detector.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "detect",
+        "_detect_frameworks",
+        "_check_python_frameworks",
+        "_check_js_frameworks",
+        "_detect_libraries",
+        "_detect_databases",
+        "_detect_tools",
+        "_detect_package_managers",
+        "get_summary"
+      ]
+    },
+    "file:devbot/orchestrator/__init__.py": {
+      "type": "file",
+      "path": "devbot/orchestrator/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:devbot/orchestrator/task_graph.py": {
+      "type": "file",
+      "path": "devbot/orchestrator/task_graph.py",
+      "name": "task_graph.py",
+      "language": "python",
+      "line_count": 207
+    },
+    "class:devbot/orchestrator/task_graph.py:TaskState": {
+      "type": "class",
+      "name": "TaskState",
+      "file": "devbot/orchestrator/task_graph.py",
+      "line": 17,
+      "methods": []
+    },
+    "class:devbot/orchestrator/task_graph.py:TaskPriority": {
+      "type": "class",
+      "name": "TaskPriority",
+      "file": "devbot/orchestrator/task_graph.py",
+      "line": 26,
+      "methods": []
+    },
+    "class:devbot/orchestrator/task_graph.py:TaskItem": {
+      "type": "class",
+      "name": "TaskItem",
+      "file": "devbot/orchestrator/task_graph.py",
+      "line": 35,
+      "methods": [
+        "is_ready",
+        "can_execute"
+      ]
+    },
+    "class:devbot/orchestrator/task_graph.py:TaskGraph": {
+      "type": "class",
+      "name": "TaskGraph",
+      "file": "devbot/orchestrator/task_graph.py",
+      "line": 62,
+      "methods": [
+        "__init__",
+        "add_task",
+        "add_tasks",
+        "get_task",
+        "get_ready_tasks",
+        "get_tasks_by_phase",
+        "get_tasks_by_state",
+        "calculate_execution_levels",
+        "get_stats",
+        "reset"
+      ]
+    },
+    "func:devbot/orchestrator/task_graph.py:create_task_graph": {
+      "type": "function",
+      "name": "create_task_graph",
+      "file": "devbot/orchestrator/task_graph.py",
+      "line": 181,
+      "args": [
+        "name",
+        "tasks"
+      ]
+    },
+    "file:devbot/orchestrator/executor.py": {
+      "type": "file",
+      "path": "devbot/orchestrator/executor.py",
+      "name": "executor.py",
+      "language": "python",
+      "line_count": 246
+    },
+    "class:devbot/orchestrator/executor.py:Executor": {
+      "type": "class",
+      "name": "Executor",
+      "file": "devbot/orchestrator/executor.py",
+      "line": 19,
+      "methods": [
+        "__init__",
+        "register_agent",
+        "register_callback",
+        "_trigger_callbacks"
+      ]
+    },
+    "func:devbot/orchestrator/executor.py:create_executor": {
+      "type": "function",
+      "name": "create_executor",
+      "file": "devbot/orchestrator/executor.py",
+      "line": 232,
+      "args": [
+        "max_workers",
+        "retry_attempts"
+      ]
+    },
+    "file:ai-devbot/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 5
+    },
+    "file:ai-devbot/spec_engine/spec_graph.py": {
+      "type": "file",
+      "path": "ai-devbot/spec_engine/spec_graph.py",
+      "name": "spec_graph.py",
+      "language": "python",
+      "line_count": 462
+    },
+    "class:ai-devbot/spec_engine/spec_graph.py:TaskStatus": {
+      "type": "class",
+      "name": "TaskStatus",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:ai-devbot/spec_engine/spec_graph.py:TaskPhase": {
+      "type": "class",
+      "name": "TaskPhase",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 28,
+      "methods": []
+    },
+    "class:ai-devbot/spec_engine/spec_graph.py:SpecTask": {
+      "type": "class",
+      "name": "SpecTask",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 37,
+      "methods": [
+        "can_execute"
+      ]
+    },
+    "class:ai-devbot/spec_engine/spec_graph.py:SpecFeature": {
+      "type": "class",
+      "name": "SpecFeature",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 56,
+      "methods": [
+        "get_tasks_by_phase",
+        "get_pending_tasks",
+        "get_completed_tasks"
+      ]
+    },
+    "class:ai-devbot/spec_engine/spec_graph.py:SpecGraph": {
+      "type": "class",
+      "name": "SpecGraph",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 81,
+      "methods": [
+        "__init__",
+        "_build_graph",
+        "get_ready_tasks",
+        "get_execution_levels",
+        "get_parallel_groups",
+        "topological_sort"
+      ]
+    },
+    "class:ai-devbot/spec_engine/spec_graph.py:SpecEngine": {
+      "type": "class",
+      "name": "SpecEngine",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 172,
+      "methods": [
+        "__init__",
+        "load_feature",
+        "_parse_markdown",
+        "_parse_yaml",
+        "_parse_directory",
+        "_parse_phase",
+        "_infer_assignee",
+        "create_feature",
+        "_save_feature",
+        "list_features",
+        "get_task_graph",
+        "validate_feature"
+      ]
+    },
+    "func:ai-devbot/spec_engine/spec_graph.py:get_spec_engine": {
+      "type": "function",
+      "name": "get_spec_engine",
+      "file": "ai-devbot/spec_engine/spec_graph.py",
+      "line": 457,
+      "args": [
+        "base_path"
+      ]
+    },
+    "file:ai-devbot/tools/telegram_api.py": {
+      "type": "file",
+      "path": "ai-devbot/tools/telegram_api.py",
+      "name": "telegram_api.py",
+      "language": "python",
+      "line_count": 103
+    },
+    "class:ai-devbot/tools/telegram_api.py:TelegramAPITool": {
+      "type": "class",
+      "name": "TelegramAPITool",
+      "file": "ai-devbot/tools/telegram_api.py",
+      "line": 14,
+      "methods": [
+        "__init__",
+        "execute",
+        "send_message",
+        "get_updates",
+        "get_me",
+        "get_schema"
+      ]
+    },
+    "file:ai-devbot/tools/git_tools.py": {
+      "type": "file",
+      "path": "ai-devbot/tools/git_tools.py",
+      "name": "git_tools.py",
+      "language": "python",
+      "line_count": 252
+    },
+    "class:ai-devbot/tools/git_tools.py:GitTool": {
+      "type": "class",
+      "name": "GitTool",
+      "file": "ai-devbot/tools/git_tools.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "_run_git",
+        "execute",
+        "status",
+        "add",
+        "commit",
+        "push",
+        "pull",
+        "branch",
+        "log",
+        "diff",
+        "validate",
+        "get_schema"
+      ]
+    },
+    "file:ai-devbot/tools/claude_cli.py": {
+      "type": "file",
+      "path": "ai-devbot/tools/claude_cli.py",
+      "name": "claude_cli.py",
+      "language": "python",
+      "line_count": 215
+    },
+    "class:ai-devbot/tools/claude_cli.py:ClaudeCLITool": {
+      "type": "class",
+      "name": "ClaudeCLITool",
+      "file": "ai-devbot/tools/claude_cli.py",
+      "line": 20,
+      "methods": [
+        "__init__",
+        "execute",
+        "execute_with_session",
+        "validate",
+        "get_schema"
+      ]
+    },
+    "func:ai-devbot/tools/claude_cli.py:create_claude_tool": {
+      "type": "function",
+      "name": "create_claude_tool",
+      "file": "ai-devbot/tools/claude_cli.py",
+      "line": 213,
+      "args": [
+        "config"
+      ]
+    },
+    "file:ai-devbot/tools/tool_registry.py": {
+      "type": "file",
+      "path": "ai-devbot/tools/tool_registry.py",
+      "name": "tool_registry.py",
+      "language": "python",
+      "line_count": 314
+    },
+    "class:ai-devbot/tools/tool_registry.py:ToolCategory": {
+      "type": "class",
+      "name": "ToolCategory",
+      "file": "ai-devbot/tools/tool_registry.py",
+      "line": 18,
+      "methods": []
+    },
+    "class:ai-devbot/tools/tool_registry.py:ToolMetadata": {
+      "type": "class",
+      "name": "ToolMetadata",
+      "file": "ai-devbot/tools/tool_registry.py",
+      "line": 31,
+      "methods": []
+    },
+    "class:ai-devbot/tools/tool_registry.py:ToolRegistry": {
+      "type": "class",
+      "name": "ToolRegistry",
+      "file": "ai-devbot/tools/tool_registry.py",
+      "line": 42,
+      "methods": [
+        "__new__",
+        "__init__",
+        "register",
+        "register_lazy",
+        "get",
+        "get_metadata",
+        "list_tools",
+        "find_tools",
+        "unregister",
+        "get_registry_summary"
+      ]
+    },
+    "func:ai-devbot/tools/tool_registry.py:get_registry": {
+      "type": "function",
+      "name": "get_registry",
+      "file": "ai-devbot/tools/tool_registry.py",
+      "line": 257,
+      "args": []
+    },
+    "func:ai-devbot/tools/tool_registry.py:register_tool": {
+      "type": "function",
+      "name": "register_tool",
+      "file": "ai-devbot/tools/tool_registry.py",
+      "line": 265,
+      "args": [
+        "name",
+        "category"
+      ]
+    },
+    "func:ai-devbot/tools/tool_registry.py:discover_tools": {
+      "type": "function",
+      "name": "discover_tools",
+      "file": "ai-devbot/tools/tool_registry.py",
+      "line": 274,
+      "args": [
+        "base_module"
+      ]
+    },
+    "file:ai-devbot/tools/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/tools/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 1
+    },
+    "file:ai-devbot/tools/tool.py": {
+      "type": "file",
+      "path": "ai-devbot/tools/tool.py",
+      "name": "tool.py",
+      "language": "python",
+      "line_count": 97
+    },
+    "class:ai-devbot/tools/tool.py:ToolResult": {
+      "type": "class",
+      "name": "ToolResult",
+      "file": "ai-devbot/tools/tool.py",
+      "line": 18,
+      "methods": [
+        "__post_init__"
+      ]
+    },
+    "class:ai-devbot/tools/tool.py:Tool": {
+      "type": "class",
+      "name": "Tool",
+      "file": "ai-devbot/tools/tool.py",
+      "line": 30,
+      "methods": [
+        "__init__",
+        "execute",
+        "validate",
+        "get_schema",
+        "__repr__"
+      ]
+    },
+    "file:ai-devbot/guardrails/command_validation.py": {
+      "type": "file",
+      "path": "ai-devbot/guardrails/command_validation.py",
+      "name": "command_validation.py",
+      "language": "python",
+      "line_count": 187
+    },
+    "class:ai-devbot/guardrails/command_validation.py:ValidationResult": {
+      "type": "class",
+      "name": "ValidationResult",
+      "file": "ai-devbot/guardrails/command_validation.py",
+      "line": 16,
+      "methods": []
+    },
+    "class:ai-devbot/guardrails/command_validation.py:CommandValidator": {
+      "type": "class",
+      "name": "CommandValidator",
+      "file": "ai-devbot/guardrails/command_validation.py",
+      "line": 23,
+      "methods": [
+        "__init__",
+        "_compile_patterns",
+        "validate",
+        "_sanitize",
+        "check_suspicious",
+        "validate_file_path"
+      ]
+    },
+    "file:ai-devbot/guardrails/permissions.py": {
+      "type": "file",
+      "path": "ai-devbot/guardrails/permissions.py",
+      "name": "permissions.py",
+      "language": "python",
+      "line_count": 159
+    },
+    "class:ai-devbot/guardrails/permissions.py:PermissionLevel": {
+      "type": "class",
+      "name": "PermissionLevel",
+      "file": "ai-devbot/guardrails/permissions.py",
+      "line": 15,
+      "methods": []
+    },
+    "class:ai-devbot/guardrails/permissions.py:User": {
+      "type": "class",
+      "name": "User",
+      "file": "ai-devbot/guardrails/permissions.py",
+      "line": 25,
+      "methods": [
+        "__post_init__"
+      ]
+    },
+    "class:ai-devbot/guardrails/permissions.py:PermissionManager": {
+      "type": "class",
+      "name": "PermissionManager",
+      "file": "ai-devbot/guardrails/permissions.py",
+      "line": 38,
+      "methods": [
+        "__init__",
+        "add_user",
+        "remove_user",
+        "block_user",
+        "unblock_user",
+        "is_allowed",
+        "can_execute_command",
+        "get_user",
+        "list_users",
+        "set_user_permission",
+        "add_user_command"
+      ]
+    },
+    "file:ai-devbot/memory/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/memory/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 392
+    },
+    "class:ai-devbot/memory/__init__.py:ShortTermMemory": {
+      "type": "class",
+      "name": "ShortTermMemory",
+      "file": "ai-devbot/memory/__init__.py",
+      "line": 22,
+      "methods": [
+        "__init__",
+        "set",
+        "get",
+        "delete",
+        "clear",
+        "cleanup_expired",
+        "keys",
+        "__len__"
+      ]
+    },
+    "class:ai-devbot/memory/__init__.py:LongTermMemory": {
+      "type": "class",
+      "name": "LongTermMemory",
+      "file": "ai-devbot/memory/__init__.py",
+      "line": 129,
+      "methods": [
+        "__init__",
+        "_load_index",
+        "_save_index",
+        "store",
+        "retrieve",
+        "search",
+        "delete",
+        "list_keys",
+        "clear"
+      ]
+    },
+    "class:ai-devbot/memory/__init__.py:Memory": {
+      "type": "class",
+      "name": "Memory",
+      "file": "ai-devbot/memory/__init__.py",
+      "line": 283,
+      "methods": [
+        "__init__",
+        "set",
+        "get",
+        "remember",
+        "forget",
+        "clear_short_term",
+        "clear_all"
+      ]
+    },
+    "func:ai-devbot/memory/__init__.py:get_short_term_memory": {
+      "type": "function",
+      "name": "get_short_term_memory",
+      "file": "ai-devbot/memory/__init__.py",
+      "line": 371,
+      "args": []
+    },
+    "func:ai-devbot/memory/__init__.py:get_long_term_memory": {
+      "type": "function",
+      "name": "get_long_term_memory",
+      "file": "ai-devbot/memory/__init__.py",
+      "line": 379,
+      "args": []
+    },
+    "func:ai-devbot/memory/__init__.py:get_memory": {
+      "type": "function",
+      "name": "get_memory",
+      "file": "ai-devbot/memory/__init__.py",
+      "line": 387,
+      "args": []
+    },
+    "file:ai-devbot/config/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/config/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 212
+    },
+    "class:ai-devbot/config/__init__.py:ConfigLoader": {
+      "type": "class",
+      "name": "ConfigLoader",
+      "file": "ai-devbot/config/__init__.py",
+      "line": 20,
+      "methods": [
+        "__init__",
+        "_get_default_config_path",
+        "load",
+        "_process_env_vars",
+        "_substitute_env_vars",
+        "_resolve_dynamic_paths",
+        "get",
+        "get_section"
+      ]
+    },
+    "func:ai-devbot/config/__init__.py:load_config": {
+      "type": "function",
+      "name": "load_config",
+      "file": "ai-devbot/config/__init__.py",
+      "line": 181,
+      "args": [
+        "config_path"
+      ]
+    },
+    "func:ai-devbot/config/__init__.py:get_config": {
+      "type": "function",
+      "name": "get_config",
+      "file": "ai-devbot/config/__init__.py",
+      "line": 199,
+      "args": [
+        "config_path"
+      ]
+    },
+    "file:ai-devbot/tests/test_workflows.py": {
+      "type": "file",
+      "path": "ai-devbot/tests/test_workflows.py",
+      "name": "test_workflows.py",
+      "language": "python",
+      "line_count": 195
+    },
+    "class:ai-devbot/tests/test_workflows.py:TestCommandRouter": {
+      "type": "class",
+      "name": "TestCommandRouter",
+      "file": "ai-devbot/tests/test_workflows.py",
+      "line": 18,
+      "methods": [
+        "setUp",
+        "test_parse_spec_command",
+        "test_parse_code_command",
+        "test_parse_status_command",
+        "test_parse_unknown_command",
+        "test_get_help_text",
+        "test_command_mapping"
+      ]
+    },
+    "class:ai-devbot/tests/test_workflows.py:TestTaskPlanner": {
+      "type": "class",
+      "name": "TestTaskPlanner",
+      "file": "ai-devbot/tests/test_workflows.py",
+      "line": 81,
+      "methods": [
+        "setUp",
+        "test_create_plan_for_spec",
+        "test_create_plan_for_code",
+        "test_create_plan_for_status",
+        "test_estimate_time"
+      ]
+    },
+    "class:ai-devbot/tests/test_workflows.py:TestOrchestrator": {
+      "type": "class",
+      "name": "TestOrchestrator",
+      "file": "ai-devbot/tests/test_workflows.py",
+      "line": 134,
+      "methods": [
+        "setUp",
+        "test_register_agent",
+        "test_get_agent_not_found",
+        "test_create_workflow",
+        "test_add_step",
+        "test_list_workflows"
+      ]
+    },
+    "class:ai-devbot/tests/test_workflows.py:TestOrchestratorAsync": {
+      "type": "class",
+      "name": "TestOrchestratorAsync",
+      "file": "ai-devbot/tests/test_workflows.py",
+      "line": 177,
+      "methods": []
+    },
+    "file:ai-devbot/tests/test_agents.py": {
+      "type": "file",
+      "path": "ai-devbot/tests/test_agents.py",
+      "name": "test_agents.py",
+      "language": "python",
+      "line_count": 129
+    },
+    "class:ai-devbot/tests/test_agents.py:TestBaseAgent": {
+      "type": "class",
+      "name": "TestBaseAgent",
+      "file": "ai-devbot/tests/test_agents.py",
+      "line": 19,
+      "methods": [
+        "test_agent_initialization",
+        "test_validate_input_valid",
+        "test_validate_input_empty",
+        "test_validate_input_whitespace",
+        "test_get_capabilities",
+        "test_get_config"
+      ]
+    },
+    "class:ai-devbot/tests/test_agents.py:TestSpecAgent": {
+      "type": "class",
+      "name": "TestSpecAgent",
+      "file": "ai-devbot/tests/test_agents.py",
+      "line": 58,
+      "methods": [
+        "test_spec_agent_execute",
+        "test_spec_agent_invalid_input"
+      ]
+    },
+    "class:ai-devbot/tests/test_agents.py:TestCodeAgent": {
+      "type": "class",
+      "name": "TestCodeAgent",
+      "file": "ai-devbot/tests/test_agents.py",
+      "line": 78,
+      "methods": [
+        "test_code_agent_execute",
+        "test_code_agent_capabilities"
+      ]
+    },
+    "class:ai-devbot/tests/test_agents.py:TestTestAgent": {
+      "type": "class",
+      "name": "TestTestAgent",
+      "file": "ai-devbot/tests/test_agents.py",
+      "line": 95,
+      "methods": [
+        "test_test_agent_execute"
+      ]
+    },
+    "class:ai-devbot/tests/test_agents.py:TestDeployAgent": {
+      "type": "class",
+      "name": "TestDeployAgent",
+      "file": "ai-devbot/tests/test_agents.py",
+      "line": 106,
+      "methods": [
+        "test_deploy_agent_execute"
+      ]
+    },
+    "class:ai-devbot/tests/test_agents.py:TestDebugAgent": {
+      "type": "class",
+      "name": "TestDebugAgent",
+      "file": "ai-devbot/tests/test_agents.py",
+      "line": 117,
+      "methods": [
+        "test_debug_agent_execute"
+      ]
+    },
+    "file:ai-devbot/workflows/task_planner.py": {
+      "type": "file",
+      "path": "ai-devbot/workflows/task_planner.py",
+      "name": "task_planner.py",
+      "language": "python",
+      "line_count": 157
+    },
+    "class:ai-devbot/workflows/task_planner.py:ExecutionStep": {
+      "type": "class",
+      "name": "ExecutionStep",
+      "file": "ai-devbot/workflows/task_planner.py",
+      "line": 18,
+      "methods": [
+        "__post_init__"
+      ]
+    },
+    "class:ai-devbot/workflows/task_planner.py:ExecutionPlan": {
+      "type": "class",
+      "name": "ExecutionPlan",
+      "file": "ai-devbot/workflows/task_planner.py",
+      "line": 31,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/task_planner.py:TaskPlanner": {
+      "type": "class",
+      "name": "TaskPlanner",
+      "file": "ai-devbot/workflows/task_planner.py",
+      "line": 40,
+      "methods": [
+        "__init__",
+        "create_plan",
+        "create_tasks",
+        "get_supported_commands",
+        "estimate_time"
+      ]
+    },
+    "file:ai-devbot/workflows/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/workflows/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 1
+    },
+    "file:ai-devbot/workflows/orchestration.py": {
+      "type": "file",
+      "path": "ai-devbot/workflows/orchestration.py",
+      "name": "orchestration.py",
+      "language": "python",
+      "line_count": 383
+    },
+    "class:ai-devbot/workflows/orchestration.py:TaskStatus": {
+      "type": "class",
+      "name": "TaskStatus",
+      "file": "ai-devbot/workflows/orchestration.py",
+      "line": 21,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/orchestration.py:WorkflowStep": {
+      "type": "class",
+      "name": "WorkflowStep",
+      "file": "ai-devbot/workflows/orchestration.py",
+      "line": 31,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/orchestration.py:Workflow": {
+      "type": "class",
+      "name": "Workflow",
+      "file": "ai-devbot/workflows/orchestration.py",
+      "line": 44,
+      "methods": [
+        "is_complete",
+        "total_steps",
+        "completed_steps"
+      ]
+    },
+    "class:ai-devbot/workflows/orchestration.py:Orchestrator": {
+      "type": "class",
+      "name": "Orchestrator",
+      "file": "ai-devbot/workflows/orchestration.py",
+      "line": 67,
+      "methods": [
+        "__init__",
+        "register_agent",
+        "get_agent",
+        "list_agents",
+        "register_callback",
+        "_trigger_callbacks",
+        "create_workflow",
+        "add_step",
+        "cancel_workflow",
+        "get_workflow",
+        "list_workflows",
+        "get_workflow_summary"
+      ]
+    },
+    "file:ai-devbot/workflows/error_recovery.py": {
+      "type": "file",
+      "path": "ai-devbot/workflows/error_recovery.py",
+      "name": "error_recovery.py",
+      "language": "python",
+      "line_count": 329
+    },
+    "class:ai-devbot/workflows/error_recovery.py:RecoveryStrategy": {
+      "type": "class",
+      "name": "RecoveryStrategy",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/error_recovery.py:FailureReason": {
+      "type": "class",
+      "name": "FailureReason",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 27,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/error_recovery.py:RetryConfig": {
+      "type": "class",
+      "name": "RetryConfig",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 37,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/error_recovery.py:FallbackConfig": {
+      "type": "class",
+      "name": "FallbackConfig",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 47,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/error_recovery.py:RecoveryRecord": {
+      "type": "class",
+      "name": "RecoveryRecord",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 55,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/error_recovery.py:ErrorRecovery": {
+      "type": "class",
+      "name": "ErrorRecovery",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 66,
+      "methods": [
+        "__init__",
+        "calculate_delay",
+        "classify_failure",
+        "determine_strategy",
+        "_record_recovery",
+        "save_workflow_state",
+        "load_workflow_state",
+        "clear_workflow_state",
+        "get_recovery_stats"
+      ]
+    },
+    "func:ai-devbot/workflows/error_recovery.py:get_error_recovery": {
+      "type": "function",
+      "name": "get_error_recovery",
+      "file": "ai-devbot/workflows/error_recovery.py",
+      "line": 321,
+      "args": [
+        "retry_config",
+        "fallback_config"
+      ]
+    },
+    "file:ai-devbot/workflows/examples.py": {
+      "type": "file",
+      "path": "ai-devbot/workflows/examples.py",
+      "name": "examples.py",
+      "language": "python",
+      "line_count": 205
+    },
+    "file:ai-devbot/workflows/command_router.py": {
+      "type": "file",
+      "path": "ai-devbot/workflows/command_router.py",
+      "name": "command_router.py",
+      "language": "python",
+      "line_count": 163
+    },
+    "class:ai-devbot/workflows/command_router.py:CommandType": {
+      "type": "class",
+      "name": "CommandType",
+      "file": "ai-devbot/workflows/command_router.py",
+      "line": 16,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/command_router.py:ParsedCommand": {
+      "type": "class",
+      "name": "ParsedCommand",
+      "file": "ai-devbot/workflows/command_router.py",
+      "line": 29,
+      "methods": []
+    },
+    "class:ai-devbot/workflows/command_router.py:CommandRouter": {
+      "type": "class",
+      "name": "CommandRouter",
+      "file": "ai-devbot/workflows/command_router.py",
+      "line": 39,
+      "methods": [
+        "__init__",
+        "register_handler",
+        "parse_command",
+        "route",
+        "_get_default_response",
+        "get_help_text",
+        "get_command_mapping"
+      ]
+    },
+    "file:ai-devbot/agents/test_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/test_agent.py",
+      "name": "test_agent.py",
+      "language": "python",
+      "line_count": 156
+    },
+    "class:ai-devbot/agents/test_agent.py:TestAgent": {
+      "type": "class",
+      "name": "TestAgent",
+      "file": "ai-devbot/agents/test_agent.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "execute",
+        "_run_pytest",
+        "_build_test_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:ai-devbot/agents/spec_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/spec_agent.py",
+      "name": "spec_agent.py",
+      "language": "python",
+      "line_count": 131
+    },
+    "class:ai-devbot/agents/spec_agent.py:SpecAgent": {
+      "type": "class",
+      "name": "SpecAgent",
+      "file": "ai-devbot/agents/spec_agent.py",
+      "line": 16,
+      "methods": [
+        "__init__",
+        "execute",
+        "_build_spec_prompt",
+        "get_capabilities",
+        "_extract_feature_name"
+      ]
+    },
+    "file:ai-devbot/agents/base_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/base_agent.py",
+      "name": "base_agent.py",
+      "language": "python",
+      "line_count": 193
+    },
+    "class:ai-devbot/agents/base_agent.py:Task": {
+      "type": "class",
+      "name": "Task",
+      "file": "ai-devbot/agents/base_agent.py",
+      "line": 18,
+      "methods": []
+    },
+    "class:ai-devbot/agents/base_agent.py:AgentResult": {
+      "type": "class",
+      "name": "AgentResult",
+      "file": "ai-devbot/agents/base_agent.py",
+      "line": 29,
+      "methods": []
+    },
+    "class:ai-devbot/agents/base_agent.py:BaseAgent": {
+      "type": "class",
+      "name": "BaseAgent",
+      "file": "ai-devbot/agents/base_agent.py",
+      "line": 39,
+      "methods": [
+        "__init__",
+        "execute",
+        "validate_input",
+        "get_capabilities",
+        "get_config",
+        "log",
+        "set_memory",
+        "remember",
+        "recall",
+        "get_context",
+        "learn_from_execution",
+        "__repr__"
+      ]
+    },
+    "file:ai-devbot/agents/deploy_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/deploy_agent.py",
+      "name": "deploy_agent.py",
+      "language": "python",
+      "line_count": 188
+    },
+    "class:ai-devbot/agents/deploy_agent.py:DeployAgent": {
+      "type": "class",
+      "name": "DeployAgent",
+      "file": "ai-devbot/agents/deploy_agent.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "execute",
+        "_detect_and_execute_deployment",
+        "_deploy_vercel",
+        "_deploy_docker",
+        "_deploy_heroku",
+        "_build_deploy_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:ai-devbot/agents/planner_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/planner_agent.py",
+      "name": "planner_agent.py",
+      "language": "python",
+      "line_count": 271
+    },
+    "class:ai-devbot/agents/planner_agent.py:TaskPriority": {
+      "type": "class",
+      "name": "TaskPriority",
+      "file": "ai-devbot/agents/planner_agent.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:ai-devbot/agents/planner_agent.py:TaskStatus": {
+      "type": "class",
+      "name": "TaskStatus",
+      "file": "ai-devbot/agents/planner_agent.py",
+      "line": 27,
+      "methods": []
+    },
+    "class:ai-devbot/agents/planner_agent.py:TaskNode": {
+      "type": "class",
+      "name": "TaskNode",
+      "file": "ai-devbot/agents/planner_agent.py",
+      "line": 36,
+      "methods": [
+        "__init__",
+        "_infer_agent_type"
+      ]
+    },
+    "class:ai-devbot/agents/planner_agent.py:TaskGraph": {
+      "type": "class",
+      "name": "TaskGraph",
+      "file": "ai-devbot/agents/planner_agent.py",
+      "line": 64,
+      "methods": [
+        "__init__",
+        "add_task",
+        "get_ready_tasks",
+        "topological_sort"
+      ]
+    },
+    "class:ai-devbot/agents/planner_agent.py:PlannerAgent": {
+      "type": "class",
+      "name": "PlannerAgent",
+      "file": "ai-devbot/agents/planner_agent.py",
+      "line": 120,
+      "methods": [
+        "__init__",
+        "execute",
+        "_generate_task_graph",
+        "_format_plan_output",
+        "get_plan",
+        "get_capabilities"
+      ]
+    },
+    "file:ai-devbot/agents/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 1
+    },
+    "file:ai-devbot/agents/code_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/code_agent.py",
+      "name": "code_agent.py",
+      "language": "python",
+      "line_count": 151
+    },
+    "class:ai-devbot/agents/code_agent.py:CodeAgent": {
+      "type": "class",
+      "name": "CodeAgent",
+      "file": "ai-devbot/agents/code_agent.py",
+      "line": 16,
+      "methods": [
+        "__init__",
+        "execute",
+        "_extract_feature_name",
+        "_format_spec_context",
+        "_build_code_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:ai-devbot/agents/debug_agent.py": {
+      "type": "file",
+      "path": "ai-devbot/agents/debug_agent.py",
+      "name": "debug_agent.py",
+      "language": "python",
+      "line_count": 106
+    },
+    "class:ai-devbot/agents/debug_agent.py:DebugAgent": {
+      "type": "class",
+      "name": "DebugAgent",
+      "file": "ai-devbot/agents/debug_agent.py",
+      "line": 16,
+      "methods": [
+        "__init__",
+        "execute",
+        "_build_debug_prompt",
+        "get_capabilities"
+      ]
+    },
+    "file:ai-devbot/observability/logging.py": {
+      "type": "file",
+      "path": "ai-devbot/observability/logging.py",
+      "name": "logging.py",
+      "language": "python",
+      "line_count": 141
+    },
+    "class:ai-devbot/observability/logging.py:JSONFormatter": {
+      "type": "class",
+      "name": "JSONFormatter",
+      "file": "ai-devbot/observability/logging.py",
+      "line": 15,
+      "methods": [
+        "format"
+      ]
+    },
+    "class:ai-devbot/observability/logging.py:Logger": {
+      "type": "class",
+      "name": "Logger",
+      "file": "ai-devbot/observability/logging.py",
+      "line": 45,
+      "methods": [
+        "__init__",
+        "_setup_logger",
+        "debug",
+        "info",
+        "warning",
+        "error",
+        "critical",
+        "exception"
+      ]
+    },
+    "func:ai-devbot/observability/logging.py:get_logger": {
+      "type": "function",
+      "name": "get_logger",
+      "file": "ai-devbot/observability/logging.py",
+      "line": 122,
+      "args": [
+        "name",
+        "config"
+      ]
+    },
+    "file:ai-devbot/observability/metrics.py": {
+      "type": "file",
+      "path": "ai-devbot/observability/metrics.py",
+      "name": "metrics.py",
+      "language": "python",
+      "line_count": 188
+    },
+    "class:ai-devbot/observability/metrics.py:Counter": {
+      "type": "class",
+      "name": "Counter",
+      "file": "ai-devbot/observability/metrics.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:ai-devbot/observability/metrics.py:Gauge": {
+      "type": "class",
+      "name": "Gauge",
+      "file": "ai-devbot/observability/metrics.py",
+      "line": 27,
+      "methods": []
+    },
+    "class:ai-devbot/observability/metrics.py:Histogram": {
+      "type": "class",
+      "name": "Histogram",
+      "file": "ai-devbot/observability/metrics.py",
+      "line": 35,
+      "methods": []
+    },
+    "class:ai-devbot/observability/metrics.py:Metrics": {
+      "type": "class",
+      "name": "Metrics",
+      "file": "ai-devbot/observability/metrics.py",
+      "line": 44,
+      "methods": [
+        "__init__",
+        "counter",
+        "gauge",
+        "histogram",
+        "get_metrics",
+        "_make_key"
+      ]
+    },
+    "class:ai-devbot/observability/metrics.py:MetricNames": {
+      "type": "class",
+      "name": "MetricNames",
+      "file": "ai-devbot/observability/metrics.py",
+      "line": 150,
+      "methods": []
+    },
+    "func:ai-devbot/observability/metrics.py:get_metrics": {
+      "type": "function",
+      "name": "get_metrics",
+      "file": "ai-devbot/observability/metrics.py",
+      "line": 175,
+      "args": [
+        "config"
+      ]
+    },
+    "file:ai-devbot/observability/tracing.py": {
+      "type": "file",
+      "path": "ai-devbot/observability/tracing.py",
+      "name": "tracing.py",
+      "language": "python",
+      "line_count": 137
+    },
+    "class:ai-devbot/observability/tracing.py:Span": {
+      "type": "class",
+      "name": "Span",
+      "file": "ai-devbot/observability/tracing.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:ai-devbot/observability/tracing.py:Tracer": {
+      "type": "class",
+      "name": "Tracer",
+      "file": "ai-devbot/observability/tracing.py",
+      "line": 32,
+      "methods": [
+        "__init__",
+        "start_span",
+        "_export_console",
+        "get_span",
+        "get_current_span"
+      ]
+    },
+    "func:ai-devbot/observability/tracing.py:get_tracer": {
+      "type": "function",
+      "name": "get_tracer",
+      "file": "ai-devbot/observability/tracing.py",
+      "line": 124,
+      "args": [
+        "config"
+      ]
+    },
+    "file:ai-devbot/observability/dashboard.py": {
+      "type": "file",
+      "path": "ai-devbot/observability/dashboard.py",
+      "name": "dashboard.py",
+      "language": "python",
+      "line_count": 315
+    },
+    "class:ai-devbot/observability/dashboard.py:LogLevel": {
+      "type": "class",
+      "name": "LogLevel",
+      "file": "ai-devbot/observability/dashboard.py",
+      "line": 21,
+      "methods": []
+    },
+    "class:ai-devbot/observability/dashboard.py:ExecutionLog": {
+      "type": "class",
+      "name": "ExecutionLog",
+      "file": "ai-devbot/observability/dashboard.py",
+      "line": 31,
+      "methods": []
+    },
+    "class:ai-devbot/observability/dashboard.py:AgentStatus": {
+      "type": "class",
+      "name": "AgentStatus",
+      "file": "ai-devbot/observability/dashboard.py",
+      "line": 42,
+      "methods": []
+    },
+    "class:ai-devbot/observability/dashboard.py:TaskMetric": {
+      "type": "class",
+      "name": "TaskMetric",
+      "file": "ai-devbot/observability/dashboard.py",
+      "line": 54,
+      "methods": []
+    },
+    "class:ai-devbot/observability/dashboard.py:ObservabilityDashboard": {
+      "type": "class",
+      "name": "ObservabilityDashboard",
+      "file": "ai-devbot/observability/dashboard.py",
+      "line": 65,
+      "methods": [
+        "__new__",
+        "__init__",
+        "log",
+        "info",
+        "error",
+        "warning",
+        "register_agent",
+        "update_agent_status",
+        "record_agent_completion",
+        "start_task",
+        "complete_task",
+        "get_recent_logs",
+        "get_agent_statuses",
+        "get_task_metrics",
+        "get_summary",
+        "get_dashboard_data",
+        "clear_old_data"
+      ]
+    },
+    "func:ai-devbot/observability/dashboard.py:get_dashboard": {
+      "type": "function",
+      "name": "get_dashboard",
+      "file": "ai-devbot/observability/dashboard.py",
+      "line": 310,
+      "args": []
+    },
+    "file:ai-devbot/bot/telegram_bot.py": {
+      "type": "file",
+      "path": "ai-devbot/bot/telegram_bot.py",
+      "name": "telegram_bot.py",
+      "language": "python",
+      "line_count": 704
+    },
+    "class:ai-devbot/bot/telegram_bot.py:AIDevBot": {
+      "type": "class",
+      "name": "AIDevBot",
+      "file": "ai-devbot/bot/telegram_bot.py",
+      "line": 43,
+      "methods": [
+        "__init__",
+        "_setup_handlers",
+        "_save_spec",
+        "run"
+      ]
+    },
+    "func:ai-devbot/bot/telegram_bot.py:create_bot": {
+      "type": "function",
+      "name": "create_bot",
+      "file": "ai-devbot/bot/telegram_bot.py",
+      "line": 664,
+      "args": [
+        "config"
+      ]
+    },
+    "func:ai-devbot/bot/telegram_bot.py:main": {
+      "type": "function",
+      "name": "main",
+      "file": "ai-devbot/bot/telegram_bot.py",
+      "line": 677,
+      "args": []
+    },
+    "file:ai-devbot/events/event_bus.py": {
+      "type": "file",
+      "path": "ai-devbot/events/event_bus.py",
+      "name": "event_bus.py",
+      "language": "python",
+      "line_count": 263
+    },
+    "class:ai-devbot/events/event_bus.py:EventHandler": {
+      "type": "class",
+      "name": "EventHandler",
+      "file": "ai-devbot/events/event_bus.py",
+      "line": 20,
+      "methods": []
+    },
+    "class:ai-devbot/events/event_bus.py:EventBus": {
+      "type": "class",
+      "name": "EventBus",
+      "file": "ai-devbot/events/event_bus.py",
+      "line": 30,
+      "methods": [
+        "__new__",
+        "__init__",
+        "subscribe",
+        "subscribe_all",
+        "unsubscribe",
+        "publish",
+        "publish_sync",
+        "get_handlers",
+        "get_event_history",
+        "clear_history",
+        "get_stats"
+      ]
+    },
+    "func:ai-devbot/events/event_bus.py:get_event_bus": {
+      "type": "function",
+      "name": "get_event_bus",
+      "file": "ai-devbot/events/event_bus.py",
+      "line": 248,
+      "args": []
+    },
+    "func:ai-devbot/events/event_bus.py:publish": {
+      "type": "function",
+      "name": "publish",
+      "file": "ai-devbot/events/event_bus.py",
+      "line": 256,
+      "args": [
+        "event"
+      ]
+    },
+    "func:ai-devbot/events/event_bus.py:subscribe": {
+      "type": "function",
+      "name": "subscribe",
+      "file": "ai-devbot/events/event_bus.py",
+      "line": 261,
+      "args": [
+        "event_type",
+        "callback",
+        "description"
+      ]
+    },
+    "file:ai-devbot/events/event_types.py": {
+      "type": "file",
+      "path": "ai-devbot/events/event_types.py",
+      "name": "event_types.py",
+      "language": "python",
+      "line_count": 243
+    },
+    "class:ai-devbot/events/event_types.py:EventType": {
+      "type": "class",
+      "name": "EventType",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 13,
+      "methods": []
+    },
+    "class:ai-devbot/events/event_types.py:Event": {
+      "type": "class",
+      "name": "Event",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 66,
+      "methods": [
+        "to_dict"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:FeatureCreatedEvent": {
+      "type": "class",
+      "name": "FeatureCreatedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 88,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:FeatureUpdatedEvent": {
+      "type": "class",
+      "name": "FeatureUpdatedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 99,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:TaskGraphCreatedEvent": {
+      "type": "class",
+      "name": "TaskGraphCreatedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 111,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:TaskStartedEvent": {
+      "type": "class",
+      "name": "TaskStartedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 122,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:TaskCompletedEvent": {
+      "type": "class",
+      "name": "TaskCompletedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 133,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:TaskFailedEvent": {
+      "type": "class",
+      "name": "TaskFailedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 149,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:AgentStartedEvent": {
+      "type": "class",
+      "name": "AgentStartedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 161,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:AgentCompletedEvent": {
+      "type": "class",
+      "name": "AgentCompletedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 172,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:WorkflowStartedEvent": {
+      "type": "class",
+      "name": "WorkflowStartedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 184,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:WorkflowCompletedEvent": {
+      "type": "class",
+      "name": "WorkflowCompletedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 195,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:DeployStartedEvent": {
+      "type": "class",
+      "name": "DeployStartedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 207,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:DeployCompletedEvent": {
+      "type": "class",
+      "name": "DeployCompletedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 218,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/events/event_types.py:TestCompletedEvent": {
+      "type": "class",
+      "name": "TestCompletedEvent",
+      "file": "ai-devbot/events/event_types.py",
+      "line": 230,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "file:ai-devbot/openspec/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/openspec/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 360
+    },
+    "class:ai-devbot/openspec/__init__.py:SpecStatus": {
+      "type": "class",
+      "name": "SpecStatus",
+      "file": "ai-devbot/openspec/__init__.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:ai-devbot/openspec/__init__.py:OpenSpec": {
+      "type": "class",
+      "name": "OpenSpec",
+      "file": "ai-devbot/openspec/__init__.py",
+      "line": 27,
+      "methods": [
+        "__init__",
+        "list_features",
+        "load_feature",
+        "_parse_spec",
+        "create_feature",
+        "update_task_status",
+        "get_pending_tasks",
+        "get_task_graph",
+        "get_context",
+        "validate_spec"
+      ]
+    },
+    "func:ai-devbot/openspec/__init__.py:get_openspec": {
+      "type": "function",
+      "name": "get_openspec",
+      "file": "ai-devbot/openspec/__init__.py",
+      "line": 355,
+      "args": [
+        "base_path"
+      ]
+    },
+    "file:ai-devbot/orchestrator/task_queue.py": {
+      "type": "file",
+      "path": "ai-devbot/orchestrator/task_queue.py",
+      "name": "task_queue.py",
+      "language": "python",
+      "line_count": 423
+    },
+    "class:ai-devbot/orchestrator/task_queue.py:TaskPriority": {
+      "type": "class",
+      "name": "TaskPriority",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 21,
+      "methods": []
+    },
+    "class:ai-devbot/orchestrator/task_queue.py:TaskState": {
+      "type": "class",
+      "name": "TaskState",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 29,
+      "methods": []
+    },
+    "class:ai-devbot/orchestrator/task_queue.py:QueuedTask": {
+      "type": "class",
+      "name": "QueuedTask",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 40,
+      "methods": [
+        "__lt__"
+      ]
+    },
+    "class:ai-devbot/orchestrator/task_queue.py:WorkerPool": {
+      "type": "class",
+      "name": "WorkerPool",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 60,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "class:ai-devbot/orchestrator/task_queue.py:TaskQueueMetrics": {
+      "type": "class",
+      "name": "TaskQueueMetrics",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 99,
+      "methods": []
+    },
+    "class:ai-devbot/orchestrator/task_queue.py:TaskQueue": {
+      "type": "class",
+      "name": "TaskQueue",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 111,
+      "methods": [
+        "__init__",
+        "_get_nowait_task",
+        "get_status",
+        "get_metrics",
+        "on"
+      ]
+    },
+    "func:ai-devbot/orchestrator/task_queue.py:get_task_queue": {
+      "type": "function",
+      "name": "get_task_queue",
+      "file": "ai-devbot/orchestrator/task_queue.py",
+      "line": 418,
+      "args": []
+    },
+    "file:ai-devbot/orchestrator/__init__.py": {
+      "type": "file",
+      "path": "ai-devbot/orchestrator/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 19
+    },
+    "file:ai-devbot/orchestrator/orchestrator.py": {
+      "type": "file",
+      "path": "ai-devbot/orchestrator/orchestrator.py",
+      "name": "orchestrator.py",
+      "language": "python",
+      "line_count": 458
+    },
+    "class:ai-devbot/orchestrator/orchestrator.py:WorkflowStatus": {
+      "type": "class",
+      "name": "WorkflowStatus",
+      "file": "ai-devbot/orchestrator/orchestrator.py",
+      "line": 30,
+      "methods": []
+    },
+    "class:ai-devbot/orchestrator/orchestrator.py:TaskNode": {
+      "type": "class",
+      "name": "TaskNode",
+      "file": "ai-devbot/orchestrator/orchestrator.py",
+      "line": 40,
+      "methods": []
+    },
+    "class:ai-devbot/orchestrator/orchestrator.py:WorkflowExecution": {
+      "type": "class",
+      "name": "WorkflowExecution",
+      "file": "ai-devbot/orchestrator/orchestrator.py",
+      "line": 56,
+      "methods": [
+        "total_tasks",
+        "completed_tasks",
+        "progress"
+      ]
+    },
+    "class:ai-devbot/orchestrator/orchestrator.py:AgentPool": {
+      "type": "class",
+      "name": "AgentPool",
+      "file": "ai-devbot/orchestrator/orchestrator.py",
+      "line": 83,
+      "methods": [
+        "__init__",
+        "register",
+        "get_status"
+      ]
+    },
+    "class:ai-devbot/orchestrator/orchestrator.py:ScalableOrchestrator": {
+      "type": "class",
+      "name": "ScalableOrchestrator",
+      "file": "ai-devbot/orchestrator/orchestrator.py",
+      "line": 127,
+      "methods": [
+        "__init__",
+        "register_agent",
+        "_calculate_levels",
+        "get_workflow",
+        "list_workflows",
+        "get_status"
+      ]
+    },
+    "func:ai-devbot/orchestrator/orchestrator.py:get_orchestrator": {
+      "type": "function",
+      "name": "get_orchestrator",
+      "file": "ai-devbot/orchestrator/orchestrator.py",
+      "line": 453,
+      "args": [
+        "config"
+      ]
+    }
+  },
+  "edges": [
+    {
+      "source": "file:telegram_claude_bot.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:telegram_claude_bot.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:telegram_claude_bot.py",
+      "target": "import:requests",
+      "type": "imports"
+    },
+    {
+      "source": "file:telegram_claude_bot.py",
+      "target": "import:telegram",
+      "type": "imports"
+    },
+    {
+      "source": "file:telegram_claude_bot.py",
+      "target": "import:telegram.ext",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/__init__.py",
+      "target": "import:devbot.core.devbot_core",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/setup.py",
+      "target": "import:setuptools",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/setup.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/git_tools.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/git_tools.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/git_tools.py",
+      "target": "import:devbot.tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/git_tools.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/git_tools.py",
+      "target": "class:devbot/tools/git_tools.py:GitTool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/git_tools.py",
+      "target": "func:devbot/tools/git_tools.py:create_git_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "import:devbot.tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "class:devbot/tools/claude_cli.py:ClaudeCLITool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/claude_cli.py",
+      "target": "func:devbot/tools/claude_cli.py:create_claude_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "import:devbot.tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "class:devbot/tools/tool_registry.py:ToolRegistry",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "func:devbot/tools/tool_registry.py:get_registry",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "func:devbot/tools/tool_registry.py:register_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/tool_registry.py",
+      "target": "func:devbot/tools/tool_registry.py:get_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/__init__.py",
+      "target": "import:devbot.tools.tool_registry",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/__init__.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/__init__.py",
+      "target": "import:devbot.tools.git_tools",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool.py",
+      "target": "import:abc",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/tools/tool.py",
+      "target": "class:devbot/tools/tool.py:ToolResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/tools/tool.py",
+      "target": "class:devbot/tools/tool.py:Tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.scanner.project_scanner",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.scanner.stack_detector",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.graph.code_graph_builder",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.spec.spec_generator",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.agents.planner_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.orchestrator.executor",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.tools.git_tools",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.observability",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:devbot.orchestrator.task_graph",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "class:devbot/core/devbot_core.py:DevBot",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/core/devbot_core.py",
+      "target": "func:devbot/core/devbot_core.py:create_devbot",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/core/__init__.py",
+      "target": "import:devbot.core.devbot_core",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/memory.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/memory.py",
+      "target": "import:devbot.memory.short_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/memory.py",
+      "target": "import:devbot.memory.long_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/memory.py",
+      "target": "class:devbot/memory/memory.py:Memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/memory/memory.py",
+      "target": "func:devbot/memory/memory.py:get_memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/memory/short_term_memory.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/short_term_memory.py",
+      "target": "import:threading",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/short_term_memory.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/short_term_memory.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/short_term_memory.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/short_term_memory.py",
+      "target": "class:devbot/memory/short_term_memory.py:ShortTermMemory",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/memory/__init__.py",
+      "target": "import:devbot.memory.short_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/__init__.py",
+      "target": "import:devbot.memory.long_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/__init__.py",
+      "target": "import:devbot.memory.memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/memory/long_term_memory.py",
+      "target": "class:devbot/memory/long_term_memory.py:LongTermMemory",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/graph/symbol_parser.py",
+      "target": "import:ast",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/symbol_parser.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/symbol_parser.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/symbol_parser.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/symbol_parser.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/symbol_parser.py",
+      "target": "class:devbot/graph/symbol_parser.py:SymbolParser",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/graph/__init__.py",
+      "target": "import:devbot.graph.code_graph_builder",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:ast",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/graph/code_graph_builder.py",
+      "target": "class:devbot/graph/code_graph_builder.py:CodeGraphBuilder",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/spec/__init__.py",
+      "target": "import:devbot.spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/__init__.py",
+      "target": "import:devbot.spec.spec_generator",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/spec_generator.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/spec_generator.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/spec_generator.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/spec_generator.py",
+      "target": "class:devbot/spec/spec_generator.py:SpecGenerator",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/spec/spec_generator.py",
+      "target": "func:devbot/spec/spec_generator.py:create_spec_generator",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "class:devbot/spec/openspec_sync.py:OpenSpecSync",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/spec/openspec_sync.py",
+      "target": "func:devbot/spec/openspec_sync.py:get_openspec",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/test_agent.py",
+      "target": "class:devbot/agents/test_agent.py:TestAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "import:abc",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "class:devbot/agents/base_agent.py:Task",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "class:devbot/agents/base_agent.py:AgentResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/base_agent.py",
+      "target": "class:devbot/agents/base_agent.py:BaseAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/deploy_agent.py",
+      "target": "class:devbot/agents/deploy_agent.py:DeployAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "class:devbot/agents/planner_agent.py:TaskPriority",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "class:devbot/agents/planner_agent.py:TaskStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "class:devbot/agents/planner_agent.py:TaskNode",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "class:devbot/agents/planner_agent.py:TaskGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/planner_agent.py",
+      "target": "class:devbot/agents/planner_agent.py:PlannerAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/agents/__init__.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/__init__.py",
+      "target": "import:devbot.agents.planner_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/__init__.py",
+      "target": "import:devbot.agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/__init__.py",
+      "target": "import:devbot.agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/__init__.py",
+      "target": "import:devbot.agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "import:devbot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/agents/code_agent.py",
+      "target": "class:devbot/agents/code_agent.py:CodeAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/__init__.py",
+      "target": "import:devbot.cli.devbot_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:click",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:devbot.core.devbot_core",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:cli",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:attach",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:scan",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:graph",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:feature",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:plan",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:implement",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:status",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:list_features",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:main",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "import:functools",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "import:contextlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "class:devbot/observability/tracing.py:Tracer",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "func:devbot/observability/tracing.py:get_tracer",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/observability/tracing.py",
+      "target": "func:devbot/observability/tracing.py:setup_tracing",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/observability/__init__.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/__init__.py",
+      "target": "import:devbot.observability.tracing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "import:colorlog",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "func:devbot/observability/logger.py:get_logger",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "func:devbot/observability/logger.py:configure_logging",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/observability/logger.py",
+      "target": "class:devbot/observability/logger.py:LogContext",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:telegram",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:telegram.ext",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:devbot",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "class:devbot/integrations/telegram_bot.py:DevBotTelegramBot",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "func:devbot/integrations/telegram_bot.py:create_bot",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/integrations/telegram_bot.py",
+      "target": "func:devbot/integrations/telegram_bot.py:main",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/integrations/__init__.py",
+      "target": "import:devbot.integrations.telegram_bot",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:fnmatch",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/project_scanner.py",
+      "target": "class:devbot/scanner/project_scanner.py:ProjectScanner",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/scanner/__init__.py",
+      "target": "import:devbot.scanner.project_scanner",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/__init__.py",
+      "target": "import:devbot.scanner.stack_detector",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/stack_detector.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/stack_detector.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/stack_detector.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/stack_detector.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/stack_detector.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/scanner/stack_detector.py",
+      "target": "class:devbot/scanner/stack_detector.py:StackDetector",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/__init__.py",
+      "target": "import:devbot.orchestrator.task_graph",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/__init__.py",
+      "target": "import:devbot.orchestrator.executor",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "class:devbot/orchestrator/task_graph.py:TaskState",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "class:devbot/orchestrator/task_graph.py:TaskPriority",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "class:devbot/orchestrator/task_graph.py:TaskItem",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "class:devbot/orchestrator/task_graph.py:TaskGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/task_graph.py",
+      "target": "func:devbot/orchestrator/task_graph.py:create_task_graph",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:devbot.orchestrator.task_graph",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:devbot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "class:devbot/orchestrator/executor.py:Executor",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/orchestrator/executor.py",
+      "target": "func:devbot/orchestrator/executor.py:create_executor",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "class:ai-devbot/spec_engine/spec_graph.py:TaskStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "class:ai-devbot/spec_engine/spec_graph.py:TaskPhase",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "class:ai-devbot/spec_engine/spec_graph.py:SpecTask",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "class:ai-devbot/spec_engine/spec_graph.py:SpecFeature",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "class:ai-devbot/spec_engine/spec_graph.py:SpecGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "class:ai-devbot/spec_engine/spec_graph.py:SpecEngine",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/spec_engine/spec_graph.py",
+      "target": "func:ai-devbot/spec_engine/spec_graph.py:get_spec_engine",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/telegram_api.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/telegram_api.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/telegram_api.py",
+      "target": "import:tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/telegram_api.py",
+      "target": "class:ai-devbot/tools/telegram_api.py:TelegramAPITool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "import:tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/git_tools.py",
+      "target": "class:ai-devbot/tools/git_tools.py:GitTool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:tempfile",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "import:tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "class:ai-devbot/tools/claude_cli.py:ClaudeCLITool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/claude_cli.py",
+      "target": "func:ai-devbot/tools/claude_cli.py:create_claude_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:importlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:inspect",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "import:tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "class:ai-devbot/tools/tool_registry.py:ToolCategory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "class:ai-devbot/tools/tool_registry.py:ToolMetadata",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "class:ai-devbot/tools/tool_registry.py:ToolRegistry",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "func:ai-devbot/tools/tool_registry.py:get_registry",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "func:ai-devbot/tools/tool_registry.py:register_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool_registry.py",
+      "target": "func:ai-devbot/tools/tool_registry.py:discover_tools",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "import:abc",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "class:ai-devbot/tools/tool.py:ToolResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tools/tool.py",
+      "target": "class:ai-devbot/tools/tool.py:Tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/command_validation.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/command_validation.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/command_validation.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/command_validation.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/command_validation.py",
+      "target": "class:ai-devbot/guardrails/command_validation.py:ValidationResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/command_validation.py",
+      "target": "class:ai-devbot/guardrails/command_validation.py:CommandValidator",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "class:ai-devbot/guardrails/permissions.py:PermissionLevel",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "class:ai-devbot/guardrails/permissions.py:User",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/guardrails/permissions.py",
+      "target": "class:ai-devbot/guardrails/permissions.py:PermissionManager",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:threading",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "class:ai-devbot/memory/__init__.py:ShortTermMemory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "class:ai-devbot/memory/__init__.py:LongTermMemory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "class:ai-devbot/memory/__init__.py:Memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "func:ai-devbot/memory/__init__.py:get_short_term_memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "func:ai-devbot/memory/__init__.py:get_long_term_memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/memory/__init__.py",
+      "target": "func:ai-devbot/memory/__init__.py:get_memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "import:shutil",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "class:ai-devbot/config/__init__.py:ConfigLoader",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "func:ai-devbot/config/__init__.py:load_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/config/__init__.py",
+      "target": "func:ai-devbot/config/__init__.py:get_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:unittest",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:unittest.mock",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:workflows.command_router",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:workflows.orchestration",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:workflows.task_planner",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "import:agents.spec_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "class:ai-devbot/tests/test_workflows.py:TestCommandRouter",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "class:ai-devbot/tests/test_workflows.py:TestTaskPlanner",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "class:ai-devbot/tests/test_workflows.py:TestOrchestrator",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_workflows.py",
+      "target": "class:ai-devbot/tests/test_workflows.py:TestOrchestratorAsync",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:unittest",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:unittest.mock",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:agents.spec_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "import:agents.debug_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "class:ai-devbot/tests/test_agents.py:TestBaseAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "class:ai-devbot/tests/test_agents.py:TestSpecAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "class:ai-devbot/tests/test_agents.py:TestCodeAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "class:ai-devbot/tests/test_agents.py:TestTestAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "class:ai-devbot/tests/test_agents.py:TestDeployAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/tests/test_agents.py",
+      "target": "class:ai-devbot/tests/test_agents.py:TestDebugAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "import:workflows.command_router",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "class:ai-devbot/workflows/task_planner.py:ExecutionStep",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "class:ai-devbot/workflows/task_planner.py:ExecutionPlan",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/task_planner.py",
+      "target": "class:ai-devbot/workflows/task_planner.py:TaskPlanner",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "import:workflows.command_router",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "class:ai-devbot/workflows/orchestration.py:TaskStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "class:ai-devbot/workflows/orchestration.py:WorkflowStep",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "class:ai-devbot/workflows/orchestration.py:Workflow",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/orchestration.py",
+      "target": "class:ai-devbot/workflows/orchestration.py:Orchestrator",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "import:random",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "class:ai-devbot/workflows/error_recovery.py:RecoveryStrategy",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "class:ai-devbot/workflows/error_recovery.py:FailureReason",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "class:ai-devbot/workflows/error_recovery.py:RetryConfig",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "class:ai-devbot/workflows/error_recovery.py:FallbackConfig",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "class:ai-devbot/workflows/error_recovery.py:RecoveryRecord",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "class:ai-devbot/workflows/error_recovery.py:ErrorRecovery",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/error_recovery.py",
+      "target": "func:ai-devbot/workflows/error_recovery.py:get_error_recovery",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:agents.spec_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:agents.debug_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:workflows.orchestration",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/examples.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "class:ai-devbot/workflows/command_router.py:CommandType",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "class:ai-devbot/workflows/command_router.py:ParsedCommand",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/workflows/command_router.py",
+      "target": "class:ai-devbot/workflows/command_router.py:CommandRouter",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/test_agent.py",
+      "target": "class:ai-devbot/agents/test_agent.py:TestAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/spec_agent.py",
+      "target": "class:ai-devbot/agents/spec_agent.py:SpecAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "import:abc",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "class:ai-devbot/agents/base_agent.py:Task",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "class:ai-devbot/agents/base_agent.py:AgentResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/base_agent.py",
+      "target": "class:ai-devbot/agents/base_agent.py:BaseAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/deploy_agent.py",
+      "target": "class:ai-devbot/agents/deploy_agent.py:DeployAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "class:ai-devbot/agents/planner_agent.py:TaskPriority",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "class:ai-devbot/agents/planner_agent.py:TaskStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "class:ai-devbot/agents/planner_agent.py:TaskNode",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "class:ai-devbot/agents/planner_agent.py:TaskGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/planner_agent.py",
+      "target": "class:ai-devbot/agents/planner_agent.py:PlannerAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/code_agent.py",
+      "target": "class:ai-devbot/agents/code_agent.py:CodeAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/agents/debug_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/debug_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/debug_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/debug_agent.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/debug_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/agents/debug_agent.py",
+      "target": "class:ai-devbot/agents/debug_agent.py:DebugAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "import:logging.handlers",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "class:ai-devbot/observability/logging.py:JSONFormatter",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "class:ai-devbot/observability/logging.py:Logger",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/logging.py",
+      "target": "func:ai-devbot/observability/logging.py:get_logger",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "import:threading",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "class:ai-devbot/observability/metrics.py:Counter",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "class:ai-devbot/observability/metrics.py:Gauge",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "class:ai-devbot/observability/metrics.py:Histogram",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "class:ai-devbot/observability/metrics.py:Metrics",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "class:ai-devbot/observability/metrics.py:MetricNames",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/metrics.py",
+      "target": "func:ai-devbot/observability/metrics.py:get_metrics",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:contextlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "class:ai-devbot/observability/tracing.py:Span",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "class:ai-devbot/observability/tracing.py:Tracer",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/tracing.py",
+      "target": "func:ai-devbot/observability/tracing.py:get_tracer",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:threading",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "class:ai-devbot/observability/dashboard.py:LogLevel",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "class:ai-devbot/observability/dashboard.py:ExecutionLog",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "class:ai-devbot/observability/dashboard.py:AgentStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "class:ai-devbot/observability/dashboard.py:TaskMetric",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "class:ai-devbot/observability/dashboard.py:ObservabilityDashboard",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/observability/dashboard.py",
+      "target": "func:ai-devbot/observability/dashboard.py:get_dashboard",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:telegram",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:telegram.ext",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:telegram",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:telegram.ext",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:workflows.command_router",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:workflows.orchestration",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:workflows.task_planner",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:guardrails.permissions",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:guardrails.command_validation",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:openspec",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:workflows.command_router",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:telegram",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:telegram.ext",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "class:ai-devbot/bot/telegram_bot.py:AIDevBot",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "func:ai-devbot/bot/telegram_bot.py:create_bot",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/bot/telegram_bot.py",
+      "target": "func:ai-devbot/bot/telegram_bot.py:main",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:threading",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "import:events.event_types",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "class:ai-devbot/events/event_bus.py:EventHandler",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "class:ai-devbot/events/event_bus.py:EventBus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "func:ai-devbot/events/event_bus.py:get_event_bus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "func:ai-devbot/events/event_bus.py:publish",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_bus.py",
+      "target": "func:ai-devbot/events/event_bus.py:subscribe",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:EventType",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:Event",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:FeatureCreatedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:FeatureUpdatedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:TaskGraphCreatedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:TaskStartedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:TaskCompletedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:TaskFailedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:AgentStartedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:AgentCompletedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:WorkflowStartedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:WorkflowCompletedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:DeployStartedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:DeployCompletedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/events/event_types.py",
+      "target": "class:ai-devbot/events/event_types.py:TestCompletedEvent",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "class:ai-devbot/openspec/__init__.py:SpecStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "class:ai-devbot/openspec/__init__.py:OpenSpec",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/openspec/__init__.py",
+      "target": "func:ai-devbot/openspec/__init__.py:get_openspec",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "import:heapq",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "class:ai-devbot/orchestrator/task_queue.py:TaskPriority",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "class:ai-devbot/orchestrator/task_queue.py:TaskState",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "class:ai-devbot/orchestrator/task_queue.py:QueuedTask",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "class:ai-devbot/orchestrator/task_queue.py:WorkerPool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "class:ai-devbot/orchestrator/task_queue.py:TaskQueueMetrics",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "class:ai-devbot/orchestrator/task_queue.py:TaskQueue",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/task_queue.py",
+      "target": "func:ai-devbot/orchestrator/task_queue.py:get_task_queue",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/__init__.py",
+      "target": "import:orchestrator.task_queue",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/__init__.py",
+      "target": "import:orchestrator.orchestrator",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:events.event_bus",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:events.event_types",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:orchestrator.task_queue",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "import:observability.dashboard",
+      "type": "imports"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "class:ai-devbot/orchestrator/orchestrator.py:WorkflowStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "class:ai-devbot/orchestrator/orchestrator.py:TaskNode",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "class:ai-devbot/orchestrator/orchestrator.py:WorkflowExecution",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "class:ai-devbot/orchestrator/orchestrator.py:AgentPool",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "class:ai-devbot/orchestrator/orchestrator.py:ScalableOrchestrator",
+      "type": "contains"
+    },
+    {
+      "source": "file:ai-devbot/orchestrator/orchestrator.py",
+      "target": "func:ai-devbot/orchestrator/orchestrator.py:get_orchestrator",
+      "type": "contains"
+    }
+  ],
+  "metadata": {
+    "project_path": "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot",
+    "created_at": "2026-03-13T18:27:40.395522"
+  }
+}
