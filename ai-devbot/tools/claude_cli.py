@@ -51,21 +51,20 @@ class ClaudeCLITool(Tool):
         model = kwargs.get('model', self.model)
 
         try:
-            # Write the prompt to a temp file for claude to read
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
-                f.write(prompt)
-                prompt_file = f.name
-
-            # Build Claude CLI command - use claude with --print flag for non-interactive
+            # Build Claude CLI command - use claude with -p flag for non-interactive
             cmd = [
                 self.cli_path,
-                'expand',
-                '--yes',  # Auto-confirm
+                '-p',  # Print mode (non-interactive)
+                '--dangerously-skip-permissions',  # Skip permission prompts
                 '--model', model,
-                '--prompt-file', prompt_file
+                prompt  # Pass prompt directly
             ]
 
             logger.info(f"Executing Claude CLI: {' '.join(cmd[:3])}... with prompt: {prompt[:80]}...")
+
+            # Create clean environment (remove CLAUDECODE to allow nested sessions)
+            env = os.environ.copy()
+            env.pop('CLAUDECODE', None)
 
             # Execute command
             result = subprocess.run(
@@ -73,14 +72,9 @@ class ClaudeCLITool(Tool):
                 capture_output=True,
                 text=True,
                 timeout=120,
-                cwd=self.project_context
+                cwd=self.project_context,
+                env=env
             )
-
-            # Cleanup temp file
-            try:
-                os.unlink(prompt_file)
-            except:
-                pass
 
             if result.returncode == 0:
                 output = {

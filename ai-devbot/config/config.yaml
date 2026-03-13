@@ -16,11 +16,15 @@ telegram:
 
 # Claude Code Configuration
 claude:
-  cli_path: "claude"
+  cli_path: "${CLAUDE_CLI_PATH}"  # Auto-detect from PATH if not set
   model: "sonnet"
   max_tokens: 4096
   temperature: 0.7
-  project_context: "ai-devbot"
+  project_context: "."
+
+# Storage Configuration
+specs_dir: "specs"
+output_dir: "output"
 
 # Agent Configuration
 agents:

@@ -85,13 +85,20 @@ ai-devbot/
 # Clone the repository
 cd ai-devbot
 
-# Install dependencies (when implemented)
-# pip install -r requirements.txt
+# Install dependencies
+pip install python-telegram-bot pyyaml
 ```
 
 ## Configuration
 
-Configure the bot by editing `config/config.yaml`:
+1. **Create `.env` file** (copy from `.env.example` or create manually):
+
+```bash
+# .env
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+```
+
+2. **Edit `config/config.yaml`** if needed:
 
 ```yaml
 telegram:
@@ -106,26 +113,66 @@ agents:
     max_iterations: 10
 ```
 
-Set environment variables:
+## Quick Start
+
+### Using the Helper Script (Recommended)
 
 ```bash
+# Start the bot
+./run_bot.sh start
+
+# Check status
+./run_bot.sh status
+
+# Stop the bot
+./run_bot.sh stop
+
+# Restart the bot
+./run_bot.sh restart
+```
+
+### Manual Start
+
+```bash
+# Set environment variable
 export TELEGRAM_BOT_TOKEN="your_bot_token"
+
+# Run the bot
+python -m bot.telegram_bot
 ```
 
 ## Usage
 
-1. Start the bot:
-   ```bash
-   python -m bot.telegram_bot
-   ```
+### Telegram Commands
 
-2. Send commands to your Telegram bot:
-   - `/spec Create a user authentication system`
-   - `/code Implement login endpoint`
-   - `/test Run all tests`
-   - `/deploy staging`
-   - `/debug Connection timeout error`
-   - `/status`
+Send these commands to your Telegram bot:
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/start` | Start the bot | `/start` |
+| `/help` | Show available commands | `/help` |
+| `/spec` | Generate specification | `/spec Create a user authentication system` |
+| `/code` | Generate code | `/code Implement login endpoint` |
+| `/test` | Run tests | `/test Run all tests` |
+| `/deploy` | Deploy service | `/deploy staging` |
+| `/debug` | Debug an issue | `/debug Connection timeout error` |
+| `/status` | Check bot status | `/status` |
+
+### Bot Commands
+
+```bash
+# Start the bot
+./run_bot.sh start
+
+# Check if bot is running
+./run_bot.sh status
+
+# Stop the bot
+./run_bot.sh stop
+
+# Restart the bot
+./run_bot.sh restart
+```
 
 ## Development
 

@@ -327,7 +327,44 @@ Include:
 """
 
         result = self._claude_tool.execute(prompt, task_type='spec')
+
+        # Save spec to file if successful
+        if result.success and result.output:
+            spec_content = result.output.get('response', '')
+            spec_path = self._save_spec(requirement, spec_content)
+            if spec_path:
+                logger.info(f"Spec saved to: {spec_path}")
+
         return result
+
+    def _save_spec(self, requirement: str, content: str) -> str:
+        """Save specification to a file."""
+        import re
+        from datetime import datetime
+
+        # Create slug from requirement
+        slug = re.sub(r'[^a-zA-Z0-9]+', '-', requirement.lower())
+        slug = slug.strip('-')[:50]
+
+        # Create filename with timestamp
+        timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+        filename = f"{timestamp}-{slug}.md"
+
+        # Get specs directory
+        specs_dir = self.config.get('specs_dir', 'specs')
+        os.makedirs(specs_dir, exist_ok=True)
+
+        filepath = os.path.join(specs_dir, filename)
+
+        # Write spec to file
+        try:
+            with open(filepath, 'w') as f:
+                f.write(f"# Specification: {requirement}\n\n")
+                f.write(content)
+            return filepath
+        except Exception as e:
+            logger.error(f"Failed to save spec: {e}")
+            return ""
 
     async def _execute_code(self, requirement: str):
         """Execute code generation."""

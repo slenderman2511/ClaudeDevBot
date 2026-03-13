@@ -64,6 +64,10 @@ class ConfigLoader:
 
             # Process environment variables
             self._config = self._process_env_vars(raw_config)
+
+            # Resolve dynamic paths
+            self._resolve_dynamic_paths()
+
             logger.info(f"Loaded config from {self.config_path}")
             return self._config
 
@@ -115,6 +119,27 @@ class ConfigLoader:
             return os.environ.get(var_expr.strip(), '')
 
         return re.sub(r'\$\{([^}]+)\}', replace, value)
+
+    def _resolve_dynamic_paths(self):
+        """Resolve dynamic path placeholders in config."""
+        if 'claude' not in self._config:
+            return
+
+        claude_config = self._config['claude']
+
+        # Resolve cli_path dynamically
+        cli_path = claude_config.get('cli_path', '')
+        if not cli_path or cli_path.startswith('${'):
+            # Try to find claude in PATH
+            from shutil import which
+            found_path = which('claude')
+            if found_path:
+                claude_config['cli_path'] = found_path
+                logger.info(f"Resolved Claude CLI path: {found_path}")
+            else:
+                # Set default path as fallback
+                claude_config['cli_path'] = 'claude'
+                logger.warning("Claude CLI not found in PATH, using 'claude' as fallback")
 
     def get(self, key: str, default: Any = None) -> Any:
         """
