@@ -171,7 +171,7 @@ class Orchestrator:
 
     async def execute_workflow(self, workflow: Workflow) -> Workflow:
         """
-        Execute a workflow.
+        Execute a workflow with parallel execution support.
 
         Args:
             workflow: Workflow to execute
@@ -183,6 +183,26 @@ class Orchestrator:
         workflow.status = TaskStatus.RUNNING
         self._trigger_callbacks('on_workflow_start', workflow)
 
+        # Check if we have task graph data for parallel execution
+        execution_levels = workflow.context.get('execution_levels')
+        if execution_levels:
+            # Use parallel execution
+            workflow = await self._execute_parallel(workflow, execution_levels)
+        else:
+            # Sequential execution
+            workflow = await self._execute_sequential(workflow)
+
+        if workflow.status == TaskStatus.RUNNING:
+            workflow.status = TaskStatus.COMPLETED
+
+        workflow.completed_at = datetime.now()
+        logger.info(f"Workflow {workflow.workflow_id} completed with status: {workflow.status.value}")
+        self._trigger_callbacks('on_workflow_complete', workflow)
+
+        return workflow
+
+    async def _execute_sequential(self, workflow: Workflow) -> Workflow:
+        """Execute workflow steps sequentially."""
         for step in workflow.steps:
             if workflow.status == TaskStatus.CANCELLED:
                 break
@@ -228,14 +248,89 @@ class Orchestrator:
                 self._trigger_callbacks('on_error', workflow, step, str(e))
                 break
 
-        if workflow.status == TaskStatus.RUNNING:
-            workflow.status = TaskStatus.COMPLETED
+        return workflow
 
-        workflow.completed_at = datetime.now()
-        logger.info(f"Workflow {workflow.workflow_id} completed with status: {workflow.status.value}")
-        self._trigger_callbacks('on_workflow_complete', workflow)
+    async def _execute_parallel(self, workflow: Workflow, execution_levels: List[List[dict]]) -> Workflow:
+        """Execute workflow with parallel execution at each level."""
+        step_map = {}  # Maps step_id to WorkflowStep
+
+        for level_idx, level in enumerate(execution_levels):
+            logger.info(f"Executing level {level_idx + 1}/{len(execution_levels)} with {len(level)} parallel tasks")
+
+            # Create tasks for parallel execution
+            tasks = []
+            step_objects = []
+
+            for task_data in level:
+                step_id = task_data.get('step_id', f"parallel_{level_idx}_{len(tasks)}")
+                agent_name = task_data.get('agent_name', 'code_agent')
+                task_input = task_data.get('task', Task(input="")).input if hasattr(task_data.get('task'), 'input') else task_data.get('task', "")
+
+                # Create step
+                step = WorkflowStep(
+                    step_id=step_id,
+                    agent_name=agent_name,
+                    task=task_input
+                )
+                step.status = TaskStatus.RUNNING
+                step.started_at = datetime.now()
+                workflow.steps.append(step)
+                step_map[step_id] = step
+
+                # Create async task
+                agent = self.get_agent(agent_name)
+                if agent:
+                    task = asyncio.create_task(
+                        self._execute_step_async(agent, step, workflow)
+                    )
+                    tasks.append(task)
+                    step_objects.append(step)
+
+            # Wait for all parallel tasks to complete
+            if tasks:
+                results = await asyncio.gather(*tasks, return_exceptions=True)
+
+                # Check for failures
+                for i, result in enumerate(results):
+                    step = step_objects[i]
+                    if isinstance(result, Exception):
+                        step.status = TaskStatus.FAILED
+                        step.error = str(result)
+                        workflow.status = TaskStatus.FAILED
+                        self._trigger_callbacks('on_error', workflow, step, str(result))
+                    elif not result.success:
+                        step.status = TaskStatus.FAILED
+                        workflow.status = TaskStatus.FAILED
+                        self._trigger_callbacks('on_error', workflow, step, result.error)
+
+                # Stop if workflow failed
+                if workflow.status == TaskStatus.FAILED:
+                    break
 
         return workflow
+
+    async def _execute_step_async(self, agent: BaseAgent, step: WorkflowStep, workflow: Workflow) -> AgentResult:
+        """Execute a single step asynchronously."""
+        try:
+            result = await asyncio.wait_for(
+                asyncio.to_thread(agent.execute, step.task),
+                timeout=self.task_timeout
+            )
+            step.result = result
+            step.status = TaskStatus.COMPLETED if result.success else TaskStatus.FAILED
+            step.completed_at = datetime.now()
+            self._trigger_callbacks('on_step_complete', workflow, step)
+            return result
+        except asyncio.TimeoutError:
+            step.status = TaskStatus.FAILED
+            step.error = f"Task timeout after {self.task_timeout}s"
+            step.completed_at = datetime.now()
+            raise Exception(step.error)
+        except Exception as e:
+            step.status = TaskStatus.FAILED
+            step.error = str(e)
+            step.completed_at = datetime.now()
+            raise
 
     async def execute_workflow_with_retry(self, workflow: Workflow) -> Workflow:
         """Execute workflow with retry on failure."""
