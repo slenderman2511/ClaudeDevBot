@@ -20,7 +20,7 @@ class CodeAgent(BaseAgent):
     Uses Claude CLI to generate code implementations from requirements.
     """
 
-    def __init__(self, config: Dict[str, Any] = None, claude_tool: Optional[ClaudeCLITool] = None):
+    def __init__(self, config: Dict[str, Any] = None, claude_tool: Optional[ClaudeCLITool] = None, openspec=None):
         super().__init__(
             name="code_agent",
             model=config.get('model', 'sonnet') if config else 'sonnet',
@@ -30,6 +30,8 @@ class CodeAgent(BaseAgent):
         )
         # Use provided tool or create new one
         self._claude = claude_tool or ClaudeCLITool(config.get('claude', {}))
+        # OpenSpec for context
+        self._openspec = openspec
 
     def execute(self, task: Task) -> AgentResult:
         """
@@ -52,9 +54,20 @@ class CodeAgent(BaseAgent):
 
         logger.info(f"Generating code for: {task.input[:100]}...")
 
+        # Load OpenSpec context if available
+        spec_context = ""
+        if self._openspec:
+            # Try to find matching feature
+            feature_name = self._extract_feature_name(task.input)
+            if feature_name:
+                spec = self._openspec.load_feature(feature_name)
+                if spec:
+                    spec_context = self._format_spec_context(spec)
+                    logger.info(f"Loaded OpenSpec context for: {feature_name}")
+
         try:
             # Build prompt for code generation
-            prompt = self._build_code_prompt(task.input)
+            prompt = self._build_code_prompt(task.input, spec_context)
 
             # Execute via Claude CLI
             result = self._claude.execute(prompt, task_type='code', model=self.model)
@@ -64,7 +77,7 @@ class CodeAgent(BaseAgent):
                 return AgentResult(
                     success=True,
                     output=result.output.get('response', str(result.output)),
-                    artifacts={'language': 'python', 'model': self.model},
+                    artifacts={'language': 'python', 'model': self.model, 'feature': feature_name if self._openspec else None},
                     execution_time=execution_time,
                     iterations=1
                 )
@@ -83,11 +96,42 @@ class CodeAgent(BaseAgent):
                 error=f"Code agent error: {str(e)}"
             )
 
-    def _build_code_prompt(self, requirement: str) -> str:
+    def _extract_feature_name(self, requirement: str) -> Optional[str]:
+        """Extract feature name from requirement."""
+        import re
+        # Try to find feature name patterns like "implement payment-service"
+        match = re.search(r'(?:implement|for|feature[:\s]+)(\w+(?:-\w+)*)', requirement, re.IGNORECASE)
+        if match:
+            return match.group(1)
+        return None
+
+    def _format_spec_context(self, spec: Dict[str, Any]) -> str:
+        """Format OpenSpec context for prompt."""
+        context = f"\n\n## OpenSpec Context\n"
+        context += f"Feature: {spec.get('name')}\n"
+        context += f"Version: {spec.get('version')}\n"
+        context += f"Status: {spec.get('status')}\n\n"
+
+        # Add task context
+        pending = [t for t in spec.get('tasks', []) if not t.get('completed')]
+        if pending:
+            context += "Current tasks to implement:\n"
+            for task in pending[:5]:
+                context += f"- [{task['phase']}] {task['name']}\n"
+
+        # Add dependencies
+        deps = spec.get('dependencies', [])
+        if deps:
+            context += f"\nDependencies: {', '.join(deps)}\n"
+
+        return context
+
+    def _build_code_prompt(self, requirement: str, spec_context: str = "") -> str:
         """Build a detailed prompt for code generation."""
         return f"""Generate implementation code for the following requirement:
 
 {requirement}
+{spec_context}
 
 Provide:
 1. Clean, well-documented code

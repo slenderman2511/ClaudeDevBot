@@ -67,6 +67,8 @@ class AIDevBot:
         from guardrails.permissions import PermissionManager
         from guardrails.command_validation import CommandValidator
         from tools.claude_cli import ClaudeCLITool
+        from openspec import get_openspec
+        from memory import get_memory
 
         self._router = CommandRouter(config.get('workflow', {}))
         self._orchestrator = Orchestrator(config.get('workflow', {}))
@@ -78,6 +80,12 @@ class AIDevBot:
         claude_config = config.get('claude', {})
         claude_config['project_context'] = config.get('claude', {}).get('project_context', '.')
         self._claude_tool = ClaudeCLITool(claude_config)
+
+        # Initialize OpenSpec
+        self._openspec = get_openspec(config.get('openspec_path', 'openspec'))
+
+        # Initialize Memory
+        self._memory = get_memory()
 
         # Setup handlers
         self._setup_handlers()
@@ -108,23 +116,182 @@ class AIDevBot:
         welcome_text = """
 👋 Welcome to AI DevBot!
 
-I can help you with development tasks:
-• /spec - Generate specification documents
-• /code - Write implementation code
-• /test - Run tests
-• /debug - Debug issues
-• /deploy - Deploy services
-• /status - Check system status
-• /help - Show this message
+Spec-Driven AI Development with OpenSpec
 
-Just send a command with your request!
+📋 Features:
+• /feature create <name> - Create feature
+• /feature list - List features
+• /feature show <name> - Show details
+
+📝 Specification:
+• /spec plan <feature> - Plan/specify
+• /tasks list <feature> - List tasks
+
+💻 Workflow:
+• /code implement <feature>
+• /test run
+• /deploy staging|production
+• /debug <service>
+• /status
+
+Type /help for all commands!
 """
         await update.message.reply_text(welcome_text)
 
     async def help_command(self, update: 'Update', context: Any):
         """Handle /help command."""
-        help_text = self._router.get_help_text()
+        help_text = """
+🤖 AI DevBot Commands:
+
+📋 Feature Management:
+• /feature create <name> - Create new feature
+• /feature list - List all features
+• /feature show <name> - Show feature details
+
+📝 Specification:
+• /spec plan <feature> - Plan/specify a feature
+
+📋 Task Management:
+• /tasks list <feature> - List pending tasks
+• /tasks show <feature> - Show task graph
+
+💻 Code:
+• /code implement <feature> - Generate code for feature
+
+🧪 Testing:
+• /test run - Run tests
+
+🚀 Deployment:
+• /deploy staging - Deploy to staging
+• /deploy production - Deploy to production
+
+🔧 Debugging:
+• /debug <service> - Debug a service
+
+📊 Status:
+• /status - Show system status
+"""
         await update.message.reply_text(help_text)
+
+    async def feature_command(self, update: 'Update', context: Any):
+        """Handle /feature command - create, list, show features."""
+        user_id = update.effective_user.id
+        if not self._permission_manager.is_allowed(user_id):
+            await update.message.reply_text("❌ You are not authorized to use this bot.")
+            return
+
+        args = ' '.join(context.args) if context.args else ""
+
+        if not args:
+            await update.message.reply_text(
+                "📋 Usage:\n• /feature create <name> - Create feature\n• /feature list - List features\n• /feature show <name> - Show details"
+            )
+            return
+
+        # Parse subcommand
+        parts = args.split(None, 1)
+        subcommand = parts[0].lower()
+        feature_name = parts[1] if len(parts) > 1 else ""
+
+        if subcommand == "create" and feature_name:
+            # Create new feature
+            await update.message.reply_text(f"🔄 Creating feature: {feature_name}")
+            try:
+                spec = self._openspec.create_feature(feature_name, f"Feature: {feature_name}")
+                await update.message.reply_text(
+                    f"✅ Feature '{feature_name}' created!\n\n"
+                    f"Status: {spec.get('status', 'draft')}\n"
+                    f"Tasks: {len(spec.get('tasks', []))}"
+                )
+            except Exception as e:
+                await update.message.reply_text(f"❌ Error creating feature: {e}")
+
+        elif subcommand == "list":
+            # List all features
+            features = self._openspec.list_features()
+            if features:
+                msg = "📋 Features:\n" + "\n".join(f"• {f}" for f in features)
+            else:
+                msg = "No features found. Create one with /feature create <name>"
+            await update.message.reply_text(msg)
+
+        elif subcommand == "show" and feature_name:
+            # Show feature details
+            spec = self._openspec.load_feature(feature_name)
+            if spec:
+                validation = self._openspec.validate_spec(feature_name)
+                pending = self._openspec.get_pending_tasks(feature_name)
+                msg = f"""📋 Feature: {feature_name}
+
+Status: {spec.get('status', 'unknown')}
+Version: {spec.get('version', '1.0.0')}
+Tasks: {validation['stats']['completed_tasks']}/{validation['stats']['total_tasks']} ({validation['stats']['progress']})
+
+Pending Tasks:
+"""
+                for task in pending[:5]:
+                    msg += f"• [{task['phase']}] {task['name']}\n"
+                if len(pending) > 5:
+                    msg += f"... and {len(pending) - 5} more"
+                await update.message.reply_text(msg)
+            else:
+                await update.message.reply_text(f"❌ Feature '{feature_name}' not found")
+
+        else:
+            await update.message.reply_text("Unknown subcommand. Use: create, list, or show")
+
+    async def tasks_command(self, update: 'Update', context: Any):
+        """Handle /tasks command - list or show tasks."""
+        user_id = update.effective_user.id
+        if not self._permission_manager.is_allowed(user_id):
+            await update.message.reply_text("❌ You are not authorized to use this bot.")
+            return
+
+        args = ' '.join(context.args) if context.args else ""
+
+        if not args:
+            await update.message.reply_text(
+                "📋 Usage:\n• /tasks list <feature> - List pending tasks\n• /tasks show <feature> - Show task graph"
+            )
+            return
+
+        parts = args.split(None, 1)
+        subcommand = parts[0].lower()
+        feature_name = parts[1] if len(parts) > 1 else ""
+
+        if subcommand == "list" and feature_name:
+            pending = self._openspec.get_pending_tasks(feature_name)
+            if pending:
+                msg = f"📋 Pending tasks for '{feature_name}':\n\n"
+                for task in pending:
+                    msg += f"• [{task['phase']}] {task['name']}\n"
+                await update.message.reply_text(msg)
+            else:
+                await update.message.reply_text(f"✅ No pending tasks for '{feature_name}'")
+
+        elif subcommand == "show" and feature_name:
+            graph = self._openspec.get_task_graph(feature_name)
+            if "error" in graph:
+                await update.message.reply_text(f"❌ {graph['error']}")
+            else:
+                msg = f"""📋 Task Graph: {feature_name}
+
+Total: {graph['total_tasks']} tasks
+Completed: {graph['completed_tasks']}
+Status: {graph['status']}
+
+Phases:
+"""
+                for phase, tasks in graph.get('phases', {}).items():
+                    completed = sum(1 for t in tasks if t.get('completed'))
+                    msg += f"\n{phase}: {completed}/{len(tasks)}\n"
+                    for task in tasks:
+                        status = "✅" if task.get('completed') else "⬜"
+                        msg += f"  {status} {task['name']}\n"
+                await update.message.reply_text(msg)
+
+        else:
+            await update.message.reply_text("Unknown subcommand. Use: list or show")
 
     async def spec_command(self, update: 'Update', context: Any):
         """Handle /spec command."""
@@ -470,7 +637,11 @@ Provide deployment steps and status updates.
         # Register handlers
         self._application.add_handler(CommandHandler("start", self.start_command))
         self._application.add_handler(CommandHandler("help", self.help_command))
+        # New OpenSpec commands
+        self._application.add_handler(CommandHandler("feature", self.feature_command))
         self._application.add_handler(CommandHandler("spec", self.spec_command))
+        self._application.add_handler(CommandHandler("tasks", self.tasks_command))
+        # Existing workflow commands
         self._application.add_handler(CommandHandler("code", self.code_command))
         self._application.add_handler(CommandHandler("test", self.test_command))
         self._application.add_handler(CommandHandler("debug", self.debug_command))

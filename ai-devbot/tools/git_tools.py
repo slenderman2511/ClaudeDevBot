@@ -5,8 +5,10 @@ Wrapper for Git operations.
 """
 
 import subprocess
+import os
 import logging
 from typing import Any, Dict, Optional, List
+from pathlib import Path
 from tools.tool import Tool, ToolResult
 
 logger = logging.getLogger(__name__)
@@ -27,6 +29,32 @@ class GitTool(Tool):
         )
         self.default_branch = self.config.get('default_branch', 'main')
         self.commit_prefix = self.config.get('commit_message_prefix', '[AI-DevBot]')
+        self.repo_path = self.config.get('repo_path', '.')
+
+    def _run_git(self, args: List[str], cwd: Optional[str] = None) -> subprocess.CompletedProcess:
+        """
+        Run a git command.
+
+        Args:
+            args: Git command arguments
+            cwd: Working directory
+
+        Returns:
+            CompletedProcess result
+        """
+        cwd = cwd or self.repo_path
+        cmd = ['git'] + args
+
+        logger.info(f"Running git: {' '.join(cmd)} in {cwd}")
+
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            cwd=cwd
+        )
+
+        return result
 
     def execute(self, command: str, **kwargs) -> ToolResult:
         """
@@ -41,27 +69,31 @@ class GitTool(Tool):
         """
         try:
             # Build git command
-            cmd = ['git', command]
+            cmd = [command]
             if kwargs:
                 for key, value in kwargs.items():
-                    cmd.extend([f'--{key}', str(value)])
+                    if isinstance(value, bool):
+                        if value:
+                            cmd.append(f'--{key}')
+                    else:
+                        cmd.extend([f'--{key}', str(value)])
 
             logger.info(f"Executing git command: {' '.join(cmd)}")
 
-            # Placeholder: Execute actual git command
-            # result = subprocess.run(cmd, capture_output=True, text=True, cwd=repo_path)
+            result = self._run_git(cmd)
 
-            output = {
-                'command': command,
-                'status': 'success',
-                'output': f"Git {command} placeholder - implement actual execution"
-            }
-
-            return ToolResult(
-                success=True,
-                output=output,
-                metadata={'command': command}
-            )
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'command': command, 'output': result.stdout},
+                    metadata={'command': command, 'returncode': result.returncode}
+                )
+            else:
+                return ToolResult(
+                    success=False,
+                    output=None,
+                    error=result.stderr
+                )
 
         except Exception as e:
             logger.error(f"Git command failed: {e}")
@@ -73,40 +105,134 @@ class GitTool(Tool):
 
     def status(self, repo_path: Optional[str] = None) -> ToolResult:
         """Get git status."""
-        return self.execute('status', porcelain=True)
+        try:
+            result = self._run_git(['status', '--porcelain'], cwd=repo_path)
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'status': 'clean' if not result.stdout.strip() else 'dirty', 'details': result.stdout},
+                    metadata={'repo_path': repo_path or self.repo_path}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
 
-    def add(self, files: List[str]) -> ToolResult:
+    def add(self, files: List[str], repo_path: Optional[str] = None) -> ToolResult:
         """Stage files for commit."""
-        return self.execute('add', *files)
+        try:
+            result = self._run_git(['add'] + files, cwd=repo_path)
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'staged': files},
+                    metadata={'files': files}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
 
-    def commit(self, message: str) -> ToolResult:
+    def commit(self, message: str, repo_path: Optional[str] = None) -> ToolResult:
         """Commit staged changes."""
-        full_message = f"{self.commit_prefix} {message}"
-        return self.execute('commit', message=full_message)
+        try:
+            full_message = f"{self.commit_prefix} {message}"
+            result = self._run_git(['commit', '-m', full_message], cwd=repo_path)
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'committed': True, 'message': full_message},
+                    metadata={'message': full_message}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
 
-    def push(self, remote: str = 'origin', branch: Optional[str] = None) -> ToolResult:
+    def push(self, remote: str = 'origin', branch: Optional[str] = None, repo_path: Optional[str] = None) -> ToolResult:
         """Push to remote."""
-        cmd = 'push'
-        params = {'remote': remote}
-        if branch:
-            params['branch'] = branch
-        return self.execute(cmd, **params)
+        try:
+            cmd = ['push', remote]
+            if branch:
+                cmd.append(branch)
+            result = self._run_git(cmd, cwd=repo_path)
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'pushed': True, 'remote': remote, 'branch': branch},
+                    metadata={'remote': remote, 'branch': branch}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
 
-    def pull(self, remote: str = 'origin', branch: Optional[str] = None) -> ToolResult:
+    def pull(self, remote: str = 'origin', branch: Optional[str] = None, repo_path: Optional[str] = None) -> ToolResult:
         """Pull from remote."""
-        cmd = 'pull'
-        params = {'remote': remote}
-        if branch:
-            params['branch'] = branch
-        return self.execute(cmd, **params)
+        try:
+            cmd = ['pull', remote]
+            if branch:
+                cmd.append(branch)
+            result = self._run_git(cmd, cwd=repo_path)
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'pulled': True, 'remote': remote, 'branch': branch},
+                    metadata={'remote': remote, 'branch': branch}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
 
-    def branch(self, list_branches: bool = True) -> ToolResult:
+    def branch(self, list_branches: bool = True, repo_path: Optional[str] = None) -> ToolResult:
         """List branches."""
-        return self.execute('branch', all=list_branches)
+        try:
+            cmd = ['branch', '-a'] if list_branches else ['branch']
+            result = self._run_git(cmd, cwd=repo_path)
+            if result.returncode == 0:
+                branches = [b.strip() for b in result.stdout.split('\n') if b.strip()]
+                return ToolResult(
+                    success=True,
+                    output={'branches': branches},
+                    metadata={'count': len(branches)}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
 
-    def log(self, max_count: int = 10) -> ToolResult:
+    def log(self, max_count: int = 10, repo_path: Optional[str] = None) -> ToolResult:
         """Get commit history."""
-        return self.execute('log', max_count=max_count)
+        try:
+            result = self._run_git(['log', f'--max-count={max_count}', '--oneline'], cwd=repo_path)
+            if result.returncode == 0:
+                commits = [c.strip() for c in result.stdout.split('\n') if c.strip()]
+                return ToolResult(
+                    success=True,
+                    output={'commits': commits},
+                    metadata={'count': len(commits)}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
+
+    def diff(self, staged: bool = False, repo_path: Optional[str] = None) -> ToolResult:
+        """Get diff of changes."""
+        try:
+            cmd = ['diff', '--staged'] if staged else ['diff']
+            result = self._run_git(cmd, cwd=repo_path)
+            if result.returncode == 0:
+                return ToolResult(
+                    success=True,
+                    output={'diff': result.stdout},
+                    metadata={'staged': staged}
+                )
+            return ToolResult(success=False, output=None, error=result.stderr)
+        except Exception as e:
+            return ToolResult(success=False, output=None, error=str(e))
+
+    def validate(self) -> bool:
+        """Check if git is available."""
+        try:
+            result = subprocess.run(['git', '--version'], capture_output=True, text=True)
+            return result.returncode == 0
+        except Exception:
+            return False
 
     def get_schema(self) -> Dict[str, Any]:
         return {

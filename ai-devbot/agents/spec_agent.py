@@ -20,7 +20,7 @@ class SpecAgent(BaseAgent):
     Uses Claude CLI to generate detailed specification documents from requirements.
     """
 
-    def __init__(self, config: Dict[str, Any] = None, claude_tool: Optional[ClaudeCLITool] = None):
+    def __init__(self, config: Dict[str, Any] = None, claude_tool: Optional[ClaudeCLITool] = None, openspec=None):
         super().__init__(
             name="spec_agent",
             model=config.get('model', 'sonnet') if config else 'sonnet',
@@ -30,6 +30,8 @@ class SpecAgent(BaseAgent):
         )
         # Use provided tool or create new one
         self._claude = claude_tool or ClaudeCLITool(config.get('claude', {}))
+        # OpenSpec for saving specs
+        self._openspec = openspec
 
     def execute(self, task: Task) -> AgentResult:
         """
@@ -61,10 +63,23 @@ class SpecAgent(BaseAgent):
 
             if result.success:
                 execution_time = time.time() - start_time
+
+                # Save to OpenSpec if available
+                spec_saved = False
+                if self._openspec:
+                    feature_name = self._extract_feature_name(task.input)
+                    if feature_name:
+                        try:
+                            self._openspec.create_feature(feature_name, result.output.get('response', ''))
+                            spec_saved = True
+                            logger.info(f"Saved spec to OpenSpec: {feature_name}")
+                        except Exception as e:
+                            logger.warning(f"Failed to save spec to OpenSpec: {e}")
+
                 return AgentResult(
                     success=True,
                     output=result.output.get('response', str(result.output)),
-                    artifacts={'spec_type': 'product_specification', 'model': self.model},
+                    artifacts={'spec_type': 'product_specification', 'model': self.model, 'spec_saved': spec_saved},
                     execution_time=execution_time,
                     iterations=1
                 )
@@ -106,3 +121,11 @@ Provide a comprehensive but concise specification that a developer could use to 
             "generate_api_spec",
             "generate_architecture_spec"
         ]
+
+    def _extract_feature_name(self, requirement: str) -> Optional[str]:
+        """Extract feature name from requirement."""
+        import re
+        match = re.search(r'([a-zA-Z][a-zA-Z0-9-]+)', requirement)
+        if match:
+            return match.group(1).lower()
+        return None
