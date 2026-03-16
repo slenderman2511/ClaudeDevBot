@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-16
 **Topic:** Embedded Library - Multi-Channel AI Development Assistant
-**Status:** Pending Review
+**Status:** Pending Review (v2)
 
 ---
 
@@ -80,6 +80,12 @@ Thiết kế hệ thống ClaudeDevBot như một embedded library/API service c
 | Orchestrator | Task queue, job scheduling, state management |
 | Agent Services | Each agent type handles specific workflow |
 | Claude CLI | AI execution engine |
+| Plan Agent | Creates implementation plans from high-level goals, breaks down features into actionable tasks |
+| Spec Agent | Generates/specs from requirements |
+| Code Agent | Generates implementation code from specs |
+| Test Agent | Generates and runs tests |
+| Debug Agent | Analyzes errors and suggests fixes |
+| Deploy Agent | Handles deployment workflows |
 
 ---
 
@@ -115,6 +121,40 @@ Thiết kế hệ thống ClaudeDevBot như một embedded library/API service c
 - File/document upload support
 - Progress updates via edit message
 
+### 4.3 Multi-Channel Sync
+
+#### User Identity Linking
+- **Telegram**: User identified by `telegram_user_id`
+- **Web UI**: User identified by `user_id` (JWT)
+- **Linking**: User links Telegram account via `/link` command + Web UI confirmation
+
+#### Task Synchronization
+- Each task has a unique UUID regardless of channel
+- Task state stored centrally in database
+- Real-time updates via WebSocket to all connected clients
+- Notification routing based on user preferences
+
+#### Channel Transition Flow
+```
+1. User starts task in Telegram
+   └→ Task created with channel="telegram", chatId=xxx
+
+2. User opens Web UI
+   └→ WebSocket connects with JWT
+   └→ Server sends all tasks for that user (including Telegram tasks)
+
+3. User views progress in Web
+   └→ Task detail shows full history, logs, output
+
+4. User continues in Telegram
+   └→ Inline buttons allow "View in Web", "Continue Here"
+```
+
+#### Conflict Resolution
+- First input wins - subsequent inputs from other channels queued until first completes
+- User gets notification when their input is needed
+- Explicit "switch channel" action clears pending inputs
+
 ---
 
 ## 5. Data Models
@@ -132,10 +172,11 @@ interface Task {
   projectId: string;
   description: string;
   context: {
-    files?: string[];
+    files?: string[];          // Max 50 files per task
     repoUrl?: string;
     branch?: string;
     specId?: string;
+    maxFileSize?: number;      // Default: 1MB per file
   };
 
   // Output
@@ -208,8 +249,11 @@ interface User {
 | POST | `/api/v1/tasks` | Create new task |
 | GET | `/api/v1/tasks` | List tasks (with filters) |
 | GET | `/api/v1/tasks/:id` | Get task details |
-| DELETE | `/api/v1/tasks/:id` | Cancel/delete task |
+| PATCH | `/api/v1/tasks/:id` | Update task (priority, status) |
+| POST | `/api/v1/tasks/:id/input` | Provide interactive input to running task |
 | POST | `/api/v1/tasks/:id/approve` | Approve task output |
+| POST | `/api/v1/tasks/:id/retry` | Retry failed task |
+| DELETE | `/api/v1/tasks/:id` | Cancel/delete task |
 
 #### Projects
 | Method | Endpoint | Description |
@@ -226,6 +270,16 @@ interface User {
 | POST | `/api/v1/webhooks` | Register webhook |
 | GET | `/api/v1/webhooks` | List webhooks |
 | DELETE | `/api/v1/webhooks/:id` | Delete webhook |
+
+**Webhook Payload:**
+```typescript
+interface WebhookPayload {
+  event: 'task.completed' | 'task.failed' | 'task.created';
+  timestamp: string;
+  task: Task;
+  projectId: string;
+}
+```
 
 ### 6.2 WebSocket Events
 
@@ -305,6 +359,30 @@ console.log(result.summary);
 ---
 
 ## 8. Deployment Architecture
+
+### Claude CLI Integration
+
+The system uses Claude Code CLI as the AI execution engine. Integration approach:
+
+| Environment | Installation Method |
+|-------------|-------------------|
+| Local/Docker | Pre-installed in container image |
+| Serverless | Bundled in Lambda layer (ZIP archive) |
+| Container | Volume mount or build-time installation |
+
+**Container Dockerfile (for agents):**
+```dockerfile
+FROM python:3.11-slim
+
+# Install Claude Code CLI
+RUN pip install claude-code-cli
+
+# Or use official installer
+RUN curl -sSfL https://claude.com/install.sh | sh
+
+# Verify installation
+RUN claude --version
+```
 
 ### 8.1 Development (Local)
 
@@ -409,6 +487,24 @@ enum ErrorCode {
   // Rate Limiting
   RATE_LIMIT_EXCEEDED = 'RATE_001',
   QUOTA_EXCEEDED = 'RATE_002',
+
+  // Repository Errors
+  REPO_ACCESS_DENIED = 'REPO_001',
+  REPO_NOT_FOUND = 'REPO_002',
+  REPO_INVALID_URL = 'REPO_003',
+  REPO_CLONE_FAILED = 'REPO_004',
+
+  // File Errors
+  FILE_SIZE_EXCEEDED = 'FILE_001',
+  FILE_COUNT_EXCEEDED = 'FILE_002',
+  FILE_NOT_FOUND = 'FILE_003',
+
+  // Webhook Errors
+  WEBHOOK_DELIVERY_FAILED = 'WH_001',
+  WEBHOOK_INVALID_URL = 'WH_002',
+
+  // Claude API
+  CLAUDE_RATE_LIMITED = 'CLAUDE_004',
 }
 
 interface APIError {
@@ -590,7 +686,7 @@ interface ApiKey {
 
 ---
 
-## 14. Open Questions & Decisions
+## 14. Decisions & Future Considerations
 
 ### Resolved Decisions
 
