@@ -2,7 +2,9 @@
 
 **Date:** 2026-03-16
 **Topic:** Embedded Library - Multi-Channel AI Development Assistant
-**Status:** Pending Review (v2)
+**Status:** Pending Review (v3 - MVP focused)
+
+> **Note:** This is an MVP-focused specification. All features will be prioritized - Core API + one agent (Code) first, then expand.
 
 ---
 
@@ -176,8 +178,12 @@ interface Task {
     repoUrl?: string;
     branch?: string;
     specId?: string;
-    maxFileSize?: number;      // Default: 1MB per file
   };
+
+  // Constraints
+  const MAX_FILES_PER_TASK = 50;
+  const MAX_FILE_SIZE_BYTES = 1024 * 1024; // 1MB default
+  const MAX_CONTEXT_SIZE_BYTES = 10 * 1024 * 1024; // 10MB total
 
   // Output
   result?: {
@@ -374,14 +380,16 @@ The system uses Claude Code CLI as the AI execution engine. Integration approach
 ```dockerfile
 FROM python:3.11-slim
 
-# Install Claude Code CLI
-RUN pip install claude-code-cli
+# Install Claude Code CLI (system-wide installation)
+# Claude Code is invoked via subprocess
+RUN pip install claude-cli-wrapper || true
 
-# Or use official installer
-RUN curl -sSfL https://claude.com/install.sh | sh
+# For production, consider bundling Claude binary
+# or using a base image with Claude pre-installed
+COPY --from=claude-base:latest /usr/local/bin/claude /usr/local/bin/claude
 
 # Verify installation
-RUN claude --version
+RUN claude --version || echo "Claude CLI not available - configure API key"
 ```
 
 ### 8.1 Development (Local)
