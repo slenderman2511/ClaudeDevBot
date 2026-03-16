@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-16
 **Topic:** Embedded Library - Multi-Channel AI Development Assistant
-**Status:** Draft
+**Status:** Pending Review
 
 ---
 
@@ -378,52 +378,209 @@ services:
 
 ---
 
-## 9. Security
+## 9. Error Handling
+
+### Error Types
+
+```typescript
+enum ErrorCode {
+  // Authentication/Authorization
+  UNAUTHORIZED = 'AUTH_001',
+  FORBIDDEN = 'AUTH_002',
+  INVALID_API_KEY = 'AUTH_003',
+  TOKEN_EXPIRED = 'AUTH_004',
+
+  // Task Errors
+  TASK_NOT_FOUND = 'TASK_001',
+  TASK_CANCELLED = 'TASK_002',
+  TASK_TIMEOUT = 'TASK_003',
+  TASK_FAILED = 'TASK_004',
+
+  // Agent Errors
+  AGENT_UNAVAILABLE = 'AGENT_001',
+  AGENT_TIMEOUT = 'AGENT_002',
+  AGENT_ERROR = 'AGENT_003',
+
+  // Claude CLI Errors
+  CLAUDE_NOT_FOUND = 'Claude_001',
+  CLAUDE_ERROR = 'CLAUDE_002',
+  CLAUDE_TIMEOUT = 'CLAUDE_003',
+
+  // Rate Limiting
+  RATE_LIMIT_EXCEEDED = 'RATE_001',
+  QUOTA_EXCEEDED = 'RATE_002',
+}
+
+interface APIError {
+  code: ErrorCode;
+  message: string;
+  details?: Record<string, unknown>;
+  requestId: string;
+  timestamp: string;
+}
+```
+
+### Retry Policy
+- **Transient errors**: Retry 3 times with exponential backoff (1s, 2s, 4s)
+- **Agent failures**: Retry once after 30 seconds
+- **Claude CLI errors**: Retry with fresh session
+
+---
+
+## 10. Logging & Monitoring
+
+### Log Levels
+| Level | Usage |
+|-------|-------|
+| ERROR | Exceptions, failures, invalid inputs |
+| WARN | Deprecated usage, rate limit warnings |
+| INFO | Task created/completed, user actions |
+| DEBUG | Request/response details, agent steps |
+
+### Key Metrics
+- **Task Metrics**: Created, Running, Completed, Failed, Duration (p50, p95, p99)
+- **Agent Metrics**: Success rate, error rate, queue depth
+- **System Metrics**: CPU, Memory, API latency, WebSocket connections
+
+### Observability Stack
+- **Logging**: Structured JSON logs ( Pino for Node.js, structlog for Python)
+- **Metrics**: Prometheus + Grafana dashboard
+- **Tracing**: OpenTelemetry with Jaeger
+- **Alerting**: PagerDuty / Slack notifications
+
+---
+
+## 11. Security
 
 ### Authentication
-- API Keys for SDKs and external integrations
-- JWT tokens for Web UI sessions
-- Telegram login via Bot API
 
-### Authorization
-- Role-based access control (RBAC)
-- Project-level permissions
-- API key scopes
+| Method | Use Case | Token Lifetime |
+|--------|----------|----------------|
+| API Key | SDK integrations | Long-lived (1 year) |
+| JWT Access Token | Web UI sessions | 15 minutes |
+| JWT Refresh Token | Token rotation | 7 days |
+| Telegram Bot Auth | Telegram commands | Per-session |
+
+**JWT Structure:**
+```typescript
+interface JWTPayload {
+  sub: string;        // userId
+  role: 'admin' | 'developer' | 'viewer';
+  projects: string[]; // accessible project IDs
+  iat: number;
+  exp: number;
+}
+```
+
+### Authorization (RBAC)
+
+| Permission | Admin | Developer | Viewer |
+|------------|-------|-----------|--------|
+| Create Task | ✅ | ✅ | ❌ |
+| View Task | ✅ (all) | ✅ (own projects) | ✅ (own projects) |
+| Cancel Task | ✅ | ✅ (own) | ❌ |
+| Approve Output | ✅ | ✅ | ❌ |
+| Manage Projects | ✅ | ❌ | ❌ |
+| Manage Users | ✅ | ❌ | ❌ |
+| Manage Webhooks | ✅ | ✅ | ❌ |
 
 ### Rate Limiting
-- Per-user rate limits
-- Per-project rate limits
-- Queue-based priority for paid plans
+
+| Plan | Requests/min | Concurrent Tasks | Max Duration |
+|------|--------------|------------------|--------------|
+| Free | 10 | 2 | 5 min |
+| Pro | 60 | 10 | 15 min |
+| Enterprise | Unlimited | Unlimited | 30 min |
+
+### API Key Scopes
+
+```typescript
+interface ApiKey {
+  id: string;
+  name: string;
+  scopes: ('tasks:read' | 'tasks:write' | 'projects:read' | 'projects:write')[];
+  projectId?: string; // If scoped to single project
+  createdAt: Date;
+  expiresAt?: Date;
+}
+```
 
 ---
 
-## 10. Implementation Phases
+## 12. Implementation Phases
 
-### Phase 1: Core API
-- [ ] API server với REST endpoints
-- [ ] Task queue system
-- [ ] Basic agent execution (code agent)
-- [ ] SQLite database
+### Phase 1: Core API (Week 1-2)
+**Goal:** Functional API server with basic task execution
 
-### Phase 2: Multi-Channel
-- [ ] Web UI (command palette + forms)
-- [ ] Telegram bot integration
-- [ ] WebSocket real-time updates
+| Deliverable | Description |
+|-------------|-------------|
+| REST API Server | FastAPI/Express server with `/api/v1/tasks` endpoints |
+| Task Model | Database schema for Task, Project, User |
+| SQLite Database | Local development database |
+| Task Queue | Redis-based queue for async task processing |
+| Code Agent | Basic code generation using Claude CLI |
+| CLI Integration | Wrapper for Claude Code CLI invocation |
 
-### Phase 3: SDKs
-- [ ] Python SDK
-- [ ] JavaScript/TypeScript SDK
-- [ ] Documentation & examples
+**Deliverables Checklist:**
+- [ ] `POST /api/v1/tasks` returns task ID
+- [ ] `GET /api/v1/tasks/:id` returns task status
+- [ ] Task status transitions: pending → queued → running → completed/failed
+- [ ] Claude CLI invoked with task description
+- [ ] Result stored and returned to client
 
-### Phase 4: Production Ready
-- [ ] PostgreSQL + Redis
-- [ ] Docker deployment
-- [ ] Serverless templates
-- [ ] Monitoring & logging
+### Phase 2: Multi-Channel (Week 3-4)
+**Goal:** Web UI and Telegram integration with real-time updates
+
+| Deliverable | Description |
+|-------------|-------------|
+| Web UI | Next.js frontend with command palette |
+| Telegram Bot | Python-telegram-bot integration |
+| WebSocket | Real-time task progress streaming |
+| Channel Sync | Unified task state across channels |
+
+**Deliverables Checklist:**
+- [ ] Web UI: Cmd+K opens command palette
+- [ ] Web UI: Tasks list with status
+- [ ] Telegram: `/code`, `/spec`, `/test` commands work
+- [ ] WebSocket: Task progress streams to UI
+- [ ] Task created in Telegram visible in Web UI
+
+### Phase 3: SDKs (Week 5-6)
+**Goal:** Python and JavaScript SDKs for external integrations
+
+| Deliverable | Description |
+|-------------|-------------|
+| Python SDK | pip-installable package |
+| JS SDK | npm package `@claudebot/sdk` |
+| SDK Docs | Usage examples, API reference |
+
+**Deliverables Checklist:**
+- [ ] `pip install claudebot` works
+- [ ] `npm install @claudebot/sdk` works
+- [ ] SDKs can create tasks and stream results
+- [ ] TypeScript types complete
+
+### Phase 4: Production Ready (Week 7-8)
+**Goal:** Production deployment options with monitoring
+
+| Deliverable | Description |
+|-------------|-------------|
+| PostgreSQL | Production database with migrations |
+| Redis | Production queue and session storage |
+| Docker | Multi-container compose files |
+| Serverless | AWS Lambda / Vercel templates |
+| Monitoring | Prometheus metrics, Grafana dashboard |
+| Alerting | Error alerts to Slack |
+
+**Deliverables Checklist:**
+- [ ] Docker Compose production stack works
+- [ ] Serverless deployment under 10 minutes
+- [ ] Grafana shows task metrics
+- [ ] Errors trigger Slack alerts
 
 ---
 
-## 11. Acceptance Criteria
+## 13. Acceptance Criteria
 
 1. **Task Creation**: User có thể tạo task qua REST API và nhận task ID
 2. **Agent Execution**: Task được xử lý bởi đúng agent và trả về kết quả
@@ -433,12 +590,21 @@ services:
 
 ---
 
-## 12. Open Questions
+## 14. Open Questions & Decisions
 
-- [ ] Claude API key management: Per-user hay organization-level?
-- [ ] Storage cho artifacts: S3-compatible hay local filesystem?
-- [ ] Max execution time cho tasks: 5 min, 15 min, hay unlimited?
-- [ ] Pricing model: Per-task, per-user, hay subscription?
+### Resolved Decisions
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Claude API Key Management | Organization-level (shared) | Simpler for teams, reduce per-user complexity |
+| Storage for Artifacts | S3-compatible (local filesystem for dev) | Production uses S3, dev uses local |
+| Max Execution Time | 15 minutes | Balance between flexibility and resource management |
+| Pricing Model | Per-project subscription | Predictable billing for teams |
+
+### Future Considerations (Post-MVP)
+- Per-user API keys with usage tracking
+- Usage-based pricing for high-volume teams
+- Enterprise self-hosted option with unlimited execution
 
 ---
 
