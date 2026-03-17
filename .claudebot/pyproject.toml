@@ -1,0 +1,20 @@
+# .claudebot/pyproject.toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claudebot"
+version = "0.1.0"
+description = "Injectable AI Development Assistant Plugin"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "pydantic>=2.5.0",
+    "pyyaml>=6.0",
+    "aiosqlite>=0.19.0",
+]
+
+[project.scripts]
+claudebot = "claudebot.cli:main"
