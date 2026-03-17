@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-17
 **Topic:** ClaudeDevBot Plugin - Injectable AI Development Assistant
-**Status:** Pending Review (v2)
+**Status:** Pending Review (v3)
 
 ---
 
@@ -149,8 +149,21 @@ class TaskOrchestrator:
 
     def _get_agent(self, task_type: TaskType) -> BaseAgent:
         """Get agent instance for task type"""
-        # Load from config - which agents are enabled
-        pass
+        agent_map = {
+            TaskType.SPEC: SpecAgent(),
+            TaskType.CODE: CodeAgent(),
+            TaskType.TEST: TestAgent(),
+            TaskType.DEPLOY: DeployAgent(),
+            TaskType.DEBUG: DebugAgent(),
+        }
+
+        if task_type not in agent_map:
+            raise ValueError(f"Unknown task type: {task_type}")
+
+        if task_type not in self.config.enabled_agents:
+            raise ValueError(f"Agent {task_type} is not enabled")
+
+        return agent_map[task_type]
 ```
 
 **Task Queue Implementation:**
@@ -298,9 +311,42 @@ class Task(BaseModel):
     logs: list[str] = []
 
     # Metadata
+    priority: int = 0
+    max_retries: int = 3
     created_at: datetime
     started_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
+
+    # Persistence (SQLite)
+    class Config:
+        table_name = "tasks"
+```
+
+### SQLite Schema
+
+```python
+# Database: .claudebot/tasks.db
+
+CREATE TABLE tasks (
+    id TEXT PRIMARY KEY,
+    type TEXT NOT NULL,
+    status TEXT NOT NULL,
+    description TEXT NOT NULL,
+    repo_path TEXT NOT NULL,
+    branch TEXT,
+    files TEXT,  -- JSON array
+    result TEXT, -- JSON object
+    error TEXT,
+    logs TEXT,   -- JSON array
+    priority INTEGER DEFAULT 0,
+    max_retries INTEGER DEFAULT 3,
+    created_at TEXT NOT NULL,
+    started_at TEXT,
+    completed_at TEXT
+);
+
+CREATE INDEX idx_tasks_status ON tasks(status);
+CREATE INDEX idx_tasks_created_at ON tasks(created_at);
 ```
 
 ---
@@ -377,8 +423,10 @@ class HealthResponse(BaseModel):
 ```yaml
 # .claudebot/config.yaml
 server:
-  api_key: "your-secret-api-key"  # Generate with: claudebot config generate-key
+  api_key: "${CLAUDEBOT_API_KEY}"  # Or set directly for local dev only
 ```
+
+Generate with: `claudebot config generate-key`
 
 ### Rate Limiting
 
@@ -387,6 +435,21 @@ server:
 ```yaml
 server:
   rate_limit: 60  # requests per minute
+```
+
+**Implementation:**
+```python
+from fastapi import Request, HTTPException
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+
+limiter = Limiter(key_func=get_remote_remote_address)
+
+@app.post("/api/tasks")
+@limiter.limit("60/minute")
+async def create_task(request: Request):
+    # Task creation logic
+    pass
 ```
 
 ### WebSocket (Optional)
