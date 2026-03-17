@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-17
 **Topic:** ClaudeDevBot Plugin - Injectable AI Development Assistant
-**Status:** Pending Review (v3)
+**Status:** Pending Review (v4)
 
 ---
 
@@ -95,6 +95,7 @@ class TaskOrchestrator:
         self.queue: asyncio.Queue = asyncio.Queue()
         self.running_tasks: dict[str, Task] = {}
         self.task_history: list[Task] = []
+        self.cancelled_tasks: set[str] = set()
 
     async def create_task(self, request: CreateTaskRequest) -> Task:
         """Create and queue a new task"""
@@ -125,6 +126,11 @@ class TaskOrchestrator:
         self.running_tasks[task.id] = task
 
         try:
+            # Check if cancelled before starting
+            if task.id in self.cancelled_tasks:
+                task.status = TaskStatus.CANCELLED
+                return
+
             agent = self._get_agent(task.type)
             context = AgentContext(
                 repo_path=self.config.repo_path,
@@ -135,8 +141,16 @@ class TaskOrchestrator:
 
             result = await agent.execute(task, context)
 
-            task.status = TaskStatus.COMPLETED
-            task.result = result.__dict__
+            # Check again after completion
+            if task.id in self.cancelled_tasks:
+                task.status = TaskStatus.CANCELLED
+            else:
+                task.status = TaskStatus.COMPLETED
+                task.result = result.__dict__
+
+        except asyncio.CancelledError:
+            task.status = TaskStatus.CANCELLED
+            raise
 
         except Exception as e:
             task.status = TaskStatus.FAILED
@@ -144,8 +158,18 @@ class TaskOrchestrator:
 
         finally:
             task.completed_at = datetime.now()
-            del self.running_tasks[task.id]
+            self.running_tasks.pop(task.id, None)
             self.task_history.append(task)
+
+    async def cancel_task(self, task_id: str) -> bool:
+        """Cancel a running task"""
+        if task_id in self.running_tasks:
+            self.cancelled_tasks.add(task_id)
+            # Send cancellation signal
+            task = self.running_tasks[task_id]
+            # Implementation depends on agent - may need to propagate cancel
+            return True
+        return False
 
     def _get_agent(self, task_type: TaskType) -> BaseAgent:
         """Get agent instance for task type"""
@@ -242,6 +266,7 @@ my-repo/
 server:
   host: "localhost"
   port: 8765
+  port_auto_increment: true  # If port busy, try next port
 
 agents:
   enabled:
@@ -443,7 +468,7 @@ from fastapi import Request, HTTPException
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
-limiter = Limiter(key_func=get_remote_remote_address)
+limiter = Limiter(key_func=get_remote_address)
 
 @app.post("/api/tasks")
 @limiter.limit("60/minute")
@@ -631,7 +656,57 @@ Plugin API (localhost:8765)
 Orchestrator → Agent → Claude CLI
     │
     ▼
-Response back via Webhook
+Response back via polling/webhook
+```
+
+### Telegram Response Flow
+
+**Option A: Polling (Default)**
+```python
+# Telegram Bot polls for task status
+while True:
+    tasks = get_running_tasks()
+    for task in tasks:
+        status = get_task_status(task.id)
+        if status.completed:
+            send_message(chat_id, format_result(status))
+```
+
+**Option B: Webhook Callback**
+```python
+# Plugin calls back to Telegram when task completes
+# Requires exposing plugin to internet (ngrok, tunnel, etc.)
+
+# In orchestrator, after task completes:
+async def notify_telegram(task: Task):
+    await telegram_bot.send_message(
+        chat_id=task.chat_id,
+        text=format_result(task)
+    )
+```
+
+**Recommended:** Start with Option A (polling) for simplicity. Option B requires network exposure.
+
+### Webhook Security
+
+```python
+# HMAC-SHA256 verification
+import hmac
+import hashlib
+
+def verify_telegram_webhook(request: Request):
+    secret = config.telegram_webhook_secret
+    signature = request.headers.get('X-Telegram-Signature')
+
+    data = await request.body()
+    expected = hmac.new(
+        secret.encode(),
+        data,
+        hashlib.sha256
+    ).hexdigest()
+
+    if not hmac.compare_digest(signature, expected):
+        raise HTTPException(status_code=401)
 ```
 
 ---
@@ -732,6 +807,16 @@ claudebot serve --port 8766
 | `TELEGRAM_BOT_TOKEN` | No | For Telegram integration |
 | `CLAUDEBOT_API_KEY` | No | For remote API access |
 | `CLAUDEBOT_PORT` | No | Override default port (8765) |
+
+**Validation on Startup:**
+```python
+def validate_config():
+    if not os.environ.get("CLAUDE_API_KEY"):
+        raise ValueError(
+            "CLAUDE_API_KEY environment variable is required. "
+            "Set it with: export CLAUDE_API_KEY=your-api-key"
+        )
+``` |
 
 ---
 
