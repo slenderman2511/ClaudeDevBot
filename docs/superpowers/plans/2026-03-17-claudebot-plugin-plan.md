@@ -184,9 +184,25 @@ class HealthResponse(BaseModel):
     status: str
     version: str
 
+class AgentInfo(BaseModel):
+    name: str
+    description: str
+    enabled: bool
+
 @router.get("/health", response_model=HealthResponse)
 async def health_check():
     return HealthResponse(status="healthy", version="0.1.0")
+
+@router.get("/agents", response_model=List[AgentInfo])
+async def list_agents():
+    """List available agents"""
+    return [
+        AgentInfo(name="spec", description="Generate specification documents", enabled=True),
+        AgentInfo(name="code", description="Generate code from descriptions", enabled=True),
+        AgentInfo(name="test", description="Generate tests", enabled=True),
+        AgentInfo(name="deploy", description="Handle deployment workflows", enabled=True),
+        AgentInfo(name="debug", description="Analyze and suggest fixes for errors", enabled=True),
+    ]
 ```
 
 - [ ] **Step 5: Create tasks.py (stub)**
@@ -501,6 +517,7 @@ git commit -m "feat: add base agent class and interfaces"
 **Files:**
 - Create: `.claudebot/tools/__init__.py`
 - Create: `.claudebot/tools/claude_cli.py`
+- Create: `.claudebot/tools/git_tools.py`
 
 - [ ] **Step 1: Create tools/__init__.py**
 
@@ -509,8 +526,9 @@ git commit -m "feat: add base agent class and interfaces"
 """Tools for agents"""
 
 from .claude_cli import ClaudeCLI
+from .git_tools import GitTools
 
-__all__ = ["ClaudeCLI"]
+__all__ = ["ClaudeCLI", "GitTools"]
 ```
 
 - [ ] **Step 2: Create claude_cli.py**
@@ -573,11 +591,84 @@ class ClaudeCLI:
             raise ValueError(f"Invalid JSON response: {e}")
 ```
 
-- [ ] **Step 3: Commit**
+- [ ] **Step 3: Create git_tools.py**
+
+```python
+# .claudebot/tools/git_tools.py
+"""Git operations wrapper"""
+
+import subprocess
+import os
+import logging
+from typing import Optional, List
+
+logger = logging.getLogger(__name__)
+
+class GitTools:
+    """Wrapper for git operations"""
+
+    def __init__(self, repo_path: str):
+        self.repo_path = repo_path
+
+    def _run(self, *args) -> str:
+        """Run git command"""
+        result = subprocess.run(
+            ["git", *args],
+            cwd=self.repo_path,
+            capture_output=True,
+            text=True
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"Git error: {result.stderr}")
+        return result.stdout
+
+    async def status(self) -> str:
+        """Get git status"""
+        return self._run("status", "--porcelain")
+
+    async def branch(self) -> str:
+        """Get current branch"""
+        return self._run("branch", "--show-current")
+
+    async def branches(self) -> List[str]:
+        """List all branches"""
+        output = self._run("branch", "-a")
+        return [b.strip() for b in output.split('\n') if b]
+
+    async def checkout(self, branch: str) -> str:
+        """Checkout to branch"""
+        return self._run("checkout", branch)
+
+    async def pull(self) -> str:
+        """Pull from remote"""
+        return self._run("pull")
+
+    async def commit(self, message: str) -> str:
+        """Commit changes"""
+        self._run("add", "-A")
+        return self._run("commit", "-m", message)
+
+    async def log(self, n: int = 10) -> List[dict]:
+        """Get commit history"""
+        output = self._run("log", f"-{n}", "--oneline", "--pretty=format:%H|%s|%an|%ar")
+        commits = []
+        for line in output.split('\n'):
+            if '|' in line:
+                parts = line.split('|')
+                commits.append({
+                    "hash": parts[0],
+                    "message": parts[1],
+                    "author": parts[2],
+                    "date": parts[3]
+                })
+        return commits
+```
+
+- [ ] **Step 4: Commit**
 
 ```bash
 git add .claudebot/tools/
-git commit -m "feat: add Claude CLI wrapper tool"
+git commit -m "feat: add Claude CLI and Git tools"
 ```
 
 ---
@@ -976,6 +1067,10 @@ class TaskManager:
         self.running_tasks: dict[str, asyncio.Task] = {}
         self.cancelled_tasks: set[str] = set()
 
+    async def _get_db(self):
+        """Get database connection for queries"""
+        return get_db()
+
     async def start(self):
         """Start the task manager"""
         await init_db()
@@ -1287,15 +1382,51 @@ async def create_task(request: CreateTaskRequest):
 async def list_tasks():
     if _task_manager is None:
         raise HTTPException(status_code=500, detail="Task manager not initialized")
-    # TODO: Implement list from database
-    return []
+    # Query from database
+    async with await _task_manager._get_db() as db:
+        async with db.execute(
+            "SELECT id, type, status, description, created_at, started_at, completed_at, error, result FROM tasks ORDER BY created_at DESC LIMIT 100"
+        ) as cursor:
+            rows = await cursor.fetchall()
+            tasks = []
+            for row in rows:
+                tasks.append(TaskResponse(
+                    id=row[0],
+                    type=row[1],
+                    status=row[2],
+                    description=row[3],
+                    created_at=row[4],
+                    started_at=row[5],
+                    completed_at=row[6],
+                    error=row[7],
+                    result=row[8]
+                ))
+            return tasks
 
 @router.get("/tasks/{task_id}", response_model=TaskResponse)
 async def get_task(task_id: str):
     if _task_manager is None:
         raise HTTPException(status_code=500, detail="Task manager not initialized")
-    # TODO: Implement get from database
-    raise HTTPException(status_code=404, detail="Task not found")
+    # Query from database
+    async with await _task_manager._get_db() as db:
+        async with db.execute(
+            "SELECT id, type, status, description, created_at, started_at, completed_at, error, result FROM tasks WHERE id = ?",
+            (task_id,)
+        ) as cursor:
+            row = await cursor.fetchone()
+            if not row:
+                raise HTTPException(status_code=404, detail="Task not found")
+            return TaskResponse(
+                id=row[0],
+                type=row[1],
+                status=row[2],
+                description=row[3],
+                created_at=row[4],
+                started_at=row[5],
+                completed_at=row[6],
+                error=row[7],
+                result=row[8]
+            )
 
 @router.delete("/tasks/{task_id}")
 async def cancel_task(task_id: str):
@@ -1382,12 +1513,18 @@ git commit -m "feat: integrate orchestrator with API"
 import os
 import asyncio
 import logging
-from typing import Optional
+import aiohttp
+from typing import Optional, Dict
+from enum import Enum
 
 logger = logging.getLogger(__name__)
 
-# Telegram bot will be implemented as a separate module
-# that calls the plugin API
+class TaskType(str, Enum):
+    SPEC = "spec"
+    CODE = "code"
+    TEST = "test"
+    DEPLOY = "deploy"
+    DEBUG = "debug"
 
 class TelegramBot:
     """Telegram bot that communicates with plugin API"""
@@ -1395,25 +1532,155 @@ class TelegramBot:
     def __init__(self, api_url: str = "http://localhost:8765"):
         self.api_url = api_url
         self.token = os.environ.get("TELEGRAM_BOT_TOKEN")
+        self.api_key = os.environ.get("CLAUDEBOT_API_KEY", "")
+        self.pending_tasks: Dict[str, dict] = {}  # task_id -> chat_id mapping
 
         if not self.token:
             logger.warning("TELEGRAM_BOT_TOKEN not set")
 
     async def send_message(self, chat_id: str, text: str):
         """Send message to Telegram user"""
-        # Will use python-telegram-bot
-        pass
+        if not self.token:
+            return
 
-    async def send_task_result(self, chat_id: str, task_id: str):
-        """Send task result to user"""
-        # Call API to get task result
-        pass
+        url = f"https://api.telegram.org/bot{self.token}/sendMessage"
+        payload = {
+            "chat_id": chat_id,
+            "text": text,
+            "parse_mode": "Markdown"
+        }
 
-    async def start_polling(self):
-        """Start polling for task completion"""
-        # Poll API for running tasks
-        # Send updates when complete
-        pass
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, json=payload) as resp:
+                if resp.status != 200:
+                    logger.error(f"Failed to send message: {await resp.text()}")
+
+    async def handle_command(self, command: str, args: str, chat_id: str) -> str:
+        """Handle a command from user"""
+        command = command.lower()
+
+        if command == "/start":
+            return "Welcome to ClaudeDevBot! I can help you with:\n- /code <description> - Generate code\n- /spec <description> - Generate spec\n- /test <description> - Generate tests\n- /debug <error> - Debug errors\n- /status - Check status"
+
+        elif command == "/help":
+            return "Commands:\n- /code <description>\n- /spec <description>\n- /test <description>\n- /debug <error>\n- /status\n- /cancel <task_id>"
+
+        elif command == "/status":
+            return "I'm running! Use /code, /spec, /test, or /debug to start a task."
+
+        elif command in ["/code", "/spec", "/test", "/debug"]:
+            return await self._start_task(command.replace("/", ""), args, chat_id)
+
+        elif command == "/cancel":
+            return await self._cancel_task(args, chat_id)
+
+        return f"Unknown command: {command}"
+
+    async def _start_task(self, task_type: str, description: str, chat_id: str) -> str:
+        """Start a new task via API"""
+        if not description:
+            return f"Please provide a description. Usage: /{task_type} <description>"
+
+        # Call plugin API
+        headers = {}
+        if self.api_key:
+            headers["X-API-Key"] = self.api_key
+
+        payload = {
+            "type": task_type,
+            "description": description,
+            "files": []
+        }
+
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    f"{self.api_url}/api/tasks",
+                    json=payload,
+                    headers=headers
+                ) as resp:
+                    if resp.status == 200:
+                        data = await resp.json()
+                        task_id = data["task_id"]
+                        self.pending_tasks[task_id] = {"chat_id": chat_id, "type": task_type}
+                        return f"Task started! ID: `{task_id}`\nType: {task_type}\nDescription: {description}"
+                    else:
+                        return f"Error starting task: {resp.status}"
+
+        except aiohttp.ClientError as e:
+            return f"Could not connect to plugin API: {e}"
+
+    async def _cancel_task(self, task_id: str, chat_id: str) -> str:
+        """Cancel a task"""
+        if not task_id:
+            return "Please provide task ID: /cancel <task_id>"
+
+        headers = {}
+        if self.api_key:
+            headers["X-API-Key"] = self.api_key
+
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.delete(
+                    f"{self.api_url}/api/tasks/{task_id}",
+                    headers=headers
+                ) as resp:
+                    if resp.status == 200:
+                        return f"Task {task_id} cancelled"
+                    elif resp.status == 404:
+                        return f"Task {task_id} not found"
+                    else:
+                        return f"Error: {resp.status}"
+
+        except aiohttp.ClientError as e:
+            return f"Could not connect to plugin API: {e}"
+
+    async def poll_for_results(self):
+        """Poll API for task results and notify users"""
+        headers = {}
+        if self.api_key:
+            headers["X-API-Key"] = self.api_key
+
+        while True:
+            try:
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(
+                        f"{self.api_url}/api/tasks",
+                        headers=headers
+                    ) as resp:
+                        if resp.status == 200:
+                            tasks = await resp.json()
+                            for task in tasks:
+                                task_id = task["id"]
+                                if task_id in self.pending_tasks:
+                                    status = task["status"]
+                                    if status in ["completed", "failed", "cancelled"]:
+                                        info = self.pending_tasks.pop(task_id)
+                                        chat_id = info["chat_id"]
+
+                                        if status == "completed":
+                                            result = task.get("result", {})
+                                            summary = result.get("summary", "Task completed")
+                                            await self.send_message(
+                                                chat_id,
+                                                f"✅ Task completed!\n\n{summary}"
+                                            )
+                                        elif status == "failed":
+                                            error = task.get("error", "Unknown error")
+                                            await self.send_message(
+                                                chat_id,
+                                                f"❌ Task failed!\n\n{error}"
+                                            )
+
+            except aiohttp.ClientError:
+                logger.error("API polling failed")
+
+            await asyncio.sleep(5)  # Poll every 5 seconds
+
+    async def start(self):
+        """Start the bot"""
+        logger.info("Starting Telegram bot...")
+        asyncio.create_task(self.poll_for_results())
 ```
 
 - [ ] **Step 2: Commit**
