@@ -5,6 +5,8 @@ import sys
 import os
 import asyncio
 import logging
+import yaml
+from pathlib import Path
 
 # Add parent to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -36,12 +38,17 @@ def main():
     run_parser.add_argument("type", choices=["spec", "code", "test", "deploy", "debug"], help="Task type")
     run_parser.add_argument("description", help="Task description")
 
+    # init command
+    init_parser = subparsers.add_parser("init", help="Initialize ClaudeDevBot in current directory")
+
     args = parser.parse_args()
 
     if args.command == "serve":
         asyncio.run(serve(args))
     elif args.command == "run":
         asyncio.run(run_task(args))
+    elif args.command == "init":
+        init_project()
     else:
         parser.print_help()
 
@@ -99,6 +106,28 @@ async def run_task(args):
         print(f"Files: {result.files_modified}")
     else:
         print(f"✗ {result.error}")
+        sys.exit(1)
+
+def init_project():
+    """Initialize ClaudeDevBot in the current directory"""
+    config_path = Path(".claudebot/config.yaml")
+
+    if config_path.exists():
+        logger.info("ClaudeDevBot already initialized")
+        return
+
+    # Create .claudebot directory if it doesn't exist
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Copy config from plugin
+    plugin_config = Path(__file__).parent / "config.yaml"
+
+    if plugin_config.exists():
+        import shutil
+        shutil.copy(plugin_config, config_path)
+        logger.info(f"✓ Created {config_path}")
+    else:
+        logger.error("Plugin config not found")
         sys.exit(1)
 
 if __name__ == "__main__":

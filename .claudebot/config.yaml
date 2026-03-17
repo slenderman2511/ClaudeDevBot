@@ -1,0 +1,22 @@
+# ClaudeDevBot Configuration
+
+server:
+  host: "localhost"
+  port: 8765
+  port_auto_increment: true
+
+agents:
+  enabled:
+    - spec
+    - code
+    - test
+    - deploy
+    - debug
+  timeout: 300
+
+claude:
+  model: "claude-3-5-sonnet-20241022"
+
+git:
+  auto_commit: false
+  default_branch: "main"
