@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-17
 **Topic:** ClaudeDevBot Plugin - Injectable AI Development Assistant
-**Status:** Draft
+**Status:** Pending Review (v2)
 
 ---
 
@@ -81,6 +81,81 @@ Thiết kế plugin ClaudeDevBot có thể inject vào bất kỳ repository nà
 | `.claudebot/cli.py` | CLI commands for direct usage |
 | `.claudebot/config.yaml` | Project-specific configuration |
 | `.claudebotrc` | Quick config file |
+
+### Orchestrator Design
+
+The orchestrator manages task lifecycle from creation to completion.
+
+```python
+class TaskOrchestrator:
+    """Manages task queue and agent execution"""
+
+    def __init__(self, config: Config):
+        self.config = config
+        self.queue: asyncio.Queue = asyncio.Queue()
+        self.running_tasks: dict[str, Task] = {}
+        self.task_history: list[Task] = []
+
+    async def create_task(self, request: CreateTaskRequest) -> Task:
+        """Create and queue a new task"""
+        task = Task(
+            id=uuid4(),
+            type=request.type,
+            status=TaskStatus.PENDING,
+            description=request.description,
+            files=request.files,
+            branch=request.branch,
+            priority=request.priority,
+            created_at=datetime.now()
+        )
+        await self.queue.put(task)
+        return task
+
+    async def run(self):
+        """Main loop - processes queued tasks"""
+        while True:
+            task = await self.queue.get()
+            await self._execute_task(task)
+            self.queue.task_done()
+
+    async def _execute_task(self, task: Task):
+        """Execute a single task with the appropriate agent"""
+        task.status = TaskStatus.RUNNING
+        task.started_at = datetime.now()
+        self.running_tasks[task.id] = task
+
+        try:
+            agent = self._get_agent(task.type)
+            context = AgentContext(
+                repo_path=self.config.repo_path,
+                branch=task.branch,
+                claude_api_key=os.environ["CLAUDE_API_KEY"],
+                config=self.config.agent_config
+            )
+
+            result = await agent.execute(task, context)
+
+            task.status = TaskStatus.COMPLETED
+            task.result = result.__dict__
+
+        except Exception as e:
+            task.status = TaskStatus.FAILED
+            task.error = str(e)
+
+        finally:
+            task.completed_at = datetime.now()
+            del self.running_tasks[task.id]
+            self.task_history.append(task)
+
+    def _get_agent(self, task_type: TaskType) -> BaseAgent:
+        """Get agent instance for task type"""
+        # Load from config - which agents are enabled
+        pass
+```
+
+**Task Queue Implementation:**
+- **Development**: In-memory `asyncio.Queue`
+- **Production**: Redis-based queue (future enhancement)
 
 ---
 
@@ -177,17 +252,12 @@ telegram:
   allowed_users: []  # Empty = allow all
 ```
 
-```ini
-# .claudebotrc (alternative simple config)
-[server]
-port = 8765
+**Config Precedence:**
+1. `.claudebot/config.yaml` - Full configuration (YAML)
+2. `.claudebotrc` - Quick overrides (INI)
+3. Environment variables - Highest priority
 
-[agents]
-enabled = spec,code,test,deploy,debug
-
-[claude]
-model = claude-3-5-sonnet-20241022
-```
+For most projects, `.claudebot/config.yaml` is sufficient. `.claudebotrc` is for quick CLI overrides.
 
 ### 5.2 Task
 
@@ -250,6 +320,75 @@ class Task(BaseModel):
 | GET | `/api/health` | Health check |
 | POST | `/api/webhook/telegram` | Telegram webhook |
 
+### Request/Response Schemas
+
+```python
+# POST /api/tasks - Create Task
+class CreateTaskRequest(BaseModel):
+    type: TaskType  # spec, code, test, deploy, debug
+    description: str
+    files: list[str] = []
+    branch: str = "main"
+    priority: int = 0  # Higher = more urgent
+
+class CreateTaskResponse(BaseModel):
+    task_id: str
+    status: TaskStatus
+    created_at: datetime
+
+# GET /api/tasks/{id} - Get Task
+class TaskDetailResponse(BaseModel):
+    id: str
+    type: TaskType
+    status: TaskStatus
+    description: str
+    result: Optional[dict] = None
+    error: Optional[str] = None
+    logs: list[str] = []
+    created_at: datetime
+    started_at: Optional[datetime] = None
+    completed_at: Optional[datetime] = None
+
+# GET /api/agents - List Agents
+class AgentInfo(BaseModel):
+    name: str
+    description: str
+    enabled: bool
+
+class ListAgentsResponse(BaseModel):
+    agents: list[AgentInfo]
+
+# GET /api/health - Health Check
+class HealthResponse(BaseModel):
+    status: str  # "healthy" | "degraded"
+    version: str
+    agents_available: list[str]
+```
+
+### Authentication
+
+| Scenario | Method |
+|----------|--------|
+| Local CLI → API | No auth (localhost) |
+| Telegram Bot → API | API Key in header: `X-API-Key: <token>` |
+| Webhook verification | HMAC signature in `X-Telegram-Signature` header |
+
+**API Key Configuration:**
+```yaml
+# .claudebot/config.yaml
+server:
+  api_key: "your-secret-api-key"  # Generate with: claudebot config generate-key
+```
+
+### Rate Limiting
+
+- Default: 60 requests/minute
+- Configurable via `config.yaml`:
+```yaml
+server:
+  rate_limit: 60  # requests per minute
+```
+
 ### WebSocket (Optional)
 
 ```python
@@ -272,20 +411,83 @@ await ws.connect("ws://localhost:8765/ws/tasks/{task_id}")
 
 ```python
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class AgentContext:
+    """Context passed to all agents - provides access to tools and project state"""
+    repo_path: str
+    branch: str
+    claude_api_key: str
+    config: dict
+
+@dataclass
+class AgentResult:
+    """Standard result from any agent"""
+    success: bool
+    summary: str
+    files_created: list[str] = []
+    files_modified: list[str] = []
+    logs: list[str] = []
+    error: Optional[str] = None
 
 class BaseAgent(ABC):
     name: str
     description: str
 
     @abstractmethod
-    async def execute(self, task: Task) -> Task:
-        """Execute the agent task. Returns updated task with result."""
+    async def execute(self, task: Task, context: AgentContext) -> AgentResult:
+        """Execute the agent task. Returns result with files and logs."""
         pass
 
     @abstractmethod
-    def validate_input(self, task: Task) -> bool:
-        """Validate task input before execution."""
+    def validate_input(self, task: Task) -> tuple[bool, Optional[str]]:
+        """Validate task input. Returns (is_valid, error_message)"""
         pass
+
+    def get_required_files(self, task: Task) -> list[str]:
+        """Return list of files agent needs to read"""
+        return []
+
+    async def on_error(self, error: Exception, task: Task) -> AgentResult:
+        """Handle errors - can be overridden for custom recovery"""
+        return AgentResult(
+            success=False,
+            summary=f"Error: {str(error)}",
+            error=str(error)
+        )
+```
+
+### Tools Available to Agents
+
+```python
+class AgentTools:
+    """Tools available to all agents"""
+
+    def __init__(self, context: AgentContext):
+        self.context = context
+
+    async def read_file(self, path: str) -> str:
+        """Read file contents"""
+
+    async def write_file(self, path: str, content: str) -> None:
+        """Write file contents"""
+
+    async def list_files(self, pattern: str = "**/*") -> list[str]:
+        """List files matching pattern"""
+
+    async def run_command(self, cmd: str, cwd: Optional[str] = None) -> CommandResult:
+        """Run shell command"""
+
+    async def call_claude(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+        """Call Claude CLI/API"""
+
+    async def git(self, *args) -> str:
+        """Run git command"""
+
+    def log(self, message: str, level: str = "info") -> None:
+        """Add log entry"""
 ```
 
 ### Agent Implementations
@@ -436,12 +638,46 @@ Response back via Webhook
 
 ---
 
-## 13. Open Questions
+## 13. Resolved Design Decisions
 
-- [ ] How to handle multiple projects on same machine?
-- [ ] How to secure API when called from remote Telegram bot?
-- [ ] How to persist task history across restarts?
-- [ ] How to handle Claude API key per-project vs. global?
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Multi-project handling | One plugin per repo | Each repo has own `.claudebot/`, run on different ports |
+| API security | API Key auth | Header `X-API-Key` required for non-localhost requests |
+| Task persistence | SQLite (local) | Simple, file-based, sufficient for single-user |
+| Claude API key | Environment variable | Use `CLAUDE_API_KEY` env var, allow per-project via `.env` |
+
+### Multi-Project Setup Example
+
+```bash
+# Project A
+cd project-a
+claudebot serve --port 8765
+
+# Project B (different terminal)
+cd project-b
+claudebot serve --port 8766
+
+# Configure Telegram bot to know which port each project uses
+```
+
+### Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `CLAUDE_API_KEY` | Yes | Claude API key |
+| `TELEGRAM_BOT_TOKEN` | No | For Telegram integration |
+| `CLAUDEBOT_API_KEY` | No | For remote API access |
+| `CLAUDEBOT_PORT` | No | Override default port (8765) |
+
+---
+
+## 14. Future Enhancements (Post-MVP)
+
+- Redis queue for production deployments
+- PostgreSQL for multi-user support
+- WebSocket for real-time progress
+- Plugin marketplace with community agents
 
 ---
 
