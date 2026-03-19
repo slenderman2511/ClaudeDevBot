@@ -1,5 +1,60 @@
 {
-  "path": "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot",
-  "name": "ClaudeDevBot",
-  "attached_at": "2026-03-13T18:19:10.705584"
+  "project": {
+    "path": "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot",
+    "name": "ClaudeDevBot",
+    "scanned_at": "2026-03-19T21:54:05.571243",
+    "structure": {
+      "root_files": [
+        ".DS_Store",
+        ".gitignore",
+        "CLAUDE.md"
+      ],
+      "directories": [
+        "devbot",
+        "ai-devbot",
+        "docs",
+        "claudebot",
+        "openspec"
+      ]
+    },
+    "language": [
+      "Python"
+    ],
+    "dependencies": {
+      "python": {},
+      "javascript": {},
+      "other": []
+    },
+    "config_files": [
+      ".gitignore"
+    ],
+    "test_files": {
+      "python": [
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/devbot/agents/test_agent.py",
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/ai-devbot/tests/test_workflows.py",
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/ai-devbot/tests/test_workflows.py",
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/ai-devbot/tests/test_agents.py",
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/ai-devbot/tests/test_agents.py",
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/ai-devbot/agents/test_agent.py",
+        "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot/claudebot/agents/test_agent.py"
+      ]
+    },
+    "source_files": {
+      ".md": 23,
+      ".txt": 13,
+      ".py": 133,
+      ".sh": 1,
+      ".yaml": 3,
+      ".json": 2,
+      ".example": 1,
+      ".toml": 1
+    }
+  },
+  "stack": {
+    "frameworks": [],
+    "libraries": [],
+    "databases": [],
+    "tools": [],
+    "package_managers": []
+  }
 }

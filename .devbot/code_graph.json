@@ -1,25 +1,11 @@
 {
   "nodes": {
-    "file:telegram_claude_bot.py": {
-      "type": "file",
-      "path": "telegram_claude_bot.py",
-      "name": "telegram_claude_bot.py",
-      "language": "python",
-      "line_count": 39
-    },
     "file:devbot/__init__.py": {
       "type": "file",
       "path": "devbot/__init__.py",
       "name": "__init__.py",
       "language": "python",
       "line_count": 13
-    },
-    "file:devbot/setup.py": {
-      "type": "file",
-      "path": "devbot/setup.py",
-      "name": "setup.py",
-      "language": "python",
-      "line_count": 59
     },
     "file:devbot/tools/git_tools.py": {
       "type": "file",
@@ -602,97 +588,188 @@
       "path": "devbot/cli/devbot_cli.py",
       "name": "devbot_cli.py",
       "language": "python",
-      "line_count": 286
+      "line_count": 270
     },
-    "func:devbot/cli/devbot_cli.py:cli": {
+    "func:devbot/cli/devbot_cli.py:cmd_init": {
       "type": "function",
-      "name": "cli",
+      "name": "cmd_init",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 26,
-      "args": []
-    },
-    "func:devbot/cli/devbot_cli.py:attach": {
-      "type": "function",
-      "name": "attach",
-      "file": "devbot/cli/devbot_cli.py",
-      "line": 38,
+      "line": 22,
       "args": [
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:scan": {
+    "func:devbot/cli/devbot_cli.py:cmd_scan": {
       "type": "function",
-      "name": "scan",
+      "name": "cmd_scan",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 63,
+      "line": 28,
       "args": [
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:graph": {
+    "func:devbot/cli/devbot_cli.py:cmd_graph": {
       "type": "function",
-      "name": "graph",
+      "name": "cmd_graph",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 103,
+      "line": 58,
       "args": [
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:feature": {
+    "func:devbot/cli/devbot_cli.py:cmd_feature": {
       "type": "function",
-      "name": "feature",
+      "name": "cmd_feature",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 140,
+      "line": 77,
       "args": [
-        "feature_name",
-        "description",
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:plan": {
+    "func:devbot/cli/devbot_cli.py:cmd_plan": {
       "type": "function",
-      "name": "plan",
+      "name": "cmd_plan",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 166,
+      "line": 91,
       "args": [
-        "feature_name",
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:implement": {
+    "func:devbot/cli/devbot_cli.py:cmd_implement": {
       "type": "function",
-      "name": "implement",
+      "name": "cmd_implement",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 196,
+      "line": 112,
       "args": [
-        "feature_name",
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:status": {
+    "func:devbot/cli/devbot_cli.py:cmd_config": {
       "type": "function",
-      "name": "status",
+      "name": "cmd_config",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 229,
+      "line": 137,
       "args": [
-        "path"
+        "args"
       ]
     },
-    "func:devbot/cli/devbot_cli.py:list_features": {
+    "func:devbot/cli/devbot_cli.py:cmd_status": {
       "type": "function",
-      "name": "list_features",
+      "name": "cmd_status",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 255,
+      "line": 143,
       "args": [
-        "feature_name",
-        "path"
+        "args"
+      ]
+    },
+    "func:devbot/cli/devbot_cli.py:cmd_list": {
+      "type": "function",
+      "name": "cmd_list",
+      "file": "devbot/cli/devbot_cli.py",
+      "line": 163,
+      "args": [
+        "args"
       ]
     },
     "func:devbot/cli/devbot_cli.py:main": {
       "type": "function",
       "name": "main",
       "file": "devbot/cli/devbot_cli.py",
-      "line": 280,
+      "line": 184,
+      "args": []
+    },
+    "file:devbot/cli/commands/config.py": {
+      "type": "file",
+      "path": "devbot/cli/commands/config.py",
+      "name": "config.py",
+      "language": "python",
+      "line_count": 156
+    },
+    "func:devbot/cli/commands/config.py:run_config": {
+      "type": "function",
+      "name": "run_config",
+      "file": "devbot/cli/commands/config.py",
+      "line": 18,
+      "args": [
+        "args"
+      ]
+    },
+    "func:devbot/cli/commands/config.py:interactive_config": {
+      "type": "function",
+      "name": "interactive_config",
+      "file": "devbot/cli/commands/config.py",
+      "line": 77,
+      "args": [
+        "config",
+        "project_path"
+      ]
+    },
+    "func:devbot/cli/commands/config.py:load_config": {
+      "type": "function",
+      "name": "load_config",
+      "file": "devbot/cli/commands/config.py",
+      "line": 131,
+      "args": [
+        "project_path"
+      ]
+    },
+    "file:devbot/cli/commands/init.py": {
+      "type": "file",
+      "path": "devbot/cli/commands/init.py",
+      "name": "init.py",
+      "language": "python",
+      "line_count": 262
+    },
+    "func:devbot/cli/commands/init.py:run_init": {
+      "type": "function",
+      "name": "run_init",
+      "file": "devbot/cli/commands/init.py",
+      "line": 17,
+      "args": [
+        "args"
+      ]
+    },
+    "func:devbot/cli/commands/init.py:detect_repository": {
+      "type": "function",
+      "name": "detect_repository",
+      "file": "devbot/cli/commands/init.py",
+      "line": 121,
+      "args": [
+        "project_path"
+      ]
+    },
+    "func:devbot/cli/commands/init.py:prompt_configuration": {
+      "type": "function",
+      "name": "prompt_configuration",
+      "file": "devbot/cli/commands/init.py",
+      "line": 152,
+      "args": []
+    },
+    "func:devbot/cli/commands/init.py:save_config": {
+      "type": "function",
+      "name": "save_config",
+      "file": "devbot/cli/commands/init.py",
+      "line": 191,
+      "args": [
+        "config_file",
+        "config"
+      ]
+    },
+    "func:devbot/cli/commands/init.py:generate_project_context": {
+      "type": "function",
+      "name": "generate_project_context",
+      "file": "devbot/cli/commands/init.py",
+      "line": 202,
+      "args": [
+        "project_path",
+        "repo_info"
+      ]
+    },
+    "func:devbot/cli/commands/init.py:get_timestamp": {
+      "type": "function",
+      "name": "get_timestamp",
+      "file": "devbot/cli/commands/init.py",
+      "line": 259,
       "args": []
     },
     "file:devbot/observability/tracing.py": {
@@ -2586,47 +2663,1321 @@
       "args": [
         "config"
       ]
+    },
+    "file:claudebot/config.py": {
+      "type": "file",
+      "path": "claudebot/config.py",
+      "name": "config.py",
+      "language": "python",
+      "line_count": 160
+    },
+    "class:claudebot/config.py:ServerConfig": {
+      "type": "class",
+      "name": "ServerConfig",
+      "file": "claudebot/config.py",
+      "line": 14,
+      "methods": []
+    },
+    "class:claudebot/config.py:AgentsConfig": {
+      "type": "class",
+      "name": "AgentsConfig",
+      "file": "claudebot/config.py",
+      "line": 24,
+      "methods": []
+    },
+    "class:claudebot/config.py:ClaudeConfig": {
+      "type": "class",
+      "name": "ClaudeConfig",
+      "file": "claudebot/config.py",
+      "line": 31,
+      "methods": []
+    },
+    "class:claudebot/config.py:GitConfig": {
+      "type": "class",
+      "name": "GitConfig",
+      "file": "claudebot/config.py",
+      "line": 38,
+      "methods": []
+    },
+    "class:claudebot/config.py:Config": {
+      "type": "class",
+      "name": "Config",
+      "file": "claudebot/config.py",
+      "line": 45,
+      "methods": [
+        "from_dict"
+      ]
+    },
+    "func:claudebot/config.py:get_config_path": {
+      "type": "function",
+      "name": "get_config_path",
+      "file": "claudebot/config.py",
+      "line": 64,
+      "args": []
+    },
+    "func:claudebot/config.py:get_rc_path": {
+      "type": "function",
+      "name": "get_rc_path",
+      "file": "claudebot/config.py",
+      "line": 80,
+      "args": []
+    },
+    "func:claudebot/config.py:load_rc_config": {
+      "type": "function",
+      "name": "load_rc_config",
+      "file": "claudebot/config.py",
+      "line": 95,
+      "args": []
+    },
+    "func:claudebot/config.py:load_config": {
+      "type": "function",
+      "name": "load_config",
+      "file": "claudebot/config.py",
+      "line": 118,
+      "args": [
+        "config_path"
+      ]
+    },
+    "func:claudebot/config.py:reload_config": {
+      "type": "function",
+      "name": "reload_config",
+      "file": "claudebot/config.py",
+      "line": 157,
+      "args": []
+    },
+    "file:claudebot/__init__.py": {
+      "type": "file",
+      "path": "claudebot/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 4
+    },
+    "file:claudebot/cli.py": {
+      "type": "file",
+      "path": "claudebot/cli.py",
+      "name": "cli.py",
+      "language": "python",
+      "line_count": 420
+    },
+    "func:claudebot/cli.py:main": {
+      "type": "function",
+      "name": "main",
+      "file": "claudebot/cli.py",
+      "line": 34,
+      "args": []
+    },
+    "func:claudebot/cli.py:cmd_init": {
+      "type": "function",
+      "name": "cmd_init",
+      "file": "claudebot/cli.py",
+      "line": 129,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_scan": {
+      "type": "function",
+      "name": "cmd_scan",
+      "file": "claudebot/cli.py",
+      "line": 139,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_graph": {
+      "type": "function",
+      "name": "cmd_graph",
+      "file": "claudebot/cli.py",
+      "line": 175,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_feature": {
+      "type": "function",
+      "name": "cmd_feature",
+      "file": "claudebot/cli.py",
+      "line": 201,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_plan": {
+      "type": "function",
+      "name": "cmd_plan",
+      "file": "claudebot/cli.py",
+      "line": 222,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_config": {
+      "type": "function",
+      "name": "cmd_config",
+      "file": "claudebot/cli.py",
+      "line": 289,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_status": {
+      "type": "function",
+      "name": "cmd_status",
+      "file": "claudebot/cli.py",
+      "line": 299,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli.py:cmd_list": {
+      "type": "function",
+      "name": "cmd_list",
+      "file": "claudebot/cli.py",
+      "line": 323,
+      "args": [
+        "args"
+      ]
+    },
+    "file:claudebot/__main__.py": {
+      "type": "file",
+      "path": "claudebot/__main__.py",
+      "name": "__main__.py",
+      "language": "python",
+      "line_count": 7
+    },
+    "file:claudebot/tools/git_tools.py": {
+      "type": "file",
+      "path": "claudebot/tools/git_tools.py",
+      "name": "git_tools.py",
+      "language": "python",
+      "line_count": 190
+    },
+    "class:claudebot/tools/git_tools.py:GitTool": {
+      "type": "class",
+      "name": "GitTool",
+      "file": "claudebot/tools/git_tools.py",
+      "line": 16,
+      "methods": [
+        "__init__",
+        "_run_git",
+        "execute",
+        "status",
+        "add",
+        "commit",
+        "push",
+        "pull",
+        "branch",
+        "create_branch",
+        "checkout",
+        "log",
+        "diff",
+        "validate"
+      ]
+    },
+    "func:claudebot/tools/git_tools.py:create_git_tool": {
+      "type": "function",
+      "name": "create_git_tool",
+      "file": "claudebot/tools/git_tools.py",
+      "line": 188,
+      "args": [
+        "config"
+      ]
+    },
+    "file:claudebot/tools/claude_cli.py": {
+      "type": "file",
+      "path": "claudebot/tools/claude_cli.py",
+      "name": "claude_cli.py",
+      "language": "python",
+      "line_count": 65
+    },
+    "class:claudebot/tools/claude_cli.py:ClaudeCLI": {
+      "type": "class",
+      "name": "ClaudeCLI",
+      "file": "claudebot/tools/claude_cli.py",
+      "line": 12,
+      "methods": [
+        "__init__"
+      ]
+    },
+    "file:claudebot/tools/tool_registry.py": {
+      "type": "file",
+      "path": "claudebot/tools/tool_registry.py",
+      "name": "tool_registry.py",
+      "language": "python",
+      "line_count": 143
+    },
+    "class:claudebot/tools/tool_registry.py:ToolRegistry": {
+      "type": "class",
+      "name": "ToolRegistry",
+      "file": "claudebot/tools/tool_registry.py",
+      "line": 15,
+      "methods": [
+        "__init__",
+        "register",
+        "unregister",
+        "get",
+        "list_tools",
+        "get_all",
+        "execute",
+        "validate",
+        "get_schemas"
+      ]
+    },
+    "func:claudebot/tools/tool_registry.py:get_registry": {
+      "type": "function",
+      "name": "get_registry",
+      "file": "claudebot/tools/tool_registry.py",
+      "line": 128,
+      "args": []
+    },
+    "func:claudebot/tools/tool_registry.py:register_tool": {
+      "type": "function",
+      "name": "register_tool",
+      "file": "claudebot/tools/tool_registry.py",
+      "line": 136,
+      "args": [
+        "tool"
+      ]
+    },
+    "func:claudebot/tools/tool_registry.py:get_tool": {
+      "type": "function",
+      "name": "get_tool",
+      "file": "claudebot/tools/tool_registry.py",
+      "line": 141,
+      "args": [
+        "name"
+      ]
+    },
+    "file:claudebot/tools/__init__.py": {
+      "type": "file",
+      "path": "claudebot/tools/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 11
+    },
+    "file:claudebot/tools/tool.py": {
+      "type": "file",
+      "path": "claudebot/tools/tool.py",
+      "name": "tool.py",
+      "language": "python",
+      "line_count": 91
+    },
+    "class:claudebot/tools/tool.py:ToolResult": {
+      "type": "class",
+      "name": "ToolResult",
+      "file": "claudebot/tools/tool.py",
+      "line": 13,
+      "methods": [
+        "__post_init__"
+      ]
+    },
+    "class:claudebot/tools/tool.py:Tool": {
+      "type": "class",
+      "name": "Tool",
+      "file": "claudebot/tools/tool.py",
+      "line": 25,
+      "methods": [
+        "__init__",
+        "execute",
+        "validate",
+        "get_schema",
+        "__repr__"
+      ]
+    },
+    "file:claudebot/core/__init__.py": {
+      "type": "file",
+      "path": "claudebot/core/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 1
+    },
+    "file:claudebot/memory/memory.py": {
+      "type": "file",
+      "path": "claudebot/memory/memory.py",
+      "name": "memory.py",
+      "language": "python",
+      "line_count": 104
+    },
+    "class:claudebot/memory/memory.py:Memory": {
+      "type": "class",
+      "name": "Memory",
+      "file": "claudebot/memory/memory.py",
+      "line": 13,
+      "methods": [
+        "__init__",
+        "set",
+        "get",
+        "remember",
+        "forget",
+        "clear_short_term",
+        "clear_all"
+      ]
+    },
+    "func:claudebot/memory/memory.py:get_memory": {
+      "type": "function",
+      "name": "get_memory",
+      "file": "claudebot/memory/memory.py",
+      "line": 99,
+      "args": []
+    },
+    "file:claudebot/memory/short_term_memory.py": {
+      "type": "file",
+      "path": "claudebot/memory/short_term_memory.py",
+      "name": "short_term_memory.py",
+      "language": "python",
+      "line_count": 121
+    },
+    "class:claudebot/memory/short_term_memory.py:ShortTermMemory": {
+      "type": "class",
+      "name": "ShortTermMemory",
+      "file": "claudebot/memory/short_term_memory.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "set",
+        "get",
+        "delete",
+        "clear",
+        "cleanup_expired",
+        "keys",
+        "__len__"
+      ]
+    },
+    "file:claudebot/memory/__init__.py": {
+      "type": "file",
+      "path": "claudebot/memory/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 11
+    },
+    "file:claudebot/memory/long_term_memory.py": {
+      "type": "file",
+      "path": "claudebot/memory/long_term_memory.py",
+      "name": "long_term_memory.py",
+      "language": "python",
+      "line_count": 169
+    },
+    "class:claudebot/memory/long_term_memory.py:LongTermMemory": {
+      "type": "class",
+      "name": "LongTermMemory",
+      "file": "claudebot/memory/long_term_memory.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "_load_index",
+        "_save_index",
+        "store",
+        "retrieve",
+        "search",
+        "delete",
+        "list_keys",
+        "clear"
+      ]
+    },
+    "file:claudebot/cli_commands/__init__.py": {
+      "type": "file",
+      "path": "claudebot/cli_commands/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 2
+    },
+    "file:claudebot/cli_commands/commands/config.py": {
+      "type": "file",
+      "path": "claudebot/cli_commands/commands/config.py",
+      "name": "config.py",
+      "language": "python",
+      "line_count": 156
+    },
+    "func:claudebot/cli_commands/commands/config.py:run_config": {
+      "type": "function",
+      "name": "run_config",
+      "file": "claudebot/cli_commands/commands/config.py",
+      "line": 18,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli_commands/commands/config.py:interactive_config": {
+      "type": "function",
+      "name": "interactive_config",
+      "file": "claudebot/cli_commands/commands/config.py",
+      "line": 77,
+      "args": [
+        "config",
+        "project_path"
+      ]
+    },
+    "func:claudebot/cli_commands/commands/config.py:load_config": {
+      "type": "function",
+      "name": "load_config",
+      "file": "claudebot/cli_commands/commands/config.py",
+      "line": 131,
+      "args": [
+        "project_path"
+      ]
+    },
+    "file:claudebot/cli_commands/commands/init.py": {
+      "type": "file",
+      "path": "claudebot/cli_commands/commands/init.py",
+      "name": "init.py",
+      "language": "python",
+      "line_count": 262
+    },
+    "func:claudebot/cli_commands/commands/init.py:run_init": {
+      "type": "function",
+      "name": "run_init",
+      "file": "claudebot/cli_commands/commands/init.py",
+      "line": 17,
+      "args": [
+        "args"
+      ]
+    },
+    "func:claudebot/cli_commands/commands/init.py:detect_repository": {
+      "type": "function",
+      "name": "detect_repository",
+      "file": "claudebot/cli_commands/commands/init.py",
+      "line": 121,
+      "args": [
+        "project_path"
+      ]
+    },
+    "func:claudebot/cli_commands/commands/init.py:prompt_configuration": {
+      "type": "function",
+      "name": "prompt_configuration",
+      "file": "claudebot/cli_commands/commands/init.py",
+      "line": 152,
+      "args": []
+    },
+    "func:claudebot/cli_commands/commands/init.py:save_config": {
+      "type": "function",
+      "name": "save_config",
+      "file": "claudebot/cli_commands/commands/init.py",
+      "line": 191,
+      "args": [
+        "config_file",
+        "config"
+      ]
+    },
+    "func:claudebot/cli_commands/commands/init.py:generate_project_context": {
+      "type": "function",
+      "name": "generate_project_context",
+      "file": "claudebot/cli_commands/commands/init.py",
+      "line": 202,
+      "args": [
+        "project_path",
+        "repo_info"
+      ]
+    },
+    "func:claudebot/cli_commands/commands/init.py:get_timestamp": {
+      "type": "function",
+      "name": "get_timestamp",
+      "file": "claudebot/cli_commands/commands/init.py",
+      "line": 259,
+      "args": []
+    },
+    "file:claudebot/graph/symbol_parser.py": {
+      "type": "file",
+      "path": "claudebot/graph/symbol_parser.py",
+      "name": "symbol_parser.py",
+      "language": "python",
+      "line_count": 224
+    },
+    "class:claudebot/graph/symbol_parser.py:SymbolParser": {
+      "type": "class",
+      "name": "SymbolParser",
+      "file": "claudebot/graph/symbol_parser.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "parse_file",
+        "_parse_python",
+        "_parse_javascript",
+        "_get_name",
+        "get_all_symbols"
+      ]
+    },
+    "file:claudebot/graph/__init__.py": {
+      "type": "file",
+      "path": "claudebot/graph/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 9
+    },
+    "file:claudebot/graph/code_graph_builder.py": {
+      "type": "file",
+      "path": "claudebot/graph/code_graph_builder.py",
+      "name": "code_graph_builder.py",
+      "language": "python",
+      "line_count": 270
+    },
+    "class:claudebot/graph/code_graph_builder.py:CodeGraphBuilder": {
+      "type": "class",
+      "name": "CodeGraphBuilder",
+      "file": "claudebot/graph/code_graph_builder.py",
+      "line": 19,
+      "methods": [
+        "__init__",
+        "build",
+        "_find_source_files",
+        "_analyze_file",
+        "_analyze_python_file",
+        "_analyze_js_file",
+        "_add_node",
+        "_add_edge",
+        "_get_language",
+        "_count_lines",
+        "save_graph",
+        "get_summary"
+      ]
+    },
+    "file:claudebot/spec/__init__.py": {
+      "type": "file",
+      "path": "claudebot/spec/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:claudebot/spec/spec_generator.py": {
+      "type": "file",
+      "path": "claudebot/spec/spec_generator.py",
+      "name": "spec_generator.py",
+      "language": "python",
+      "line_count": 194
+    },
+    "class:claudebot/spec/spec_generator.py:SpecGenerator": {
+      "type": "class",
+      "name": "SpecGenerator",
+      "file": "claudebot/spec/spec_generator.py",
+      "line": 15,
+      "methods": [
+        "__init__",
+        "generate",
+        "_generate_with_ai",
+        "_generate_basic",
+        "generate_markdown"
+      ]
+    },
+    "func:claudebot/spec/spec_generator.py:create_spec_generator": {
+      "type": "function",
+      "name": "create_spec_generator",
+      "file": "claudebot/spec/spec_generator.py",
+      "line": 180,
+      "args": [
+        "claude_config"
+      ]
+    },
+    "file:claudebot/spec/openspec_sync.py": {
+      "type": "file",
+      "path": "claudebot/spec/openspec_sync.py",
+      "name": "openspec_sync.py",
+      "language": "python",
+      "line_count": 268
+    },
+    "class:claudebot/spec/openspec_sync.py:OpenSpecSync": {
+      "type": "class",
+      "name": "OpenSpecSync",
+      "file": "claudebot/spec/openspec_sync.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "list_features",
+        "load_feature",
+        "_parse_spec",
+        "create_feature",
+        "update_task_status",
+        "get_pending_tasks",
+        "get_task_graph",
+        "get_context",
+        "validate_spec",
+        "save_plan"
+      ]
+    },
+    "func:claudebot/spec/openspec_sync.py:get_openspec": {
+      "type": "function",
+      "name": "get_openspec",
+      "file": "claudebot/spec/openspec_sync.py",
+      "line": 266,
+      "args": [
+        "base_path"
+      ]
+    },
+    "file:claudebot/agents/test_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/test_agent.py",
+      "name": "test_agent.py",
+      "language": "python",
+      "line_count": 191
+    },
+    "class:claudebot/agents/test_agent.py:TestAgent": {
+      "type": "class",
+      "name": "TestAgent",
+      "file": "claudebot/agents/test_agent.py",
+      "line": 15,
+      "methods": [
+        "validate_input",
+        "_detect_language",
+        "_parse_test_output",
+        "get_required_files"
+      ]
+    },
+    "file:claudebot/agents/spec_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/spec_agent.py",
+      "name": "spec_agent.py",
+      "language": "python",
+      "line_count": 70
+    },
+    "class:claudebot/agents/spec_agent.py:SpecAgent": {
+      "type": "class",
+      "name": "SpecAgent",
+      "file": "claudebot/agents/spec_agent.py",
+      "line": 13,
+      "methods": [
+        "validate_input"
+      ]
+    },
+    "file:claudebot/agents/base_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/base_agent.py",
+      "name": "base_agent.py",
+      "language": "python",
+      "line_count": 56
+    },
+    "class:claudebot/agents/base_agent.py:AgentContext": {
+      "type": "class",
+      "name": "AgentContext",
+      "file": "claudebot/agents/base_agent.py",
+      "line": 12,
+      "methods": []
+    },
+    "class:claudebot/agents/base_agent.py:AgentResult": {
+      "type": "class",
+      "name": "AgentResult",
+      "file": "claudebot/agents/base_agent.py",
+      "line": 20,
+      "methods": []
+    },
+    "class:claudebot/agents/base_agent.py:BaseAgent": {
+      "type": "class",
+      "name": "BaseAgent",
+      "file": "claudebot/agents/base_agent.py",
+      "line": 29,
+      "methods": [
+        "validate_input",
+        "get_required_files"
+      ]
+    },
+    "file:claudebot/agents/deploy_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/deploy_agent.py",
+      "name": "deploy_agent.py",
+      "language": "python",
+      "line_count": 256
+    },
+    "class:claudebot/agents/deploy_agent.py:DeployAgent": {
+      "type": "class",
+      "name": "DeployAgent",
+      "file": "claudebot/agents/deploy_agent.py",
+      "line": 17,
+      "methods": [
+        "validate_input",
+        "_detect_deployment_configs",
+        "_determine_platform",
+        "_get_relevant_files",
+        "_parse_deploy_output",
+        "get_required_files"
+      ]
+    },
+    "file:claudebot/agents/planner_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/planner_agent.py",
+      "name": "planner_agent.py",
+      "language": "python",
+      "line_count": 258
+    },
+    "class:claudebot/agents/planner_agent.py:TaskPriority": {
+      "type": "class",
+      "name": "TaskPriority",
+      "file": "claudebot/agents/planner_agent.py",
+      "line": 18,
+      "methods": []
+    },
+    "class:claudebot/agents/planner_agent.py:TaskStatus": {
+      "type": "class",
+      "name": "TaskStatus",
+      "file": "claudebot/agents/planner_agent.py",
+      "line": 26,
+      "methods": []
+    },
+    "class:claudebot/agents/planner_agent.py:TaskNode": {
+      "type": "class",
+      "name": "TaskNode",
+      "file": "claudebot/agents/planner_agent.py",
+      "line": 35,
+      "methods": [
+        "__init__",
+        "_infer_agent_type"
+      ]
+    },
+    "class:claudebot/agents/planner_agent.py:TaskGraph": {
+      "type": "class",
+      "name": "TaskGraph",
+      "file": "claudebot/agents/planner_agent.py",
+      "line": 63,
+      "methods": [
+        "__init__",
+        "add_task",
+        "get_ready_tasks",
+        "topological_sort"
+      ]
+    },
+    "class:claudebot/agents/planner_agent.py:PlannerAgent": {
+      "type": "class",
+      "name": "PlannerAgent",
+      "file": "claudebot/agents/planner_agent.py",
+      "line": 115,
+      "methods": [
+        "__init__",
+        "execute",
+        "_generate_task_graph",
+        "_format_plan_output",
+        "get_plan",
+        "get_capabilities"
+      ]
+    },
+    "file:claudebot/agents/__init__.py": {
+      "type": "file",
+      "path": "claudebot/agents/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 15
+    },
+    "file:claudebot/agents/task_graph.py": {
+      "type": "file",
+      "path": "claudebot/agents/task_graph.py",
+      "name": "task_graph.py",
+      "language": "python",
+      "line_count": 207
+    },
+    "class:claudebot/agents/task_graph.py:TaskState": {
+      "type": "class",
+      "name": "TaskState",
+      "file": "claudebot/agents/task_graph.py",
+      "line": 17,
+      "methods": []
+    },
+    "class:claudebot/agents/task_graph.py:TaskPriority": {
+      "type": "class",
+      "name": "TaskPriority",
+      "file": "claudebot/agents/task_graph.py",
+      "line": 26,
+      "methods": []
+    },
+    "class:claudebot/agents/task_graph.py:TaskItem": {
+      "type": "class",
+      "name": "TaskItem",
+      "file": "claudebot/agents/task_graph.py",
+      "line": 35,
+      "methods": [
+        "is_ready",
+        "can_execute"
+      ]
+    },
+    "class:claudebot/agents/task_graph.py:TaskGraph": {
+      "type": "class",
+      "name": "TaskGraph",
+      "file": "claudebot/agents/task_graph.py",
+      "line": 62,
+      "methods": [
+        "__init__",
+        "add_task",
+        "add_tasks",
+        "get_task",
+        "get_ready_tasks",
+        "get_tasks_by_phase",
+        "get_tasks_by_state",
+        "calculate_execution_levels",
+        "get_stats",
+        "reset"
+      ]
+    },
+    "func:claudebot/agents/task_graph.py:create_task_graph": {
+      "type": "function",
+      "name": "create_task_graph",
+      "file": "claudebot/agents/task_graph.py",
+      "line": 181,
+      "args": [
+        "name",
+        "tasks"
+      ]
+    },
+    "file:claudebot/agents/code_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/code_agent.py",
+      "name": "code_agent.py",
+      "language": "python",
+      "line_count": 103
+    },
+    "class:claudebot/agents/code_agent.py:CodeAgent": {
+      "type": "class",
+      "name": "CodeAgent",
+      "file": "claudebot/agents/code_agent.py",
+      "line": 13,
+      "methods": [
+        "validate_input"
+      ]
+    },
+    "file:claudebot/agents/debug_agent.py": {
+      "type": "file",
+      "path": "claudebot/agents/debug_agent.py",
+      "name": "debug_agent.py",
+      "language": "python",
+      "line_count": 213
+    },
+    "class:claudebot/agents/debug_agent.py:DebugAgent": {
+      "type": "class",
+      "name": "DebugAgent",
+      "file": "claudebot/agents/debug_agent.py",
+      "line": 15,
+      "methods": [
+        "validate_input",
+        "_extract_error_from_description",
+        "_detect_language",
+        "_parse_fix_output",
+        "get_required_files"
+      ]
+    },
+    "file:claudebot/agents/__dev_init__.py": {
+      "type": "file",
+      "path": "claudebot/agents/__dev_init__.py",
+      "name": "__dev_init__.py",
+      "language": "python",
+      "line_count": 23
+    },
+    "file:claudebot/observability/tracing.py": {
+      "type": "file",
+      "path": "claudebot/observability/tracing.py",
+      "name": "tracing.py",
+      "language": "python",
+      "line_count": 116
+    },
+    "class:claudebot/observability/tracing.py:Tracer": {
+      "type": "class",
+      "name": "Tracer",
+      "file": "claudebot/observability/tracing.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "span",
+        "trace",
+        "get_spans",
+        "clear_spans"
+      ]
+    },
+    "func:claudebot/observability/tracing.py:get_tracer": {
+      "type": "function",
+      "name": "get_tracer",
+      "file": "claudebot/observability/tracing.py",
+      "line": 93,
+      "args": [
+        "name"
+      ]
+    },
+    "func:claudebot/observability/tracing.py:setup_tracing": {
+      "type": "function",
+      "name": "setup_tracing",
+      "file": "claudebot/observability/tracing.py",
+      "line": 101,
+      "args": [
+        "enabled"
+      ]
+    },
+    "file:claudebot/observability/__init__.py": {
+      "type": "file",
+      "path": "claudebot/observability/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:claudebot/observability/logger.py": {
+      "type": "file",
+      "path": "claudebot/observability/logger.py",
+      "name": "logger.py",
+      "language": "python",
+      "line_count": 131
+    },
+    "func:claudebot/observability/logger.py:get_logger": {
+      "type": "function",
+      "name": "get_logger",
+      "file": "claudebot/observability/logger.py",
+      "line": 16,
+      "args": [
+        "name",
+        "level",
+        "format_str",
+        "colorize"
+      ]
+    },
+    "func:claudebot/observability/logger.py:configure_logging": {
+      "type": "function",
+      "name": "configure_logging",
+      "file": "claudebot/observability/logger.py",
+      "line": 79,
+      "args": [
+        "level",
+        "log_file",
+        "format_str"
+      ]
+    },
+    "class:claudebot/observability/logger.py:LogContext": {
+      "type": "class",
+      "name": "LogContext",
+      "file": "claudebot/observability/logger.py",
+      "line": 118,
+      "methods": [
+        "__init__",
+        "__enter__",
+        "__exit__"
+      ]
+    },
+    "file:claudebot/integrations/__init__.py": {
+      "type": "file",
+      "path": "claudebot/integrations/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 1
+    },
+    "file:claudebot/db/models.py": {
+      "type": "file",
+      "path": "claudebot/db/models.py",
+      "name": "models.py",
+      "language": "python",
+      "line_count": 62
+    },
+    "class:claudebot/db/models.py:Task": {
+      "type": "class",
+      "name": "Task",
+      "file": "claudebot/db/models.py",
+      "line": 11,
+      "methods": []
+    },
+    "file:claudebot/db/__init__.py": {
+      "type": "file",
+      "path": "claudebot/db/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 6
+    },
+    "file:claudebot/api/auth.py": {
+      "type": "file",
+      "path": "claudebot/api/auth.py",
+      "name": "auth.py",
+      "language": "python",
+      "line_count": 68
+    },
+    "file:claudebot/api/enums.py": {
+      "type": "file",
+      "path": "claudebot/api/enums.py",
+      "name": "enums.py",
+      "language": "python",
+      "line_count": 19
+    },
+    "class:claudebot/api/enums.py:TaskType": {
+      "type": "class",
+      "name": "TaskType",
+      "file": "claudebot/api/enums.py",
+      "line": 5,
+      "methods": []
+    },
+    "class:claudebot/api/enums.py:TaskStatus": {
+      "type": "class",
+      "name": "TaskStatus",
+      "file": "claudebot/api/enums.py",
+      "line": 13,
+      "methods": []
+    },
+    "file:claudebot/api/server.py": {
+      "type": "file",
+      "path": "claudebot/api/server.py",
+      "name": "server.py",
+      "language": "python",
+      "line_count": 69
+    },
+    "file:claudebot/api/__init__.py": {
+      "type": "file",
+      "path": "claudebot/api/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 6
+    },
+    "file:claudebot/api/rate_limit.py": {
+      "type": "file",
+      "path": "claudebot/api/rate_limit.py",
+      "name": "rate_limit.py",
+      "language": "python",
+      "line_count": 94
+    },
+    "class:claudebot/api/rate_limit.py:RateLimiter": {
+      "type": "class",
+      "name": "RateLimiter",
+      "file": "claudebot/api/rate_limit.py",
+      "line": 14,
+      "methods": [
+        "__init__",
+        "_cleanup_old_requests",
+        "_get_client_ip"
+      ]
+    },
+    "file:claudebot/api/routes/tasks.py": {
+      "type": "file",
+      "path": "claudebot/api/routes/tasks.py",
+      "name": "tasks.py",
+      "language": "python",
+      "line_count": 164
+    },
+    "func:claudebot/api/routes/tasks.py:set_task_manager": {
+      "type": "function",
+      "name": "set_task_manager",
+      "file": "claudebot/api/routes/tasks.py",
+      "line": 22,
+      "args": [
+        "manager"
+      ]
+    },
+    "func:claudebot/api/routes/tasks.py:get_task_manager": {
+      "type": "function",
+      "name": "get_task_manager",
+      "file": "claudebot/api/routes/tasks.py",
+      "line": 28,
+      "args": []
+    },
+    "class:claudebot/api/routes/tasks.py:CreateTaskRequest": {
+      "type": "class",
+      "name": "CreateTaskRequest",
+      "file": "claudebot/api/routes/tasks.py",
+      "line": 33,
+      "methods": []
+    },
+    "class:claudebot/api/routes/tasks.py:CreateTaskResponse": {
+      "type": "class",
+      "name": "CreateTaskResponse",
+      "file": "claudebot/api/routes/tasks.py",
+      "line": 41,
+      "methods": []
+    },
+    "class:claudebot/api/routes/tasks.py:TaskDetailResponse": {
+      "type": "class",
+      "name": "TaskDetailResponse",
+      "file": "claudebot/api/routes/tasks.py",
+      "line": 47,
+      "methods": []
+    },
+    "file:claudebot/api/routes/health.py": {
+      "type": "file",
+      "path": "claudebot/api/routes/health.py",
+      "name": "health.py",
+      "language": "python",
+      "line_count": 52
+    },
+    "class:claudebot/api/routes/health.py:HealthResponse": {
+      "type": "class",
+      "name": "HealthResponse",
+      "file": "claudebot/api/routes/health.py",
+      "line": 19,
+      "methods": []
+    },
+    "class:claudebot/api/routes/health.py:AgentInfo": {
+      "type": "class",
+      "name": "AgentInfo",
+      "file": "claudebot/api/routes/health.py",
+      "line": 24,
+      "methods": []
+    },
+    "file:claudebot/api/routes/telegram.py": {
+      "type": "file",
+      "path": "claudebot/api/routes/telegram.py",
+      "name": "telegram.py",
+      "language": "python",
+      "line_count": 241
+    },
+    "class:claudebot/api/routes/telegram.py:CommandType": {
+      "type": "class",
+      "name": "CommandType",
+      "file": "claudebot/api/routes/telegram.py",
+      "line": 18,
+      "methods": []
+    },
+    "func:claudebot/api/routes/telegram.py:extract_command": {
+      "type": "function",
+      "name": "extract_command",
+      "file": "claudebot/api/routes/telegram.py",
+      "line": 31,
+      "args": [
+        "text"
+      ]
+    },
+    "func:claudebot/api/routes/telegram.py:format_task_response": {
+      "type": "function",
+      "name": "format_task_response",
+      "file": "claudebot/api/routes/telegram.py",
+      "line": 55,
+      "args": [
+        "task"
+      ]
+    },
+    "func:claudebot/api/routes/telegram.py:format_help": {
+      "type": "function",
+      "name": "format_help",
+      "file": "claudebot/api/routes/telegram.py",
+      "line": 88,
+      "args": []
+    },
+    "func:claudebot/api/routes/telegram.py:format_start": {
+      "type": "function",
+      "name": "format_start",
+      "file": "claudebot/api/routes/telegram.py",
+      "line": 109,
+      "args": []
+    },
+    "file:claudebot/api/routes/__init__.py": {
+      "type": "file",
+      "path": "claudebot/api/routes/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 6
+    },
+    "file:claudebot/api/routes/websocket.py": {
+      "type": "file",
+      "path": "claudebot/api/routes/websocket.py",
+      "name": "websocket.py",
+      "language": "python",
+      "line_count": 176
+    },
+    "class:claudebot/api/routes/websocket.py:ConnectionManager": {
+      "type": "class",
+      "name": "ConnectionManager",
+      "file": "claudebot/api/routes/websocket.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "disconnect"
+      ]
+    },
+    "file:claudebot/scanner/project_scanner.py": {
+      "type": "file",
+      "path": "claudebot/scanner/project_scanner.py",
+      "name": "project_scanner.py",
+      "language": "python",
+      "line_count": 250
+    },
+    "class:claudebot/scanner/project_scanner.py:ProjectScanner": {
+      "type": "class",
+      "name": "ProjectScanner",
+      "file": "claudebot/scanner/project_scanner.py",
+      "line": 18,
+      "methods": [
+        "__init__",
+        "scan",
+        "_scan_structure",
+        "_detect_languages",
+        "_scan_dependencies",
+        "_find_config_files",
+        "_find_test_files",
+        "_find_source_files",
+        "_match_pattern",
+        "save_profile"
+      ]
+    },
+    "file:claudebot/scanner/__init__.py": {
+      "type": "file",
+      "path": "claudebot/scanner/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:claudebot/scanner/stack_detector.py": {
+      "type": "file",
+      "path": "claudebot/scanner/stack_detector.py",
+      "name": "stack_detector.py",
+      "language": "python",
+      "line_count": 297
+    },
+    "class:claudebot/scanner/stack_detector.py:StackDetector": {
+      "type": "class",
+      "name": "StackDetector",
+      "file": "claudebot/scanner/stack_detector.py",
+      "line": 17,
+      "methods": [
+        "__init__",
+        "detect",
+        "_detect_frameworks",
+        "_check_python_frameworks",
+        "_check_js_frameworks",
+        "_detect_libraries",
+        "_detect_databases",
+        "_detect_tools",
+        "_detect_package_managers",
+        "get_summary"
+      ]
+    },
+    "file:claudebot/orchestrator/__init__.py": {
+      "type": "file",
+      "path": "claudebot/orchestrator/__init__.py",
+      "name": "__init__.py",
+      "language": "python",
+      "line_count": 10
+    },
+    "file:claudebot/orchestrator/task_manager.py": {
+      "type": "file",
+      "path": "claudebot/orchestrator/task_manager.py",
+      "name": "task_manager.py",
+      "language": "python",
+      "line_count": 238
+    },
+    "class:claudebot/orchestrator/task_manager.py:TaskManager": {
+      "type": "class",
+      "name": "TaskManager",
+      "file": "claudebot/orchestrator/task_manager.py",
+      "line": 54,
+      "methods": [
+        "__init__",
+        "_get_agent"
+      ]
+    },
+    "file:claudebot/orchestrator/executor.py": {
+      "type": "file",
+      "path": "claudebot/orchestrator/executor.py",
+      "name": "executor.py",
+      "language": "python",
+      "line_count": 246
+    },
+    "class:claudebot/orchestrator/executor.py:Executor": {
+      "type": "class",
+      "name": "Executor",
+      "file": "claudebot/orchestrator/executor.py",
+      "line": 19,
+      "methods": [
+        "__init__",
+        "register_agent",
+        "register_callback",
+        "_trigger_callbacks"
+      ]
+    },
+    "func:claudebot/orchestrator/executor.py:create_executor": {
+      "type": "function",
+      "name": "create_executor",
+      "file": "claudebot/orchestrator/executor.py",
+      "line": 232,
+      "args": [
+        "max_workers",
+        "retry_attempts"
+      ]
     }
   },
   "edges": [
     {
-      "source": "file:telegram_claude_bot.py",
-      "target": "import:os",
-      "type": "imports"
-    },
-    {
-      "source": "file:telegram_claude_bot.py",
-      "target": "import:subprocess",
-      "type": "imports"
-    },
-    {
-      "source": "file:telegram_claude_bot.py",
-      "target": "import:requests",
-      "type": "imports"
-    },
-    {
-      "source": "file:telegram_claude_bot.py",
-      "target": "import:telegram",
-      "type": "imports"
-    },
-    {
-      "source": "file:telegram_claude_bot.py",
-      "target": "import:telegram.ext",
-      "type": "imports"
-    },
-    {
       "source": "file:devbot/__init__.py",
       "target": "import:devbot.core.devbot_core",
-      "type": "imports"
-    },
-    {
-      "source": "file:devbot/setup.py",
-      "target": "import:setuptools",
-      "type": "imports"
-    },
-    {
-      "source": "file:devbot/setup.py",
-      "target": "import:pathlib",
       "type": "imports"
     },
     {
@@ -3401,7 +4752,7 @@
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "import:json",
+      "target": "import:argparse",
       "type": "imports"
     },
     {
@@ -3416,11 +4767,6 @@
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "import:click",
-      "type": "imports"
-    },
-    {
-      "source": "file:devbot/cli/devbot_cli.py",
       "target": "import:devbot.core.devbot_core",
       "type": "imports"
     },
@@ -3431,52 +4777,192 @@
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:cli",
+      "target": "import:devbot.cli.commands.init",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "import:devbot.cli.commands.config",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/devbot_cli.py",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_init",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:attach",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_scan",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:scan",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_graph",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:graph",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_feature",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:feature",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_plan",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:plan",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_implement",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:implement",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_config",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:status",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_status",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
-      "target": "func:devbot/cli/devbot_cli.py:list_features",
+      "target": "func:devbot/cli/devbot_cli.py:cmd_list",
       "type": "contains"
     },
     {
       "source": "file:devbot/cli/devbot_cli.py",
       "target": "func:devbot/cli/devbot_cli.py:main",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "func:devbot/cli/commands/config.py:run_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "func:devbot/cli/commands/config.py:interactive_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/config.py",
+      "target": "func:devbot/cli/commands/config.py:load_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:devbot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:devbot.scanner.project_scanner",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:devbot.scanner.stack_detector",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:devbot.graph.code_graph_builder",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "func:devbot/cli/commands/init.py:run_init",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "func:devbot/cli/commands/init.py:detect_repository",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "func:devbot/cli/commands/init.py:prompt_configuration",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "func:devbot/cli/commands/init.py:save_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "func:devbot/cli/commands/init.py:generate_project_context",
+      "type": "contains"
+    },
+    {
+      "source": "file:devbot/cli/commands/init.py",
+      "target": "func:devbot/cli/commands/init.py:get_timestamp",
       "type": "contains"
     },
     {
@@ -5733,10 +7219,1815 @@
       "source": "file:ai-devbot/orchestrator/orchestrator.py",
       "target": "func:ai-devbot/orchestrator/orchestrator.py:get_orchestrator",
       "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:configparser",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "import:functools",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "class:claudebot/config.py:ServerConfig",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "class:claudebot/config.py:AgentsConfig",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "class:claudebot/config.py:ClaudeConfig",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "class:claudebot/config.py:GitConfig",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "class:claudebot/config.py:Config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "func:claudebot/config.py:get_config_path",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "func:claudebot/config.py:get_rc_path",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "func:claudebot/config.py:load_rc_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "func:claudebot/config.py:load_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/config.py",
+      "target": "func:claudebot/config.py:reload_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:argparse",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:config",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:cli_commands.commands.init",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:scanner.project_scanner",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:scanner.stack_detector",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:graph.code_graph_builder",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:spec.spec_generator",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.planner_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:orchestrator.task_manager",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:cli_commands.commands.config",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:uvicorn",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:api.server",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.spec_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.debug_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "import:db.models",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:main",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_init",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_scan",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_graph",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_feature",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_plan",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_status",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli.py",
+      "target": "func:claudebot/cli.py:cmd_list",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/__main__.py",
+      "target": "import:cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/git_tools.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/git_tools.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/git_tools.py",
+      "target": "import:claudebot.tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/git_tools.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/git_tools.py",
+      "target": "class:claudebot/tools/git_tools.py:GitTool",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/git_tools.py",
+      "target": "func:claudebot/tools/git_tools.py:create_git_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/claude_cli.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/claude_cli.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/claude_cli.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/claude_cli.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/claude_cli.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/claude_cli.py",
+      "target": "class:claudebot/tools/claude_cli.py:ClaudeCLI",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "import:claudebot.tools.tool",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "class:claudebot/tools/tool_registry.py:ToolRegistry",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "func:claudebot/tools/tool_registry.py:get_registry",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "func:claudebot/tools/tool_registry.py:register_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/tool_registry.py",
+      "target": "func:claudebot/tools/tool_registry.py:get_tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/__init__.py",
+      "target": "import:claudebot.tools.tool_registry",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/__init__.py",
+      "target": "import:claudebot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/__init__.py",
+      "target": "import:claudebot.tools.git_tools",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool.py",
+      "target": "import:abc",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/tools/tool.py",
+      "target": "class:claudebot/tools/tool.py:ToolResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/tools/tool.py",
+      "target": "class:claudebot/tools/tool.py:Tool",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/memory/memory.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/memory.py",
+      "target": "import:claudebot.memory.short_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/memory.py",
+      "target": "import:claudebot.memory.long_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/memory.py",
+      "target": "class:claudebot/memory/memory.py:Memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/memory/memory.py",
+      "target": "func:claudebot/memory/memory.py:get_memory",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/memory/short_term_memory.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/short_term_memory.py",
+      "target": "import:threading",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/short_term_memory.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/short_term_memory.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/short_term_memory.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/short_term_memory.py",
+      "target": "class:claudebot/memory/short_term_memory.py:ShortTermMemory",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/memory/__init__.py",
+      "target": "import:claudebot.memory.short_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/__init__.py",
+      "target": "import:claudebot.memory.long_term_memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/__init__.py",
+      "target": "import:claudebot.memory.memory",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/memory/long_term_memory.py",
+      "target": "class:claudebot/memory/long_term_memory.py:LongTermMemory",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "func:claudebot/cli_commands/commands/config.py:run_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "func:claudebot/cli_commands/commands/config.py:interactive_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/config.py",
+      "target": "func:claudebot/cli_commands/commands/config.py:load_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:claudebot.scanner.project_scanner",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:claudebot.scanner.stack_detector",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:claudebot.graph.code_graph_builder",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "import:subprocess",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "func:claudebot/cli_commands/commands/init.py:run_init",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "func:claudebot/cli_commands/commands/init.py:detect_repository",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "func:claudebot/cli_commands/commands/init.py:prompt_configuration",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "func:claudebot/cli_commands/commands/init.py:save_config",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "func:claudebot/cli_commands/commands/init.py:generate_project_context",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/cli_commands/commands/init.py",
+      "target": "func:claudebot/cli_commands/commands/init.py:get_timestamp",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/graph/symbol_parser.py",
+      "target": "import:ast",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/symbol_parser.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/symbol_parser.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/symbol_parser.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/symbol_parser.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/symbol_parser.py",
+      "target": "class:claudebot/graph/symbol_parser.py:SymbolParser",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/graph/__init__.py",
+      "target": "import:claudebot.graph.code_graph_builder",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:ast",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/graph/code_graph_builder.py",
+      "target": "class:claudebot/graph/code_graph_builder.py:CodeGraphBuilder",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/spec/__init__.py",
+      "target": "import:claudebot.spec.openspec_sync",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/__init__.py",
+      "target": "import:claudebot.spec.spec_generator",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/spec_generator.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/spec_generator.py",
+      "target": "import:claudebot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/spec_generator.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/spec_generator.py",
+      "target": "class:claudebot/spec/spec_generator.py:SpecGenerator",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/spec/spec_generator.py",
+      "target": "func:claudebot/spec/spec_generator.py:create_spec_generator",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "class:claudebot/spec/openspec_sync.py:OpenSpecSync",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/spec/openspec_sync.py",
+      "target": "func:claudebot/spec/openspec_sync.py:get_openspec",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "import:base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/test_agent.py",
+      "target": "class:claudebot/agents/test_agent.py:TestAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/spec_agent.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/spec_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/spec_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/spec_agent.py",
+      "target": "import:base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/spec_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/spec_agent.py",
+      "target": "class:claudebot/agents/spec_agent.py:SpecAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "import:abc",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "class:claudebot/agents/base_agent.py:AgentContext",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "class:claudebot/agents/base_agent.py:AgentResult",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/base_agent.py",
+      "target": "class:claudebot/agents/base_agent.py:BaseAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:yaml",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/deploy_agent.py",
+      "target": "class:claudebot/agents/deploy_agent.py:DeployAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "import:claudebot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "import:claudebot.tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "class:claudebot/agents/planner_agent.py:TaskPriority",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "class:claudebot/agents/planner_agent.py:TaskStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "class:claudebot/agents/planner_agent.py:TaskNode",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "class:claudebot/agents/planner_agent.py:TaskGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/planner_agent.py",
+      "target": "class:claudebot/agents/planner_agent.py:PlannerAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/__init__.py",
+      "target": "import:base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "import:dataclasses",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "class:claudebot/agents/task_graph.py:TaskState",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "class:claudebot/agents/task_graph.py:TaskPriority",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "class:claudebot/agents/task_graph.py:TaskItem",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "class:claudebot/agents/task_graph.py:TaskGraph",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/task_graph.py",
+      "target": "func:claudebot/agents/task_graph.py:create_task_graph",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/code_agent.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/code_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/code_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/code_agent.py",
+      "target": "import:base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/code_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/code_agent.py",
+      "target": "class:claudebot/agents/code_agent.py:CodeAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "import:re",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "import:base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "import:tools.claude_cli",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/debug_agent.py",
+      "target": "class:claudebot/agents/debug_agent.py:DebugAgent",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/agents/__dev_init__.py",
+      "target": "import:claudebot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/__dev_init__.py",
+      "target": "import:claudebot.agents.planner_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/__dev_init__.py",
+      "target": "import:claudebot.agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/__dev_init__.py",
+      "target": "import:claudebot.agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/agents/__dev_init__.py",
+      "target": "import:claudebot.agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "import:functools",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "import:contextlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "class:claudebot/observability/tracing.py:Tracer",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "func:claudebot/observability/tracing.py:get_tracer",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/observability/tracing.py",
+      "target": "func:claudebot/observability/tracing.py:setup_tracing",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/observability/__init__.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/__init__.py",
+      "target": "import:claudebot.observability.tracing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "import:sys",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "import:colorlog",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "func:claudebot/observability/logger.py:get_logger",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "func:claudebot/observability/logger.py:configure_logging",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/observability/logger.py",
+      "target": "class:claudebot/observability/logger.py:LogContext",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/db/models.py",
+      "target": "import:aiosqlite",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/db/models.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/db/models.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/db/models.py",
+      "target": "import:pydantic",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/db/models.py",
+      "target": "import:api.enums",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/db/models.py",
+      "target": "class:claudebot/db/models.py:Task",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/db/__init__.py",
+      "target": "import:models",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/auth.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/auth.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/auth.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/auth.py",
+      "target": "import:fastapi.security",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/enums.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/enums.py",
+      "target": "class:claudebot/api/enums.py:TaskType",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/enums.py",
+      "target": "class:claudebot/api/enums.py:TaskStatus",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:contextlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:fastapi.middleware.cors",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:routes",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:rate_limit",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:orchestrator.task_manager",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/server.py",
+      "target": "import:config",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/__init__.py",
+      "target": "import:server",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/rate_limit.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/rate_limit.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/rate_limit.py",
+      "target": "import:collections",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/rate_limit.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/rate_limit.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/rate_limit.py",
+      "target": "class:claudebot/api/rate_limit.py:RateLimiter",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:pydantic",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:auth",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:db.models",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:enums",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "import:db.models",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "func:claudebot/api/routes/tasks.py:set_task_manager",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "func:claudebot/api/routes/tasks.py:get_task_manager",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "class:claudebot/api/routes/tasks.py:CreateTaskRequest",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "class:claudebot/api/routes/tasks.py:CreateTaskResponse",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/tasks.py",
+      "target": "class:claudebot/api/routes/tasks.py:TaskDetailResponse",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/health.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/health.py",
+      "target": "import:pydantic",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/health.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/health.py",
+      "target": "class:claudebot/api/routes/health.py:HealthResponse",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/health.py",
+      "target": "class:claudebot/api/routes/health.py:AgentInfo",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:enum",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:pydantic",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:enums",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "import:tasks",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "class:claudebot/api/routes/telegram.py:CommandType",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "func:claudebot/api/routes/telegram.py:extract_command",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "func:claudebot/api/routes/telegram.py:format_task_response",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "func:claudebot/api/routes/telegram.py:format_help",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/telegram.py",
+      "target": "func:claudebot/api/routes/telegram.py:format_start",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "import:fastapi",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/api/routes/websocket.py",
+      "target": "class:claudebot/api/routes/websocket.py:ConnectionManager",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:fnmatch",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/project_scanner.py",
+      "target": "class:claudebot/scanner/project_scanner.py:ProjectScanner",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/scanner/__init__.py",
+      "target": "import:claudebot.scanner.project_scanner",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/__init__.py",
+      "target": "import:claudebot.scanner.stack_detector",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/stack_detector.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/stack_detector.py",
+      "target": "import:json",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/stack_detector.py",
+      "target": "import:pathlib",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/stack_detector.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/stack_detector.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/scanner/stack_detector.py",
+      "target": "class:claudebot/scanner/stack_detector.py:StackDetector",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/orchestrator/__init__.py",
+      "target": "import:claudebot.orchestrator.task_graph",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/__init__.py",
+      "target": "import:claudebot.orchestrator.executor",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:os",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:logging",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:uuid",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:aiosqlite",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:agents.code_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:db.models",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:agents.spec_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:agents.test_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:agents.deploy_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:agents.debug_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "import:api.routes.websocket",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/task_manager.py",
+      "target": "class:claudebot/orchestrator/task_manager.py:TaskManager",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:asyncio",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:time",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:typing",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:datetime",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:claudebot.orchestrator.task_graph",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:claudebot.agents.base_agent",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "import:claudebot.observability.logger",
+      "type": "imports"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "class:claudebot/orchestrator/executor.py:Executor",
+      "type": "contains"
+    },
+    {
+      "source": "file:claudebot/orchestrator/executor.py",
+      "target": "func:claudebot/orchestrator/executor.py:create_executor",
+      "type": "contains"
     }
   ],
   "metadata": {
     "project_path": "/Users/trungu/Documents/Personal/Khang-PROJ/ClaudeDevBot",
-    "created_at": "2026-03-13T18:27:40.395522"
+    "created_at": "2026-03-19T21:54:14.072618"
   }
 }
