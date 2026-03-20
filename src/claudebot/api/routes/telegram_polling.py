@@ -43,7 +43,7 @@ async def handle_spec(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a description.\nUsage: /spec <description>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
     await create_agent_task(update, "spec", " ".join(args))
@@ -55,7 +55,7 @@ async def handle_code(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a description.\nUsage: /code <description>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
     await create_agent_task(update, "code", " ".join(args))
@@ -67,7 +67,7 @@ async def handle_test(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a description.\nUsage: /test <description>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
     await create_agent_task(update, "test", " ".join(args))
@@ -79,7 +79,7 @@ async def handle_deploy(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a description.\nUsage: /deploy <description>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
     await create_agent_task(update, "deploy", " ".join(args))
@@ -91,7 +91,7 @@ async def handle_debug(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a description.\nUsage: /debug <description>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
     await create_agent_task(update, "debug", " ".join(args))
@@ -103,7 +103,7 @@ async def handle_status(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a task ID.\nUsage: /status <task_id>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
 
@@ -113,7 +113,7 @@ async def handle_status(update, context):
     if not manager:
         await update.message.reply_text(
             "⚠️ Task manager not initialized. Please start the server first.",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
 
@@ -144,7 +144,7 @@ async def handle_cancel(update, context):
     if not args:
         await update.message.reply_text(
             "⚠️ Please provide a task ID.\nUsage: /cancel <task_id>",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
 
@@ -154,7 +154,7 @@ async def handle_cancel(update, context):
     if not manager:
         await update.message.reply_text(
             "⚠️ Task manager not initialized. Please start the server first.",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
 
@@ -178,7 +178,7 @@ async def handle_message(update, context):
         return
     await update.message.reply_text(
         "Unknown command. Type /help for available commands.",
-        parse_mode="Markdown",
+        parse_mode=None,
     )
 
 
@@ -188,7 +188,7 @@ async def create_agent_task(update, task_type: str, description: str):
     if not manager:
         await update.message.reply_text(
             "⚠️ Task manager not initialized. Please start the server first.",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
         return
 
@@ -203,9 +203,9 @@ async def create_agent_task(update, task_type: str, description: str):
         task = await manager.create_task(task_data)
         text = (
             f"✅ Task created!\n\n"
-            f"*Task ID:* `{task.id}`\n"
-            f"*Type:* {task_type}\n"
-            f"*Description:* {description}\n\n"
+            f"Task ID: {task.id}\n"
+            f"Type: {task_type}\n"
+            f"Description: {description}\n\n"
             f"Check status with /status {task.id}"
         )
         await update.message.reply_text(text, parse_mode="Markdown")
@@ -213,21 +213,20 @@ async def create_agent_task(update, task_type: str, description: str):
         logger.exception(f"Failed to create task: {e}")
         await update.message.reply_text(
             f"❌ Failed to create task: {e}",
-            parse_mode="Markdown",
+            parse_mode=None,
         )
 
 
 async def error_handler(update, context):
     """Handle errors from the dispatcher."""
-    try:
-        raise context.error
-    except Forbidden:
+    err = context.error
+    if isinstance(err, Forbidden):
         logger.warning(f"Bot blocked by user {getattr(update, 'effective_chat', None)}")
-    except RetryAfter as e:
-        logger.warning(f"Rate limited by Telegram, retry after {e.retry_after}s")
-        await asyncio.sleep(e.retry_after)
-    except Exception:
-        logger.exception(f"Telegram polling error: {context.error}")
+    elif isinstance(err, RetryAfter):
+        logger.warning(f"Rate limited by Telegram, retry after {err.retry_after}s")
+        await asyncio.sleep(err.retry_after)
+    else:
+        logger.exception(f"Telegram polling error: {err}")
 
 
 def run_polling():

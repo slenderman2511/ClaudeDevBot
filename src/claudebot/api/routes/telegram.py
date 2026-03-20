@@ -53,7 +53,7 @@ def extract_command(text: str) -> tuple[Optional[CommandType], str]:
 
 
 def format_task_response(task: dict) -> str:
-    """Format task status as Telegram message"""
+    """Format task status as plain-text Telegram message (no Markdown)."""
     status_emoji = {
         "pending": "⏳",
         "queued": "📋",
@@ -66,50 +66,50 @@ def format_task_response(task: dict) -> str:
     emoji = status_emoji.get(task.get("status", ""), "❓")
 
     response = f"""
-{emoji} *Task Status*
+{emoji} Task Status
 
-*ID:* `{task.get('id', 'N/A')}`
-*Type:* {task.get('type', 'N/A')}
-*Status:* {task.get('status', 'N/A').upper()}
-*Description:* {task.get('description', 'N/A')}
+ID: {task.get('id', 'N/A')}
+Type: {task.get('type', 'N/A')}
+Status: {task.get('status', 'N/A').upper()}
+Description: {task.get('description', 'N/A')}
 
-*Created:* {task.get('created_at', 'N/A')}
+Created: {task.get('created_at', 'N/A')}
 """
 
     if task.get("error"):
-        response += f"\n*Error:* {task.get('error')}"
+        response += f"\nError: {task.get('error')}"
 
     if task.get("result"):
-        response += f"\n*Result:* {task.get('result')}"
+        response += f"\nResult: {task.get('result')}"
 
     return response
 
 
 def format_help() -> str:
-    """Format help message"""
+    """Format help message (plain text, no Markdown)."""
     return """
-*ClaudeDevBot Commands*
+ClaudeDevBot Commands
 
 /start - Start the bot
 /help - Show this help message
 
-*AI Agents:*
-/spec `<description>` - Generate specification
-/code `<description>` - Generate code
-/test `<description>` - Generate tests
-/debug `<error>` - Debug an error
-/deploy `<description>` - Generate deployment config
+AI Agents:
+/spec <description> - Generate specification
+/code <description> - Generate code
+/test <description> - Generate tests
+/debug <error> - Debug an error
+/deploy <description> - Generate deployment config
 
-*Task Management:*
-/status `<task_id>` - Check task status
-/cancel `<task_id>` - Cancel a task
+Task Management:
+/status <task_id> - Check task status
+/cancel <task_id> - Cancel a task
 """
 
 
 def format_start() -> str:
-    """Format start message"""
+    """Format start message (plain text, no Markdown)."""
     return """
-*Welcome to ClaudeDevBot!*
+Welcome to ClaudeDevBot!
 
 I'm your AI-powered development assistant. I can help you with:
 
@@ -180,7 +180,7 @@ async def telegram_webhook(request: Request):
                     "priority": 0,
                 }
                 task = await manager.create_task(task_data)
-                response_text = f"✅ Task created!\n\n*Task ID:* `{task.id}`\n*Type:* {command.value}\n*Description:* {args}\n\nCheck status with /status {task.id}"
+                response_text = f"✅ Task created!\n\nTask ID: {task.id}\nType: {command.value}\nDescription: {args}\n\nCheck status with /status {task.id}"
             except Exception as e:
                 logger.exception("Failed to create task")
                 response_text = f"❌ Failed to create task: {str(e)}"
@@ -249,7 +249,7 @@ def _get_bot():
     return _bot
 
 
-async def send_telegram_message(chat_id: int, text: str, parse_mode: str = "Markdown"):
+async def send_telegram_message(chat_id: int, text: str, parse_mode=None):
     """Send a message to Telegram using the Bot API."""
     try:
         bot = _get_bot()
