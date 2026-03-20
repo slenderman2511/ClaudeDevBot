@@ -10,6 +10,9 @@ from pydantic import BaseModel
 
 from ..enums import TaskType
 
+# Re-export for convenience (also used by telegram_polling.py)
+from .tasks import get_task_manager
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
