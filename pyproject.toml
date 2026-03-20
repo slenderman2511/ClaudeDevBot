@@ -75,6 +75,7 @@ packages = [
     "claudebot.api.routes",
     "claudebot.cli",
     "claudebot.cli_commands",
+    "claudebot.cli_commands.commands",
     "claudebot.core",
     "claudebot.db",
     "claudebot.graph",
