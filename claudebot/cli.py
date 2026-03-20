@@ -89,6 +89,7 @@ Examples:
     serve_parser.add_argument("--host", default="localhost", help="Host to bind")
     serve_parser.add_argument("--port", type=int, help="Port to bind")
     serve_parser.add_argument("--reload", action="store_true", help="Auto-reload")
+    serve_parser.add_argument("--telegram", action="store_true", help="Start Telegram bot with long polling")
 
     run_parser = subparsers.add_parser("run", help="Run a task directly")
     run_parser.add_argument("type", choices=["spec", "code", "test", "deploy", "debug"], help="Task type")
@@ -344,8 +345,9 @@ def cmd_list(args):
 # ---------------------------------------------------------------------------
 
 def cmd_serve(args):
-    """Start the FastAPI server."""
+    """Start the FastAPI server, optionally with Telegram long polling."""
     import uvicorn
+    import threading
     from .api.server import app
 
     config = load_config()
@@ -353,6 +355,28 @@ def cmd_serve(args):
 
     if not os.environ.get("CLAUDE_API_KEY") and not config.claude.api_key:
         logger.warning("CLAUDE_API_KEY not set. Set with: export CLAUDE_API_KEY=your-api-key")
+
+    # Start Telegram long polling in a background thread if enabled
+    if getattr(args, "telegram", False) or os.environ.get("TELEGRAM_BOT_TOKEN"):
+        # Seed token from config into env if not already set
+        if not os.environ.get("TELEGRAM_BOT_TOKEN"):
+            import yaml
+            from .config import get_config_path
+            config_path = get_config_path()
+            if config_path.exists():
+                with open(config_path) as f:
+                    yaml_data = yaml.safe_load(f) or {}
+                if token := yaml_data.get("telegram_token"):
+                    os.environ["TELEGRAM_BOT_TOKEN"] = token
+                    logger.info("Loaded TELEGRAM_BOT_TOKEN from config")
+
+        def start_telegram_polling():
+            from .api.routes.telegram_polling import run_polling
+            asyncio.run(run_polling())
+
+        t = threading.Thread(target=start_telegram_polling, daemon=True)
+        t.start()
+        logger.info("Telegram long polling started in background thread")
 
     logger.info(f"Starting server on {args.host}:{port}")
     uvicorn.run(app, host=args.host, port=port, reload=args.reload)

@@ -55,7 +55,12 @@ Issues = "https://github.com/claudebot/claudebot/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["claudebot*"]
+include = ["*"]
+exclude = ["*.egg-info", "dist", "build"]
+
+[tool.setuptools.py-modules]
+# Also include top-level .py files that find_packages misses
+packages = ["cli", "config"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

@@ -151,6 +151,11 @@ def load_config(config_path: Optional[Path] = None) -> Config:
     if port := os.environ.get("CLAUDEBOT_PORT"):
         config.server.port = int(port)
 
+    # Seed TELEGRAM_BOT_TOKEN from config.yaml into env if not already set
+    if "TELEGRAM_BOT_TOKEN" not in os.environ:
+        if telegram_token := data.get("telegram_token"):
+            os.environ["TELEGRAM_BOT_TOKEN"] = telegram_token
+
     return config
 
 

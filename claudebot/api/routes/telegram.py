@@ -229,13 +229,35 @@ async def telegram_webhook(request: Request):
     return {"ok": True}
 
 
-async def send_telegram_message(chat_id: int, text: str, parse_mode: str = "Markdown"):
-    """Send a message to Telegram (stub - implement with actual bot)"""
-    # This is a stub - in production, use python-telegram-bot
-    # For now, just log the message
-    logger.info(f"Telegram message to {chat_id}: {text[:100]}...")
+# Lazy bot instance — only created when first message is sent
+_bot = None
 
-    # TODO: Implement actual Telegram API call
-    # from telegram import Bot
-    # bot = Bot(token=os.environ["TELEGRAM_BOT_TOKEN"])
-    # await bot.send_message(chat_id=chat_id, text=text, parse_mode=parse_mode)
+
+def _get_bot():
+    """Get or create the Telegram bot instance (singleton)."""
+    global _bot
+    if _bot is None:
+        import os
+        from telegram import Bot
+        token = os.environ.get("TELEGRAM_BOT_TOKEN")
+        if not token:
+            raise RuntimeError(
+                "TELEGRAM_BOT_TOKEN environment variable is not set. "
+                "Please set it before sending messages."
+            )
+        _bot = Bot(token=token)
+    return _bot
+
+
+async def send_telegram_message(chat_id: int, text: str, parse_mode: str = "Markdown"):
+    """Send a message to Telegram using the Bot API."""
+    try:
+        bot = _get_bot()
+        await bot.send_message(
+            chat_id=chat_id,
+            text=text,
+            parse_mode=parse_mode,
+        )
+        logger.info(f"Telegram message sent to {chat_id}: {text[:80]!r}")
+    except Exception as e:
+        logger.exception(f"Failed to send Telegram message to {chat_id}: {e}")
