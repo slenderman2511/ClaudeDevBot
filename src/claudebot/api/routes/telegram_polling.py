@@ -231,7 +231,11 @@ async def error_handler(update, context):
 
 
 def run_polling():
-    """Start the Telegram bot with long polling (blocking)."""
+    """Start the Telegram bot with long polling (blocking).
+
+    Creates its own event loop and runs it forever.
+    Call from a daemon thread — do NOT wrap with asyncio.run().
+    """
     import signal
 
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -239,58 +243,56 @@ def run_polling():
         logger.error("TELEGRAM_BOT_TOKEN not set — cannot start Telegram polling")
         return
 
-    # Ensure there is a running event loop (required by python-telegram-bot v22+)
-    try:
-        asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
 
-    logger.info("Starting Telegram long polling bot...")
+    async def _build_and_run():
+        """Build PTB app and run polling on this same loop."""
+        app = (
+            Application.builder()
+            .token(token)
+            .read_timeout(30)
+            .write_timeout(30)
+            .build()
+        )
 
-    app = (
-        Application.builder()
-        .token(token)
-        .read_timeout(30)
-        .write_timeout(30)
-        .build()
-    )
+        # Register handlers
+        app.add_handler(CommandHandler("start", handle_start))
+        app.add_handler(CommandHandler("help", handle_help))
+        app.add_handler(CommandHandler("spec", handle_spec))
+        app.add_handler(CommandHandler("code", handle_code))
+        app.add_handler(CommandHandler("test", handle_test))
+        app.add_handler(CommandHandler("deploy", handle_deploy))
+        app.add_handler(CommandHandler("debug", handle_debug))
+        app.add_handler(CommandHandler("status", handle_status))
+        app.add_handler(CommandHandler("cancel", handle_cancel))
+        app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+        app.add_error_handler(error_handler)
 
-    # Register handlers
-    app.add_handler(CommandHandler("start", handle_start))
-    app.add_handler(CommandHandler("help", handle_help))
-    app.add_handler(CommandHandler("spec", handle_spec))
-    app.add_handler(CommandHandler("code", handle_code))
-    app.add_handler(CommandHandler("test", handle_test))
-    app.add_handler(CommandHandler("deploy", handle_deploy))
-    app.add_handler(CommandHandler("debug", handle_debug))
-    app.add_handler(CommandHandler("status", handle_status))
-    app.add_handler(CommandHandler("cancel", handle_cancel))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    app.add_error_handler(error_handler)
+        logger.info("Starting Telegram long polling bot...")
 
-    logger.info("Telegram bot handlers registered — polling for updates...")
-
-    # run_polling() needs signal handlers in the main thread.
-    # Since we're in a daemon thread, we replicate its logic manually
-    # WITHOUT signal registration. Signal handling is delegated to the
-    # main FastAPI/uvicorn process.
-    async def _poll():
+        # Initialise and start polling
         await app.initialize()
         await app.start()
         await app.updater.start_polling(drop_pending_updates=True)
+        logger.info("Telegram bot handlers registered — polling for updates...")
+
         # Keep running until cancelled
         try:
             while True:
                 await asyncio.sleep(3600)
         except asyncio.CancelledError:
+            pass
+        finally:
             await app.updater.stop_polling()
             await app.stop()
             await app.shutdown()
 
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
+    # run_forever so the loop stays alive for the lifetime of the daemon thread
+    # Schedule _build_and_run() on the loop before running it forever.
+    # It will keep the loop alive with its infinite sleep.
+    asyncio.ensure_future(_build_and_run(), loop=loop)
     try:
-        loop.run_until_complete(_poll())
+        loop.run_forever()
     finally:
         loop.close()
