@@ -20,6 +20,9 @@ wheels/
 .installed.cfg
 *.egg
 
+# Src-layout — egg-info created during editable install inside package dir
+src/claudebot.egg-info/
+
 # Virtual environments
 venv/
 env/
