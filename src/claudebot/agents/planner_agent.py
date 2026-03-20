@@ -4,18 +4,17 @@ Planner Agent Module
 Agent responsible for generating executable task graphs from OpenSpec features.
 """
 
+import logging
 import time
 from typing import Dict, Any, Optional, List
-from enum import Enum
 
-from claudebot.agents.base_agent import BaseAgent, Task, AgentResult
-from claudebot.tools.claude_cli import ClaudeCLITool
-from claudebot.observability.logger import get_logger
+from .base_agent import BaseAgent, AgentContext, AgentResult
+from ..tools.claude_cli import ClaudeCLI
 
-logger = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
-class TaskPriority(Enum):
+class TaskPriority:
     """Task priority levels."""
     CRITICAL = 1
     HIGH = 2
@@ -23,7 +22,7 @@ class TaskPriority(Enum):
     LOW = 4
 
 
-class TaskStatus(Enum):
+class TaskStatus:
     """Task execution status."""
     PENDING = "pending"
     RUNNING = "running"
@@ -43,7 +42,7 @@ class TaskNode:
         self.status = TaskStatus.PENDING
         self.priority = TaskPriority.MEDIUM
         self.agent_type = self._infer_agent_type(phase)
-        self.metadata = {}
+        self.metadata: Dict[str, Any] = {}
 
     def _infer_agent_type(self, phase: str) -> str:
         """Infer which agent should handle this task based on phase."""
@@ -94,7 +93,10 @@ class TaskGraph:
         levels = []
 
         while len(levels) < len(self.nodes):
-            current_level = [tid for tid, deg in in_degree.items() if deg == 0 and self.nodes[tid].status == TaskStatus.PENDING]
+            current_level = [
+                tid for tid, deg in in_degree.items()
+                if deg == 0 and self.nodes[tid].status == TaskStatus.PENDING
+            ]
 
             if not current_level:
                 break
@@ -103,7 +105,6 @@ class TaskGraph:
 
             for tid in current_level:
                 in_degree[tid] = -1
-
                 for other_id, other_task in self.nodes.items():
                     if tid in other_task.dependencies:
                         in_degree[other_id] -= 1
@@ -119,30 +120,29 @@ class PlannerAgent(BaseAgent):
     Generates optimized task graphs with parallel execution support.
     """
 
-    def __init__(self, config: Dict[str, Any] = None, claude_tool: Optional[ClaudeCLITool] = None, openspec=None):
-        super().__init__(
-            name="planner_agent",
-            model=config.get('model', 'sonnet') if config else 'sonnet',
-            max_iterations=config.get('max_iterations', 5) if config else 5,
-            timeout=config.get('timeout', 120) if config else 120,
-            config=config or {}
-        )
-        self._claude = claude_tool
+    name = "planner"
+    description = "Generate task graphs from OpenSpec features"
+
+    def __init__(self, config: Dict[str, Any] = None, openspec=None):
+        super().__init__()
+        self._config = config or {}
         self._openspec = openspec
         self._generated_plans: Dict[str, TaskGraph] = {}
 
-    def execute(self, task: Task) -> AgentResult:
-        """Execute planning task - generate task graph from feature."""
-        start_time = time.time()
+    async def execute(self, task: dict, context: AgentContext) -> AgentResult:
+        """Execute planning task — generate task graph from feature."""
+        is_valid, error = self.validate_input(task)
+        if not is_valid:
+            return AgentResult(success=False, summary=error, error=error)
 
-        if not task.input:
+        feature_name = task.get("description", "").strip()
+        if not feature_name:
             return AgentResult(
                 success=False,
-                output="",
-                error="No feature specified for planning"
+                summary="Feature name is required",
+                error="No feature name provided for planning",
             )
 
-        feature_name = task.input.strip()
         logger.info(f"Planning tasks for feature: {feature_name}")
 
         try:
@@ -150,16 +150,16 @@ class PlannerAgent(BaseAgent):
             if not self._openspec:
                 return AgentResult(
                     success=False,
-                    output="",
-                    error="OpenSpec not configured"
+                    summary="OpenSpec not configured",
+                    error="OpenSpec not configured",
                 )
 
             feature = self._openspec.load_feature(feature_name)
             if not feature:
                 return AgentResult(
                     success=False,
-                    output="",
-                    error=f"Feature '{feature_name}' not found"
+                    summary=f"Feature '{feature_name}' not found",
+                    error=f"Feature '{feature_name}' not found in openspec/",
                 )
 
             # Generate task graph
@@ -171,39 +171,36 @@ class PlannerAgent(BaseAgent):
             # Format output
             output = self._format_plan_output(task_graph)
 
-            execution_time = time.time() - start_time
-
             return AgentResult(
                 success=True,
-                output=output,
-                artifacts={
-                    'feature': feature_name,
-                    'task_graph': task_graph,
-                    'total_tasks': len(task_graph.nodes),
-                    'parallel_levels': len(task_graph.topological_sort())
-                },
-                execution_time=execution_time,
-                iterations=1
+                summary=f"Generated plan for '{feature_name}' with {len(task_graph.nodes)} task(s)",
+                logs=[output],
             )
 
         except Exception as e:
             logger.exception("Planner agent execution failed")
             return AgentResult(
                 success=False,
-                output="",
-                error=f"Planning error: {str(e)}"
+                summary=f"Planning error: {e}",
+                error=str(e),
             )
+
+    def validate_input(self, task: dict) -> tuple[bool, Optional[str]]:
+        """Validate task input."""
+        if not task.get("description"):
+            return False, "Feature name is required"
+        return True, None
 
     def _generate_task_graph(self, feature: Dict[str, Any]) -> TaskGraph:
         """Generate task graph from feature spec."""
-        graph = TaskGraph(feature.get('name', 'unknown'))
+        graph = TaskGraph(feature.get("name", "unknown"))
 
-        tasks = feature.get('tasks', [])
+        tasks = feature.get("tasks", [])
         phase_groups: Dict[str, List[Dict]] = {}
 
         # Group tasks by phase
         for task in tasks:
-            phase = task.get('phase', 'Implementation')
+            phase = task.get("phase", "Implementation")
             if phase not in phase_groups:
                 phase_groups[phase] = []
             phase_groups[phase].append(task)
@@ -219,9 +216,9 @@ class PlannerAgent(BaseAgent):
 
                 node = TaskNode(
                     task_id=task_id,
-                    name=task.get('name', 'Unnamed task'),
+                    name=task.get("name", "Unnamed task"),
                     phase=phase,
-                    dependencies=list(previous_tasks)
+                    dependencies=list(previous_tasks),
                 )
 
                 graph.add_task(node)
@@ -254,5 +251,5 @@ class PlannerAgent(BaseAgent):
             "generate_task_graph",
             "analyze_dependencies",
             "optimize_execution_order",
-            "estimate_duration"
+            "estimate_duration",
         ]

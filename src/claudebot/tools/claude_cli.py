@@ -19,13 +19,12 @@ class ClaudeCLI:
         self.env["ANTHROPIC_API_KEY"] = api_key
 
     async def complete(self, prompt: str, system_prompt: Optional[str] = None) -> str:
-        """Send a prompt to Claude and get completion"""
-        cmd = ["claude", "--print", "--no-color"]
+        """Send a prompt to Claude and get completion as plain text."""
+        cmd = ["claude", "--print", "--output-format", "json"]
 
         if system_prompt:
             cmd.extend(["--system", system_prompt])
 
-        # Add prompt as last argument
         cmd.append(prompt)
 
         try:
@@ -33,13 +32,12 @@ class ClaudeCLI:
                 *cmd,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
-                env=self.env
+                env=self.env,
             )
 
             try:
                 stdout, stderr = await asyncio.wait_for(
-                    process.communicate(),
-                    timeout=300
+                    process.communicate(), timeout=300
                 )
             except asyncio.TimeoutError:
                 process.kill()
@@ -49,17 +47,49 @@ class ClaudeCLI:
                 error_msg = stderr.decode() if stderr else "Unknown error"
                 raise RuntimeError(f"Claude CLI error: {error_msg}")
 
-            return stdout.decode()
+            # Parse JSON response from --output-format json
+            import json
+            try:
+                data = json.loads(stdout.decode())
+                return data.get("content", stdout.decode())
+            except json.JSONDecodeError:
+                # Fallback: return raw output if not valid JSON
+                return stdout.decode()
 
         except FileNotFoundError:
             raise RuntimeError("Claude CLI not found. Please install Claude Code.")
 
     async def complete_json(self, prompt: str, system_prompt: Optional[str] = None) -> dict:
-        """Send a prompt to Claude and parse JSON response"""
-        full_prompt = f"{prompt}\n\nRespond with valid JSON only."
-        result = await self.complete(full_prompt, system_prompt)
-        import json
+        """Send a prompt to Claude and parse structured JSON response."""
+        cmd = ["claude", "--print", "--output-format", "json"]
+
+        if system_prompt:
+            cmd.extend(["--system", system_prompt])
+
+        cmd.append(prompt)
+
         try:
-            return json.loads(result)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Invalid JSON response: {e}")
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                env=self.env,
+            )
+
+            try:
+                stdout, stderr = await asyncio.wait_for(
+                    process.communicate(), timeout=300
+                )
+            except asyncio.TimeoutError:
+                process.kill()
+                raise TimeoutError("Claude CLI timed out")
+
+            if process.returncode != 0:
+                error_msg = stderr.decode() if stderr else "Unknown error"
+                raise RuntimeError(f"Claude CLI error: {error_msg}")
+
+            import json
+            return json.loads(stdout.decode())
+
+        except FileNotFoundError:
+            raise RuntimeError("Claude CLI not found. Please install Claude Code.")
