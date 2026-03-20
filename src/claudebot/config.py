@@ -7,7 +7,6 @@ import configparser
 from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass, field
-from functools import lru_cache
 
 
 @dataclass
@@ -48,6 +47,7 @@ class Config:
     agents: AgentsConfig = field(default_factory=AgentsConfig)
     claude: ClaudeConfig = field(default_factory=ClaudeConfig)
     git: GitConfig = field(default_factory=GitConfig)
+    telegram_token: Optional[str] = None
 
     @classmethod
     def from_dict(cls, data: dict) -> "Config":
@@ -56,16 +56,16 @@ class Config:
             server=ServerConfig(**data.get("server", {})),
             agents=AgentsConfig(**data.get("agents", {})),
             claude=ClaudeConfig(**data.get("claude", {})),
-            git=GitConfig(**data.get("git", {}))
+            git=GitConfig(**data.get("git", {})),
+            telegram_token=data.get("telegram_token"),
         )
 
 
-@lru_cache()
 def get_config_path() -> Path:
-    """Get config file path - checks multiple locations"""
-    # Priority: current dir .claudebot > parent .claudebot > package default
+    """Get config file path - checks multiple locations."""
     locations = [
         Path(".claudebot/config.yaml"),
+        Path(".devbot/config.yaml"),
         Path(__file__).parent / "config.yaml",
     ]
 
@@ -73,7 +73,6 @@ def get_config_path() -> Path:
         if path.exists():
             return path
 
-    # Default to package config
     return Path(__file__).parent / "config.yaml"
 
 

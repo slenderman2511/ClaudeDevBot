@@ -360,15 +360,11 @@ def cmd_serve(args):
     if getattr(args, "telegram", False) or os.environ.get("TELEGRAM_BOT_TOKEN"):
         # Seed token from config into env if not already set
         if not os.environ.get("TELEGRAM_BOT_TOKEN"):
-            import yaml
-            from ..config import get_config_path
-            config_path = get_config_path()
-            if config_path.exists():
-                with open(config_path) as f:
-                    yaml_data = yaml.safe_load(f) or {}
-                if token := yaml_data.get("telegram_token"):
-                    os.environ["TELEGRAM_BOT_TOKEN"] = token
-                    logger.info("Loaded TELEGRAM_BOT_TOKEN from config")
+            from ..config import load_config
+            cfg = load_config()
+            if cfg.telegram_token:
+                os.environ["TELEGRAM_BOT_TOKEN"] = cfg.telegram_token
+                logger.info("Loaded TELEGRAM_BOT_TOKEN from config")
 
         def start_telegram_polling():
             from ..api.routes.telegram_polling import run_polling
