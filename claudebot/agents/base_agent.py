@@ -2,11 +2,12 @@
 """Base agent class and interfaces"""
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, List
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 @dataclass
 class AgentContext:
@@ -16,15 +17,17 @@ class AgentContext:
     claude_api_key: str
     config: dict
 
+
 @dataclass
 class AgentResult:
     """Standard result from any agent"""
     success: bool
     summary: str
-    files_created: List[str] = []
-    files_modified: List[str] = []
-    logs: List[str] = []
+    files_created: List[str] = field(default_factory=list)
+    files_modified: List[str] = field(default_factory=list)
+    logs: List[str] = field(default_factory=list)
     error: Optional[str] = None
+
 
 class BaseAgent(ABC):
     """Abstract base class for all agents"""

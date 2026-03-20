@@ -115,7 +115,7 @@ Examples:
     elif args.command == "list":
         cmd_list(args)
     elif args.command == "serve":
-        asyncio.run(cmd_serve(args))
+        cmd_serve(args)
     elif args.command == "run":
         asyncio.run(cmd_run(args))
     else:
@@ -343,7 +343,7 @@ def cmd_list(args):
 # Serve command (claudebot's FastAPI server)
 # ---------------------------------------------------------------------------
 
-async def cmd_serve(args):
+def cmd_serve(args):
     """Start the FastAPI server."""
     import uvicorn
     from .api.server import app

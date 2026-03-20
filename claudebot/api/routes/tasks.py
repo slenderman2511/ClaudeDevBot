@@ -8,7 +8,7 @@ from datetime import datetime
 import logging
 
 from ..auth import verify_api_key
-from ..db.models import TaskStatus as DBTaskStatus
+from ...db.models import TaskStatus as DBTaskStatus
 from ..enums import TaskType, TaskStatus
 
 logger = logging.getLogger(__name__)
@@ -96,7 +96,7 @@ async def list_tasks(status_filter: Optional[TaskStatus] = None, limit: int = 50
 
     try:
         # Import here to avoid circular import
-        from ..db.models import TaskStatus as DBTaskStatus
+        from ...db.models import TaskStatus as DBTaskStatus
 
         db_status = None
         if status_filter:
