@@ -1,0 +1,91 @@
+# pyproject.toml — repo root
+#
+# pip install git+https://github.com/claudebot/claudebot.git
+#
+# Package source lives in src/claudebot/. A symlink "claudebot" at the
+# repo root points to src/claudebot/ so that setuptools can find the
+# packages under the "claudebot" namespace.
+#
+# NOTE: The claudebot symlink must exist alongside this file. It is
+# checked in as a symlink so this layout works on all platforms.
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "claudebot"
+version = "0.1.0"
+description = "Injectable AI Development Assistant Plugin"
+readme = "src/claudebot/README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "ClaudeDevBot", email = "dev@example.com"}
+]
+keywords = ["ai", "claude", "development", "automation", "telegram"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "pydantic>=2.5.0",
+    "pyyaml>=6.0",
+    "aiosqlite>=0.19.0",
+    "python-telegram-bot>=20.0",
+    "click>=8.0.0",
+    "python-dotenv>=1.0.0",
+    "aiohttp>=3.9.0",
+    "colorlog>=6.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "httpx>=0.24",
+]
+
+[project.scripts]
+claudebot = "claudebot.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/claudebot/claudebot"
+Documentation = "https://claudebot.readthedocs.io"
+Repository = "https://github.com/claudebot/claudebot"
+Issues = "https://github.com/claudebot/claudebot/issues"
+
+# Explicit package list — avoids the src-layout namespace mismatch.
+# The "claudebot" symlink at repo root → src/claudebot/ makes
+# these map correctly to the filesystem.
+[tool.setuptools]
+packages = [
+    "claudebot",
+    "claudebot.agents",
+    "claudebot.api",
+    "claudebot.api.routes",
+    "claudebot.cli",
+    "claudebot.cli_commands",
+    "claudebot.core",
+    "claudebot.db",
+    "claudebot.graph",
+    "claudebot.integrations",
+    "claudebot.memory",
+    "claudebot.observability",
+    "claudebot.orchestrator",
+    "claudebot.scanner",
+    "claudebot.spec",
+    "claudebot.tools",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
