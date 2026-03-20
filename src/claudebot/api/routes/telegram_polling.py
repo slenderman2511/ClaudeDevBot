@@ -239,6 +239,13 @@ def run_polling():
         logger.error("TELEGRAM_BOT_TOKEN not set — cannot start Telegram polling")
         return
 
+    # Ensure there is a running event loop (required by python-telegram-bot v22+)
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
     logger.info("Starting Telegram long polling bot...")
 
     app = (

@@ -371,8 +371,14 @@ def cmd_serve(args):
                     logger.info("Loaded TELEGRAM_BOT_TOKEN from config")
 
         def start_telegram_polling():
+            import asyncio
             from ..api.routes.telegram_polling import run_polling
-            asyncio.run(run_polling())
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            try:
+                loop.run_until_complete(run_polling())
+            finally:
+                loop.close()
 
         t = threading.Thread(target=start_telegram_polling, daemon=True)
         t.start()
